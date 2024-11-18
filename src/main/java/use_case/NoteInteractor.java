@@ -1,6 +1,9 @@
-package use_case.note;
+package use_case;
 
 import entity.User;
+import use_case.note.DataAccessException;
+import use_case.note.NoteDataAccessInterface;
+import use_case.note.NoteInputBoundary;
 
 /**
  * The "Use Case Interactor" for our two note-related use cases of refreshing
