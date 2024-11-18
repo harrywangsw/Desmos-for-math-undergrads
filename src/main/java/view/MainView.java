@@ -11,6 +11,7 @@ public class MainView extends JPanel {
     private final JTextArea inputFunctionArea = new JTextArea();
     private final String[] menuItems = {"Plot", "Draw Phase Portrait"};
     private final JComboBox<String> dropDownMenu = new JComboBox<>(menuItems);
+    private MainController mainController;
 
     public MainView() {
         final JPanel rightCornerButtons = new JPanel();
@@ -21,19 +22,19 @@ public class MainView extends JPanel {
         runButton.addActionListener(
                 evt -> {
                     if (evt.getSource().equals(runButton)) {
-
+                        mainController.execute( (String) dropDownMenu.getSelectedItem());
                     }
         });
 
         helpButton.addActionListener( evt -> {
             if (evt.getSource().equals(helpButton)) {
-                MainController.execute("help")
+                mainController.execute("help");
             }
                 }
         );
     }
 
-    public static void main(String[] args) {
-
-    }
+//    public static void main(String[] args) {
+//
+//    }
 }

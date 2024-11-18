@@ -1,26 +1,30 @@
 package interface_adapter.main;
 
 
-import use_case.note.NoteInputBoundary;
+import use_case.main.MainInputBoundary;
 
 public class MainController {
 
-    private final NoteInputBoundary noteInteractor;
+    private final MainInputBoundary mainInteractor;
 
     public MainController(MainInputBoundary mainInteractor) {
-        this.noteInteractor = noteInteractor;
+        this.mainInteractor = mainInteractor;
     }
 
     /**
-     * Executes the Note related Use Cases.
-     * @param note the note to be recorded
+     * Execute all the main tasks from the main use cases
+     * @param task the task to be executed
      */
-    public void execute(String note) {
-        if (note != null) {
-            noteInteractor.executeSave(note);
-        }
-        else {
-            noteInteractor.executeRefresh();
-        }
+    public void execute(String task) {
+       switch (task) {
+           case "Plot":
+               System.out.println("Temporary Plot");
+               break;
+           case "Draw Phase Portrait":
+               System.out.println("Temporary Draw Phase Portrait");
+
+           case "help":
+               System.out.println("You just need to believe hard enough.");
+       }
     }
 }
