@@ -12,8 +12,8 @@ import javax.swing.*;
 public class MainAppBuilder {
     public static final int HEIGHT = 300;
     public static final int WIDTH = 400;
-    private MainViewModel mainViewModel = new MainViewModel();
-    private MainView mainView;
+//    private MainViewModel mainViewModel = new MainViewModel();
+    private MainView mainView = new MainView();
     private MainInteractor mainInteractor;
 
     public JFrame build() {

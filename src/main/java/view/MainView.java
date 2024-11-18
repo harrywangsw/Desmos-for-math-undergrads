@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.main.MainController;
+import interface_adapter.main.MainViewModel;
 
 import javax.swing.*;
 import java.util.List;
@@ -12,8 +13,11 @@ public class MainView extends JPanel {
     private final String[] menuItems = {"Plot", "Draw Phase Portrait"};
     private final JComboBox<String> dropDownMenu = new JComboBox<>(menuItems);
     private MainController mainController;
+//    private final MainViewModel mainViewModel;
 
     public MainView() {
+//        this.mainViewModel = mainViewModel;
+
         final JPanel rightCornerButtons = new JPanel();
         rightCornerButtons.add(runButton);
         rightCornerButtons.add(helpButton);
