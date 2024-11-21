@@ -51,7 +51,6 @@ public class NoteInteractor implements NoteInputBoundary {
     @Override
     public void executeSave(String note) {
         try {
-
             final String updatedNote = noteDataAccessInterface.saveNote(user, note);
             noteOutputBoundary.prepareSuccessView(updatedNote);
         }

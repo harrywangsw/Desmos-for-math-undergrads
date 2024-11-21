@@ -17,7 +17,6 @@ public class MainView extends JPanel {
 
     public MainView() {
 //        this.mainViewModel = mainViewModel;
-
         final JPanel rightCornerButtons = new JPanel();
         rightCornerButtons.add(runButton);
         rightCornerButtons.add(helpButton);
@@ -36,9 +35,10 @@ public class MainView extends JPanel {
             }
                 }
         );
+
+        this.add(rightCornerButtons);
+        this.add(dropDownMenu);
     }
 
-//    public static void main(String[] args) {
-//
-//    }
+    public void setMainController(MainController controller) {this.mainController = controller;}
 }

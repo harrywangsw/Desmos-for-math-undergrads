@@ -18,13 +18,13 @@ public class MainController {
     public void execute(String task) {
        switch (task) {
            case "Plot":
-               System.out.println("Temporary Plot");
+               mainInteractor.executePlot();
                break;
            case "Draw Phase Portrait":
-               System.out.println("Temporary Draw Phase Portrait");
+               mainInteractor.executePhasePotrait();
 
            case "help":
-               System.out.println("You just need to believe hard enough.");
+               mainInteractor.executeHelp();
        }
     }
 }

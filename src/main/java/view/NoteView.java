@@ -68,6 +68,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     /**
      * React to a button click that results in evt.
+     *
      * @param evt the ActionEvent to react to
      */
     public void actionPerformed(ActionEvent evt) {
@@ -92,4 +93,3 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         this.noteController = controller;
     }
 }
-
