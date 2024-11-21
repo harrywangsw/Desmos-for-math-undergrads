@@ -1,4 +1,11 @@
 package use_case.main;
 
-public class MainInputBoundary {
+public interface MainInputBoundary {
+
+    void executePlot();
+
+    void executePhasePotrait();
+
+    void executeHelp();
+
 }
