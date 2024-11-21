@@ -14,10 +14,25 @@ import javax.swing.*;
 public class MainAppBuilder {
     public static final int HEIGHT = 300;
     public static final int WIDTH = 400;
-//    private MainViewModel mainViewModel = new MainViewModel();
+    //    private MainViewModel mainViewModel = new MainViewModel();
     private MainInteractor mainInteractor;
     private MainView mainView;
 //    private MainInteractor mainInteractor;
+
+    public MainAppBuilder addMainUseCase() {
+        mainInteractor = new MainInteractor();
+        final MainController controller = new MainController(mainInteractor);
+        if (mainView == null) {
+            throw new RuntimeException("addMainView must be called before addMainUseCase");
+        }
+        mainView.setMainController(controller);
+        return this;
+    }
+
+    public MainAppBuilder addMainView() {
+        mainView = new MainView();
+        return this;
+    }
 
 
     public JFrame build() {
@@ -25,10 +40,6 @@ public class MainAppBuilder {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setTitle("Desmos for Math Undergrad");
         frame.setSize(WIDTH, HEIGHT);
-        mainInteractor = new MainInteractor();
-        final MainController controller = new MainController(mainInteractor);
-        mainView = new MainView();
-        this.mainView.setMainController(controller);
         frame.add(mainView);
 
         return frame;
