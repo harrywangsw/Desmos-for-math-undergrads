@@ -22,9 +22,14 @@ public class MainController {
                break;
            case "Draw Phase Portrait":
                mainInteractor.executePhasePotrait();
+               break;
+
+           case "Show Previous Graphs":
+               mainInteractor.executePreviousGraphs();
 
            case "help":
                mainInteractor.executeHelp();
+               break;
        }
     }
 }
