@@ -10,7 +10,7 @@ public class MainView extends JPanel {
     private final JButton runButton = new JButton("Run");
     private final JButton helpButton = new JButton("Help");
     private final JTextArea inputFunctionArea = new JTextArea();
-    private final String[] menuItems = {"Plot", "Draw Phase Portrait"};
+    private final String[] menuItems = {"Plot", "Draw Phase Portrait", "Show Previous Graphs"};
     private final JComboBox<String> dropDownMenu = new JComboBox<>(menuItems);
     private MainController mainController;
 //    private final MainViewModel mainViewModel;

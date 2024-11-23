@@ -8,4 +8,6 @@ public interface MainInputBoundary {
 
     void executeHelp();
 
+    void executePreviousGraphs();
+
 }
