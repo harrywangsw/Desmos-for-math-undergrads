@@ -54,7 +54,7 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
         return vectors;
     }
 
-    public JFreeChart plot_vectors(List<List<Float>> vectors) {
+    public JFreeChart create_chart(List<List<Float>> vectors) {
         // create a dataset...
         // First we create a dataset
 
@@ -94,6 +94,16 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
         for (int i = 0; i < unit_vectors.size(); i++){
             vectors.add(Arrays.asList(unit_vectors.get(i).get(0), unit_vectors.get(i).get(1), unit_vectors.get(i).get(2)*vector_size, unit_vectors.get(i).get(3)*vector_size));
         }
-        return plot_vectors(vectors);
+        System.out.println("wtffff");
+        return create_chart(vectors);
+    }
+
+    @Override
+    public JFreeChart change_bounds(String[] expression, String[] variable, float ub, float lb, float leftb, float rb) throws Exception {
+        this.upper_bound = ub;
+        this.lower_bound = lb;
+        this.left_bound = leftb;
+        this.right_bound = rb;
+        return create_chart(create_phase_vectors(expression, variable));
     }
 }
