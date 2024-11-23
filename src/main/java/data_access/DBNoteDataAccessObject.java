@@ -66,14 +66,14 @@ public class DBNoteDataAccessObject implements NoteDataAccessInterface {
                 return loadNote(user);
             }
             else if (responseBody.getInt(STATUS_CODE_LABEL) == CREDENTIAL_ERROR) {
-                throw new DataAccessException("message could not be found or password was incorrect");
+                throw new DataAccessException("message could not be found or password was incorrect", rollbackException);
             }
             else {
-                throw new DataAccessException("database error: " + responseBody.getString(MESSAGE));
+                throw new DataAccessException("database error: " + responseBody.getString(MESSAGE), rollbackException);
             }
         }
         catch (IOException | JSONException ex) {
-            throw new DataAccessException(ex.getMessage());
+            throw new DataAccessException(ex.getMessage(), rollbackException);
         }
     }
 
@@ -97,7 +97,7 @@ public class DBNoteDataAccessObject implements NoteDataAccessInterface {
                 return data.getString("note");
             }
             else {
-                throw new DataAccessException(responseBody.getString(MESSAGE));
+                throw new DataAccessException(responseBody.getString(MESSAGE), rollbackException);
             }
         }
         catch (IOException | JSONException ex) {
