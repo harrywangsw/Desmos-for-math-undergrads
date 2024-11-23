@@ -1,8 +1,17 @@
 package use_case;
 
+import use_case.main.GraphDataAccessInterface;
 import use_case.main.MainInputBoundary;
 
 public class MainInteractor implements MainInputBoundary {
+
+    private final GraphDataAccessInterface graphDataAccessInterface;
+    private final MainOutputBoundary mainOutputBoundary;
+
+    public MainInteractor(GraphDataAccessInterface graphDataAccessInterface, MainOutputBoundary mainOutputBoundary) {
+        this.graphDataAccessInterface = graphDataAccessInterface;
+        this.mainOutputBoundary = mainOutputBoundary;
+    }
 
 
     @Override
