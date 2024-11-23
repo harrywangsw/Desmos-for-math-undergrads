@@ -19,4 +19,9 @@ public class MainInteractor implements MainInputBoundary {
     public void executeHelp() {
         System.out.println("You just need to believe hard enough.");
     }
+
+    @Override
+    public void executePreviousGraphs() {
+        System.out.println("This will eventually allow a new window to pop up that shows previously obtained graphs");
+    }
 }
