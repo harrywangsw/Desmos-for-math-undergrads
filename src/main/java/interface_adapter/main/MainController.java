@@ -20,12 +20,14 @@ public class MainController {
            case "Plot":
                mainInteractor.executePlot();
                break;
+
            case "Draw Phase Portrait":
                mainInteractor.executePhasePotrait();
                break;
 
            case "Show Previous Graphs":
                mainInteractor.executePreviousGraphs();
+               break;
 
            case "help":
                mainInteractor.executeHelp();

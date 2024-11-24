@@ -9,7 +9,7 @@ import java.util.List;
 public class MainView extends JPanel {
     private final JButton runButton = new JButton("Run");
     private final JButton helpButton = new JButton("Help");
-    private final JTextArea inputFunctionArea = new JTextArea();
+    private final JTextField inputFunctionArea = new JTextField(10);
     private final String[] menuItems = {"Plot", "Draw Phase Portrait", "Show Previous Graphs"};
     private final JComboBox<String> dropDownMenu = new JComboBox<>(menuItems);
     private MainController mainController;
@@ -36,8 +36,9 @@ public class MainView extends JPanel {
                 }
         );
 
-        this.add(rightCornerButtons);
         this.add(dropDownMenu);
+        this.add(new EquationsView());
+        this.add(rightCornerButtons);
     }
 
     public void setMainController(MainController controller) {this.mainController = controller;}
