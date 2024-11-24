@@ -26,6 +26,7 @@ public class MainController {
 
            case "Show Previous Graphs":
                mainInteractor.executePreviousGraphs();
+               break;
 
            case "help":
                mainInteractor.executeHelp();
