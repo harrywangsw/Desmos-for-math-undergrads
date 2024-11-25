@@ -8,4 +8,12 @@ public class ODESystem {
         this.equations = equations;
         this.variables = variables;
     }
+
+    public String[] getEquations() {
+        return equations;
+    }
+
+    public String[] getVariables() {
+        return variables;
+    }
 }

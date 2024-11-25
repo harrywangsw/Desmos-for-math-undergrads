@@ -45,7 +45,7 @@ public class EquationsView extends JPanel {
         JPanel newEquation = new JPanel(new FlowLayout(FlowLayout.LEFT));
         newEquation.add(new JLabel(label));
         newEquation.add(new JTextField("0", 20));
-        equationList.add(newEquation); // Add before the button
+        equationList.add(newEquation);
         this.revalidate();
     }
 

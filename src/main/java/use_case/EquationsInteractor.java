@@ -1,5 +1,7 @@
 package use_case;
 
+import entity.ODESystem;
+import use_case.equations.APIAccessException;
 import use_case.equations.EquationsDataAccessInterface;
 import use_case.equations.EquationsInputBoundary;
 import use_case.equations.EquationsOutputBoundary;
@@ -14,10 +16,10 @@ public class EquationsInteractor implements EquationsInputBoundary {
     // could store as a "user" through the API OR you might maintain all notes
     // in a JSON object stored in one common "user" stored through the API.
 
-    public EquationsInteractor(EquationsDataAccessInterface noteDataAccessInterface,
-                          EquationsOutputBoundary noteOutputBoundary) {
-        this.equationsDataAccessInterface = noteDataAccessInterface;
-        this.equationsOutputBoundary = noteOutputBoundary;
+    public EquationsInteractor(EquationsDataAccessInterface equationsDataAccessInterface,
+                          EquationsOutputBoundary equationsOutputBoundary) {
+        this.equationsDataAccessInterface = equationsDataAccessInterface;
+        this.equationsOutputBoundary = equationsOutputBoundary;
     }
 
     @Override
@@ -26,8 +28,15 @@ public class EquationsInteractor implements EquationsInputBoundary {
     }
 
     @Override
-    public void extractCriticalPoints() {
+    public void extractCriticalPoints(ODESystem system) {
         System.out.println("Extracting critical points");
-
+        try {
+            String[] criticalPoints = equationsDataAccessInterface.getCritPoints(system);
+            equationsOutputBoundary.prepareCritPointsSuccessView(criticalPoints);
+        }
+        catch (APIAccessException e) {
+            e.printStackTrace();
+            equationsOutputBoundary.prepareCritPointsFailureView();
+        }
     }
 }
