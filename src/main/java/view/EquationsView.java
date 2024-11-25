@@ -26,7 +26,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
     private final JButton criticalPointsBtn = new JButton("Critical Points");
     private final JButton solveBtn = new JButton("Solve System");
 
-    private final JLabel criticalPointsOutput = new JLabel();
+    private final JPanel criticalPointsOutput = new JPanel();
     private final JLabel solutionOutput = new JLabel();
 
     private final JLabel criticalPointsLabel = new JLabel("Critical Points:");
@@ -89,6 +89,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         // Outputs
         criticalPointsLabel.setVisible(false);
         criticalPointsOutput.setVisible(false);
+        criticalPointsOutput.setLayout(new BoxLayout(criticalPointsOutput, BoxLayout.Y_AXIS));
         solutionLabel.setVisible(false);
         solutionOutput.setVisible(false);
         this.add(criticalPointsLabel);
@@ -129,38 +130,19 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
     private void setCriticalPoints(EquationResultState state) {
         String[] criticalPoints = state.getCriticalPoints();
         if (criticalPoints != null) {
+            criticalPointsOutput.removeAll();
             criticalPointsLabel.setVisible(true);
             criticalPointsOutput.setVisible(true);
 
-            StringBuilder output = new StringBuilder();
             for (String criticalPoint : criticalPoints) {
-                output.append(criticalPoint).append("\n");
+                criticalPointsOutput.add(new JLabel(criticalPoint));
             }
-
-            criticalPointsOutput.setText(output.toString());
         } else {
             criticalPointsLabel.setVisible(false);
-            criticalPointsOutput.setText("");
+            criticalPointsOutput.removeAll();
             criticalPointsOutput.setVisible(false);
         }
     }
 
-    private void setSolution(EquationResultState state) {
-        String[] solutions = state.getSolutions();
-        if (solutions != null) {
-            solutionLabel.setVisible(true);
-            solutionOutput.setVisible(true);
-
-            StringBuilder output = new StringBuilder();
-            for (String solution : solutions) {
-                output.append(solution).append("\n");
-            }
-
-            solutionOutput.setText(output.toString());
-        } else {
-            solutionLabel.setVisible(false);
-            solutionOutput.setText("");
-            solutionOutput.setVisible(false);
-        }
-    }
+    private void setSolution(EquationResultState state) {}
 }

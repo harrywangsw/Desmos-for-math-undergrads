@@ -3,6 +3,8 @@ package interface_adapter.equations;
 import entity.ODESystem;
 import use_case.equations.EquationsInputBoundary;
 
+import java.util.Arrays;
+
 public class EquationsController {
     private final EquationsInputBoundary equationsInteractor;
 
@@ -18,7 +20,7 @@ public class EquationsController {
                 break;
 
             case "critpoints":
-                ODESystem system = new ODESystem(equations, new String[0]);
+                ODESystem system = new ODESystem(equations, Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
                 equationsInteractor.extractCriticalPoints(system);
                 break;
         }
