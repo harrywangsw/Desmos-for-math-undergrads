@@ -1,6 +1,5 @@
 package view;
 
-import data_access.DBNoteDataAccessObject;
 import data_access.EquationsDataAccessObject;
 import interface_adapter.equations.EquationsController;
 import interface_adapter.equations.EquationsPresenter;
