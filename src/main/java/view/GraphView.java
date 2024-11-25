@@ -58,6 +58,11 @@ public class GraphView {
         JTextField yMin = new JTextField(10);
         JTextField yMax = new JTextField(10);
         JButton updateButton = new JButton("Update");
+        JButton shiftUpButton = new JButton("Up");
+        JButton shiftDownButton = new JButton("Down");
+        JButton shiftLeftButton = new JButton("Left");
+        JButton shiftRightButton = new JButton("Right");
+
         updateButton.addActionListener(e -> {
             String xMinValue = xMin.getText();
             String xMaxValue = xMax.getText();
@@ -67,6 +72,20 @@ public class GraphView {
             // Parse the input ranges and update the chart axes
             updateAxisRange(chart, xMinValue, xMaxValue, yMinValue, yMaxValue);
         });
+
+        shiftUpButton.addActionListener(e -> {
+            YUp(chart);
+        });
+        shiftDownButton.addActionListener(e -> {
+            YDown(chart);
+        });
+        shiftLeftButton.addActionListener(e -> {
+            XDown(chart);
+        });
+        shiftRightButton.addActionListener(e -> {
+            XUp(chart);
+        });
+
         panel.add(new JLabel("X min:"));
         panel.add(xMin);
         panel.add(new JLabel("X max:"));
@@ -76,8 +95,12 @@ public class GraphView {
         panel.add(new JLabel("Y max:"));
         panel.add(yMax);
         panel.add(updateButton);
+        panel.add(shiftUpButton);
+        panel.add(shiftDownButton);
+        panel.add(shiftLeftButton);
+        panel.add(shiftRightButton);
 
-        frame.setSize(1000, 600);
+        frame.setSize(1200, 800);
         frame.add(chartPanel, BorderLayout.CENTER);
         frame.add(panel, BorderLayout.SOUTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,4 +128,52 @@ public class GraphView {
             JOptionPane.showMessageDialog(null,"Invalid input");
         }
     }
+
+    private static void XUp(JFreeChart chart) {
+        // Parse the input range for X and Y axes
+        XYPlot plot = chart.getXYPlot();
+        ValueAxis xAxis = plot.getDomainAxis();
+
+        double minX = xAxis.getLowerBound();
+        double maxX = xAxis.getUpperBound();
+
+        xAxis.setRange(minX+1, maxX+1);
+
+    }
+
+    private static void XDown(JFreeChart chart) {
+        // Parse the input range for X and Y axes
+        XYPlot plot = chart.getXYPlot();
+        ValueAxis xAxis = plot.getDomainAxis();
+
+        double minX = xAxis.getLowerBound();
+        double maxX = xAxis.getUpperBound();
+
+        xAxis.setRange(minX-1, maxX-1);
+
+    }
+
+    private static void YUp(JFreeChart chart) {
+        // Parse the input range for X and Y axes
+        XYPlot plot = chart.getXYPlot();
+        ValueAxis yAxis = plot.getRangeAxis();
+
+        double minY = yAxis.getLowerBound();
+        double maxY = yAxis.getUpperBound();
+
+        yAxis.setRange(minY+1, maxY + 1);
+    }
+
+
+    private static void YDown(JFreeChart chart) {
+        // Parse the input range for X and Y axes
+        XYPlot plot = chart.getXYPlot();
+        ValueAxis yAxis = plot.getRangeAxis();
+
+        double minY = yAxis.getLowerBound();
+        double maxY = yAxis.getUpperBound();
+
+        yAxis.setRange(minY - 1, maxY-1);
+    }
+
 }

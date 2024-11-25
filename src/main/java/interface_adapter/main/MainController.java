@@ -20,6 +20,7 @@ public class MainController {
            case "Plot":
                mainInteractor.executePlot();
                break;
+
            case "Draw Phase Portrait":
                mainInteractor.executePhasePotrait();
                break;
