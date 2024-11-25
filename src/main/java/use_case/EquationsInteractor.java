@@ -12,14 +12,22 @@ public class EquationsInteractor implements EquationsInputBoundary {
     private final EquationsOutputBoundary equationsOutputBoundary;
 
     public EquationsInteractor(EquationsDataAccessInterface equationsDataAccessInterface,
-                          EquationsOutputBoundary equationsOutputBoundary) {
+                               EquationsOutputBoundary equationsOutputBoundary) {
         this.equationsDataAccessInterface = equationsDataAccessInterface;
         this.equationsOutputBoundary = equationsOutputBoundary;
     }
 
     @Override
-    public void executeSolve() {
+    public void executeSolve(ODESystem system) {
         System.out.println("Solving equations");
+        try {
+            String[] solutions = equationsDataAccessInterface.getSolution(system);
+            equationsOutputBoundary.prepareSolutionsSuccessView(solutions);
+        }
+        catch (APIAccessException e) {
+            e.printStackTrace();
+            equationsOutputBoundary.prepareSolutionsFailureView();
+        }
     }
 
     @Override

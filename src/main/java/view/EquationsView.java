@@ -5,12 +5,14 @@ import interface_adapter.equations.EquationResultState;
 import interface_adapter.equations.EquationsController;
 import interface_adapter.equations.EquationsViewModel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class EquationsView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -27,7 +29,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
     private final JButton solveBtn = new JButton("Solve System");
 
     private final JPanel criticalPointsOutput = new JPanel();
-    private final JLabel solutionOutput = new JLabel();
+    private final JPanel solutionOutput = new JPanel();
 
     private final JLabel criticalPointsLabel = new JLabel("Critical Points:");
     private final JLabel solutionLabel = new JLabel("Solution to System:");
@@ -81,7 +83,15 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         });
         buttonPanelBottom.add(criticalPointsBtn);
 
-        solveBtn.addActionListener(e -> {});
+        solveBtn.addActionListener(e -> {
+            ArrayList<String> equations = new ArrayList<>();
+            for (Component equationPanel : equationDisplay.getComponents()) {
+                if (equationPanel instanceof JPanel) {
+                    equations.add(((JTextField) ((JPanel) equationPanel).getComponent(1)).getText());
+                }
+            }
+            equationsController.execute("solve", equations.toArray(new String[0]));
+        });
         buttonPanelBottom.add(solveBtn);
 
         this.add(buttonPanelBottom);
@@ -134,8 +144,14 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
             criticalPointsLabel.setVisible(true);
             criticalPointsOutput.setVisible(true);
 
-            for (String criticalPoint : criticalPoints) {
-                criticalPointsOutput.add(new JLabel(criticalPoint));
+            try {
+
+                for (String criticalPoint : criticalPoints) {
+                    criticalPointsOutput.add(new JLabel(new ImageIcon(ImageIO.read(new URL(criticalPoint)))));
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
             criticalPointsLabel.setVisible(false);
@@ -144,5 +160,26 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         }
     }
 
-    private void setSolution(EquationResultState state) {}
+    private void setSolution(EquationResultState state) {
+        String[] solutions = state.getSolutions();
+        if (solutions != null) {
+            solutionOutput.removeAll();
+            solutionLabel.setVisible(true);
+            solutionOutput.setVisible(true);
+
+            try {
+
+                for (String solution : solutions) {
+                    solutionOutput.add(new JLabel(new ImageIcon(ImageIO.read(new URL(solution)))));
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            solutionLabel.setVisible(false);
+            solutionOutput.removeAll();
+            solutionOutput.setVisible(false);
+        }
+    }
 }

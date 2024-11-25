@@ -13,14 +13,14 @@ public class EquationsController {
     }
 
     public void execute(String task, String[] equations) {
+        ODESystem system = new ODESystem(equations, Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
         switch (task) {
 
             case "solve":
-                equationsInteractor.executeSolve();
+                equationsInteractor.executeSolve(system);
                 break;
 
             case "critpoints":
-                ODESystem system = new ODESystem(equations, Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
                 equationsInteractor.extractCriticalPoints(system);
                 break;
         }
