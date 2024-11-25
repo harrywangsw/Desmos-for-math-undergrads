@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.equations.EquationsViewModel;
 import interface_adapter.main.MainController;
 import interface_adapter.main.MainViewModel;
 
@@ -37,7 +38,7 @@ public class MainView extends JPanel {
         );
 
         this.add(dropDownMenu);
-        this.add(new EquationsView());
+        this.add(new EquationsView(new EquationsViewModel()));
         this.add(rightCornerButtons);
     }
 

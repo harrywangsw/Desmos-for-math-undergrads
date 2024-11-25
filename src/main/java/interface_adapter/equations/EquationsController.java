@@ -1,5 +1,6 @@
 package interface_adapter.equations;
 
+import entity.ODESystem;
 import use_case.equations.EquationsInputBoundary;
 
 public class EquationsController {
@@ -9,7 +10,7 @@ public class EquationsController {
         this.equationsInteractor = equationsInteractor;
     }
 
-    public void execute(String task) {
+    public void execute(String task, String[] equations) {
         switch (task) {
 
             case "solve":
@@ -17,7 +18,8 @@ public class EquationsController {
                 break;
 
             case "critpoints":
-                equationsInteractor.extractCriticalPoints();
+                ODESystem system = new ODESystem(equations, new String[0]);
+                equationsInteractor.extractCriticalPoints(system);
                 break;
         }
     }
