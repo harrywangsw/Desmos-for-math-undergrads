@@ -2,7 +2,7 @@ package view;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import phase_portrait.PhasePortraitInteractor;
+import use_case.PhasePortraitInteractor;
 
 import javax.swing.*;
 import java.awt.*;
