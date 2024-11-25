@@ -3,6 +3,8 @@ package interface_adapter.equations;
 import interface_adapter.note.NoteViewModel;
 import use_case.equations.EquationsOutputBoundary;
 
+import javax.swing.*;
+
 public class EquationsPresenter implements EquationsOutputBoundary {
 
     private final EquationsViewModel equationsViewModel;
@@ -22,4 +24,18 @@ public class EquationsPresenter implements EquationsOutputBoundary {
         equationsViewModel.getState().setCriticalPoints(null);
         equationsViewModel.firePropertyChanged();
     }
+
+    @Override
+    public void prepareSolutionsSuccessView(String[] solutions) {
+        equationsViewModel.getState().setSolutions(solutions);
+        equationsViewModel.firePropertyChanged();
+    }
+
+    @Override
+    public void prepareSolutionsFailureView() {
+        equationsViewModel.getState().setSolutions(null);
+        equationsViewModel.firePropertyChanged();
+    }
+
+
 }
