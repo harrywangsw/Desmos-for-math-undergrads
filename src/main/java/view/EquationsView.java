@@ -102,6 +102,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         criticalPointsOutput.setLayout(new BoxLayout(criticalPointsOutput, BoxLayout.Y_AXIS));
         solutionLabel.setVisible(false);
         solutionOutput.setVisible(false);
+        solutionOutput.setLayout(new BoxLayout(solutionOutput, BoxLayout.Y_AXIS));
         this.add(criticalPointsLabel);
         this.add(criticalPointsOutput);
         this.add(solutionLabel);
