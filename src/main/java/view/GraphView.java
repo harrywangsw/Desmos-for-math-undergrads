@@ -14,7 +14,8 @@ import java.util.List;
 
 public class GraphView {
     public static void main(String[] args) throws Exception {
-        List<List<Float>> full_sol = NewtonDataAccessObject.euler(new String[]{"x^2"}, new String[]{"x"}, new Float[]{1f}, 0.8f);
+        NewtonDataAccessObject newtonDataAccessObject = new NewtonDataAccessObject();
+        List<List<Float>> full_sol = newtonDataAccessObject.euler_solve(new String[]{"x^2"}, new String[]{"x"}, new Float[]{1f}, 0.8f);
         double[][] array = new double[2][full_sol.size()];
 
         for (int i = 0; i < full_sol.size(); i++) {

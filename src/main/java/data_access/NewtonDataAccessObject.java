@@ -10,7 +10,7 @@ import use_case.phase_portrait.PhasePortraitDataAccessInterface;
 
 public class NewtonDataAccessObject implements PhasePortraitDataAccessInterface {
     //interval for euler's method
-    public static final float interval = 0.01f;
+    public static final float interval = 0.001f;
 
     /**
      * copied from internet, performs GET action and return the results from newton api

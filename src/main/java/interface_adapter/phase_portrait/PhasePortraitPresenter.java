@@ -17,14 +17,6 @@ public class PhasePortraitPresenter implements PhasePortraitOutputBoundary {
 
     @Override
     public void create_phaseportrait_view(JFreeChart plot) {
-        PhasePortraitView view = new PhasePortraitView(plot, phasePortraitViewModel);
-        final JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Phase Portrait");
-        frame.setSize(WIDTH, HEIGHT);
-        frame.add(view);
-
-        frame.setVisible(true);
     }
 
     public void change_chart(JFreeChart plot, float vector_scale) {

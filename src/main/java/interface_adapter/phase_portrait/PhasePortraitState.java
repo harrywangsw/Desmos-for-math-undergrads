@@ -16,6 +16,21 @@ public class PhasePortraitState {
     private List<List<Float>> unit_vectors;
     private ODESystem system;
 
+    public PhasePortraitState(ODESystem system, JFreeChart plot, List<List<Float>> unit_vectors, float left_bound, float right_bound, float upper_bound, float lower_bound, float vector_scale) {
+        this.system = system;
+        this.plot = plot;
+        this.left_bound = left_bound;
+        this.right_bound = right_bound;
+        this.upper_bound = upper_bound;
+        this.lower_bound = lower_bound;
+        this.unit_vectors = unit_vectors;
+        this.vector_scale = vector_scale;
+    }
+
+    public PhasePortraitState(ODESystem system) {
+        this.system = system;
+    }
+
     public void setchart(JFreeChart chart) {
         this.plot = chart;
     }
@@ -28,4 +43,8 @@ public class PhasePortraitState {
     public List<List<Float>> getunit_vectors() {return unit_vectors;};
     public JFreeChart getplot(){return plot;};
     public ODESystem getsystem(){return system;};
+    public float getleft_bound() {return left_bound;}
+    public float getright_bound() {return right_bound;}
+    public float getupper_bound() {return upper_bound;}
+    public float getlower_bound() {return lower_bound;}
 }

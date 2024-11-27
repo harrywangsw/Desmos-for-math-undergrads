@@ -29,16 +29,11 @@ public class PhasePortraitView extends JPanel implements ActionListener, Propert
     private PhasePortraitInteractor interactor;
     private static ChartPanel CP;
     private List<List<Float>> unit_vectors = new ArrayList<>();
-    private float vector_size = 0.1f;
     private float vector_size_increment = 0.01f;
-    private final PhasePortraitViewModel phasePortraitViewModel;
+    private PhasePortraitViewModel phasePortraitViewModel;
     private PhasePortraitController phasePortraitController;
 
-    public PhasePortraitView(JFreeChart plot, PhasePortraitViewModel phasePortraitViewModel) {
-        this.phasePortraitViewModel = phasePortraitViewModel;
-        this.phasePortraitViewModel.addPropertyChangeListener(this);
-        this.interactor = interactor;
-        this.CP.setChart(plot);
+    public PhasePortraitView(PhasePortraitViewModel phasePortraitViewModel, PhasePortraitInteractor interactor) {
         final JPanel scalling_buttons = new JPanel();
         final JPanel bounds = new JPanel();
         scalling_buttons.add(decrease_button);
@@ -50,45 +45,47 @@ public class PhasePortraitView extends JPanel implements ActionListener, Propert
         bounds.add(ub);
         bounds.add(lb);
         bounds.add(confirm);
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        decrease_button.addActionListener(
-                evt -> {
-                    if (evt.getSource().equals(decrease_button)) {
-                        phasePortraitController.change_scale(phasePortraitViewModel.state.getunit_vectors(), phasePortraitViewModel.state.getscale()-vector_size_increment);
-                    }
-                });
-
-        increase_button.addActionListener( evt -> {
-                    if (evt.getSource().equals(increase_button)) {
-                        phasePortraitController.change_scale(phasePortraitViewModel.state.getunit_vectors(), phasePortraitViewModel.state.getscale()+vector_size_increment);
-                    }
-                }
-        );
-
-        confirm.addActionListener(evt -> {
-            try {
-                phasePortraitController.change_viewbox(phasePortraitViewModel.state.getsystem(), phasePortraitViewModel.state.);
-                CP.setChart(interactor.change_bounds(exps, vars, Float.parseFloat(ub.getText()), Float.parseFloat(lb.getText()), Float.parseFloat(leftb.getText()), Float.parseFloat(rb.getText())));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
-        vector_scale_button.addActionListener(evt -> {
-            if (evt.getSource().equals(vector_scale_button)) {
-                phasePortraitController.change_scale(phasePortraitViewModel.state.unit_vectors, Float.parseFloat(vector_scale.getText()));
-            }
-        });
-
         JPanel jPanel1 = new JPanel();
         jPanel1.setLayout(new java.awt.BorderLayout());
-        JFreeChart chart = interactor.create_chart(unit_vectors);
-        CP = new ChartPanel(chart);
+        CP = new ChartPanel(phasePortraitViewModel.getState().getplot());
         jPanel1.add(CP, BorderLayout.CENTER);
         jPanel1.validate();
 
         this.add(scalling_buttons);
         this.add(bounds);
         this.add(CP);
+
+        JFreeChart plot = phasePortraitViewModel.getState().getplot();
+        this.phasePortraitViewModel = phasePortraitViewModel;
+        this.phasePortraitViewModel.addPropertyChangeListener(this);
+        CP.setChart(plot);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        decrease_button.addActionListener(
+                evt -> {
+                    if (evt.getSource().equals(decrease_button)) {
+                        phasePortraitController.change_scale(phasePortraitViewModel.getState(), phasePortraitViewModel.getState().getscale()-vector_size_increment);
+                    }
+                });
+
+        increase_button.addActionListener( evt -> {
+                    if (evt.getSource().equals(increase_button)) {
+                        phasePortraitController.change_scale(phasePortraitViewModel.getState(), phasePortraitViewModel.getState().getscale()+vector_size_increment);
+                    }
+                }
+        );
+
+        confirm.addActionListener(evt -> {
+            try {
+                phasePortraitController.change_viewbox(phasePortraitViewModel.getState(), Float.parseFloat(leftb.getText()), Float.parseFloat(rb.getText()), Float.parseFloat(lb.getText()), Float.parseFloat(ub.getText()));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        vector_scale_button.addActionListener(evt -> {
+            if (evt.getSource().equals(vector_scale_button)) {
+                phasePortraitController.change_scale(phasePortraitViewModel.getState(), Float.parseFloat(vector_scale.getText()));
+            }
+        });
     }
 
     public void setPhasePortraitController(PhasePortraitController phasePortraitController) {
@@ -98,8 +95,8 @@ public class PhasePortraitView extends JPanel implements ActionListener, Propert
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final PhasePortraitState state = (PhasePortraitState) evt.getNewValue();
-        setchart(state.plot);
-        setscale(state.vector_scale);
+        setchart(state.getplot());
+        setscale(state.getscale());
     }
 
     public void setchart(JFreeChart plot){
