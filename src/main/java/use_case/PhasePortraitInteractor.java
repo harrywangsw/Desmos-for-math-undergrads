@@ -94,21 +94,21 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
     }
 
     @Override
-    public void change_scale(List<List<Float>> unit_vectors, float vector_size) {
+    public JFreeChart change_scale(List<List<Float>> unit_vectors, float vector_scale) {
         List<List<Float>> vectors = new ArrayList<>();
         for (int i = 0; i < unit_vectors.size(); i++){
-            vectors.add(Arrays.asList(unit_vectors.get(i).get(0), unit_vectors.get(i).get(1), unit_vectors.get(i).get(2)*vector_size, unit_vectors.get(i).get(3)*vector_size));
+            vectors.add(Arrays.asList(unit_vectors.get(i).get(0), unit_vectors.get(i).get(1), unit_vectors.get(i).get(2)*vector_scale, unit_vectors.get(i).get(3)*vector_scale));
         }
-        System.out.println("wtffff");
+        phasePortraitOutputBoundary.change_chart(create_chart(vectors), vector_scale);
         return create_chart(vectors);
     }
 
     @Override
-    public JFreeChart change_bounds(String[] expression, String[] variable, float ub, float lb, float leftb, float rb) throws Exception {
+    public JFreeChart change_bounds(String[] expression, String[] variable, float ub, float lb, float leftb, float rb, float vector_scale) throws Exception {
         this.upper_bound = ub;
         this.lower_bound = lb;
         this.left_bound = leftb;
         this.right_bound = rb;
-        return create_chart(create_phase_vectors(expression, variable));
+        phasePortraitOutputBoundary.change_chart(create_chart(create_phase_vectors(expression, variable)), vector_scale);
     }
 }

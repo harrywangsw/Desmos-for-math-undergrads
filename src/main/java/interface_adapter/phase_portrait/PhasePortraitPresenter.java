@@ -1,24 +1,35 @@
 package interface_adapter.phase_portrait;
-import data_access.NewtonDataAccessObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.jfree.data.xy.VectorSeries;
-import org.jfree.data.xy.VectorSeriesCollection;
-import org.jfree.chart.renderer.xy.VectorRenderer;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.ChartFrame;
 import use_case.phase_portrait.PhasePortraitOutputBoundary;
 import view.PhasePortraitView;
 
+import javax.swing.*;
+
 public class PhasePortraitPresenter implements PhasePortraitOutputBoundary {
-    private final PhasePortraitViewModel view;
+    final int WIDTH = 400;
+    final int HEIGHT = 600;
+    private final PhasePortraitViewModel phasePortraitViewModel;
 
     public PhasePortraitPresenter(PhasePortraitViewModel view) {
-        this.view = view;
+        this.phasePortraitViewModel = view;
     }
 
+    @Override
+    public void create_phaseportrait_view(JFreeChart plot) {
+        PhasePortraitView view = new PhasePortraitView(plot, phasePortraitViewModel);
+        final JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setTitle("Phase Portrait");
+        frame.setSize(WIDTH, HEIGHT);
+        frame.add(view);
+
+        frame.setVisible(true);
+    }
+
+    public void change_chart(JFreeChart plot, float vector_scale) {
+        phasePortraitViewModel.getState().setchart(plot);
+        phasePortraitViewModel.getState().setscale(vector_scale);
+        phasePortraitViewModel.firePropertyChanged();
+    }
 }
