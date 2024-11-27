@@ -1,5 +1,4 @@
-package phase_portrait;
-import app.newton;
+package use_case;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,11 +9,15 @@ import org.jfree.chart.renderer.xy.VectorRenderer;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.JFreeChart;
+import use_case.phase_portrait.PhasePortraitDataAccessInterface;
 import use_case.phase_portrait.PhasePortraitInputBoundary;
+import use_case.phase_portrait.PhasePortraitOutputBoundary;
 
 import static java.lang.Math.sqrt;
 
 public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
+    private final PhasePortraitDataAccessInterface phasePortraitDataAccessInterface;
+    private final PhasePortraitOutputBoundary phasePortraitOutputBoundary;
     private Boolean show_vectors;
     private float left_bound;
     private float right_bound;
@@ -22,7 +25,9 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
     private float lower_bound ;
     private int vector_amount ;
 
-    public PhasePortraitInteractor() {
+    public PhasePortraitInteractor(PhasePortraitDataAccessInterface phasePortraitDataAccessInterface, PhasePortraitOutputBoundary phasePortraitOutputBoundary) {
+        this.phasePortraitDataAccessInterface = phasePortraitDataAccessInterface;
+        this.phasePortraitOutputBoundary = phasePortraitOutputBoundary;
         this.left_bound = -1.0f;
         this.right_bound = 1.0f;
         this.upper_bound = 1.0f;
@@ -40,13 +45,13 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
                 point.add((right_bound-left_bound)/vector_amount*i+left_bound);
                 point.add((upper_bound-lower_bound)/vector_amount*j+lower_bound);
                 String[] vars = {variable[0], variable[1]};
-                float dx = newton.evaluate_single_ODE_at_point(expression[0], vars, point);
-                float dy = newton.evaluate_single_ODE_at_point(expression[1], vars, point);
+                float dx = phasePortraitDataAccessInterface.evaluate_single_ODE_at_point(expression[0], vars, point);
+                float dy = phasePortraitDataAccessInterface.evaluate_single_ODE_at_point(expression[1], vars, point);
                 float magn = (float) sqrt(dx*dx+dy*dy);
                 if(magn == 0){
                     unit_vect.add(Arrays.asList(0f, 0f));
                     vectors.add(Arrays.asList(point.get(0), point.get(1), 0f, 0f));
-                    break;
+                    continue;
                 }
                 vectors.add(Arrays.asList(point.get(0), point.get(1), dx/magn, dy/magn));
             }
@@ -89,21 +94,21 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
     }
 
     @Override
-    public JFreeChart change_scale(List<List<Float>> unit_vectors, float vector_size) {
+    public JFreeChart change_scale(List<List<Float>> unit_vectors, float vector_scale) {
         List<List<Float>> vectors = new ArrayList<>();
         for (int i = 0; i < unit_vectors.size(); i++){
-            vectors.add(Arrays.asList(unit_vectors.get(i).get(0), unit_vectors.get(i).get(1), unit_vectors.get(i).get(2)*vector_size, unit_vectors.get(i).get(3)*vector_size));
+            vectors.add(Arrays.asList(unit_vectors.get(i).get(0), unit_vectors.get(i).get(1), unit_vectors.get(i).get(2)*vector_scale, unit_vectors.get(i).get(3)*vector_scale));
         }
-        System.out.println("wtffff");
+        phasePortraitOutputBoundary.change_chart(create_chart(vectors), vector_scale);
         return create_chart(vectors);
     }
 
     @Override
-    public JFreeChart change_bounds(String[] expression, String[] variable, float ub, float lb, float leftb, float rb) throws Exception {
+    public void change_viewbox(String[] expression, String[] variable, float ub, float lb, float leftb, float rb, float vector_size) throws Exception {
         this.upper_bound = ub;
         this.lower_bound = lb;
         this.left_bound = leftb;
         this.right_bound = rb;
-        return create_chart(create_phase_vectors(expression, variable));
+        phasePortraitOutputBoundary.change_chart(create_chart(create_phase_vectors(expression, variable)), vector_size);
     }
 }

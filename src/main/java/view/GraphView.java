@@ -1,31 +1,26 @@
 package view;
-import app.newton;
+import data_access.NewtonDataAccessObject;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.DefaultXYDataset;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.chart.plot.PlotOrientation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-import static javax.swing.SwingConstants.HORIZONTAL;
-
 public class GraphView {
     public static void main(String[] args) throws Exception {
-        List<List<Float>> full_sol = newton.euler(new String[]{"x^2"}, new String[]{"x"}, new Float[]{1f}, 0.8f);
+        NewtonDataAccessObject newtonDataAccessObject = new NewtonDataAccessObject();
+        List<List<Float>> full_sol = newtonDataAccessObject.euler_solve(new String[]{"x^2"}, new String[]{"x"}, new Float[]{1f}, 0.8f);
         double[][] array = new double[2][full_sol.size()];
 
         for (int i = 0; i < full_sol.size(); i++) {
             array[1][i] = full_sol.get(i).get(0); // we're isolating one component from the vector [x(t), y(t), z(t), ...]
-            array[0][i] = i*newton.interval;
+            array[0][i] = i* NewtonDataAccessObject.interval;
         }
         plot(array);
     }
