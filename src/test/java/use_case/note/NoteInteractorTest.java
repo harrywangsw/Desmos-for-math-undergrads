@@ -41,6 +41,37 @@ public class NoteInteractorTest {
 
         noteInteractor.executeRefresh();
 
+    }
+
+    @Test
+    public void testExecuteSaveSuccess() {
+        NoteDataAccessInterface noteDAO = new NoteDataAccessInterface() {
+            public String saveNote(User user, String note) {
+                return "test";
+            }
+
+
+            @Override
+            public String loadNote(User user) {
+                return "test";
+            }
+        };
+
+        NoteOutputBoundary noteOB = new NoteOutputBoundary() {
+            @Override
+            public void prepareSuccessView(String message) {
+                assertEquals("test", message);
+            }
+
+            @Override
+            public void prepareFailView(String errorMessage) {
+                fail(errorMessage);
+            }
+        };
+
+        NoteInteractor noteInteractor = new NoteInteractor(noteDAO, noteOB);
+        String testedNote = "test";
+        noteInteractor.executeSave(testedNote);
 
     }
 }
