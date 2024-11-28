@@ -42,4 +42,5 @@ public class EquationsInteractor implements EquationsInputBoundary {
             equationsOutputBoundary.prepareCritPointsFailureView();
         }
     }
+
 }

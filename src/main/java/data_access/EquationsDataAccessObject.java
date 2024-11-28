@@ -34,7 +34,7 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
 
         try {
             System.out.println(BASE_URL);
-            String jsonstring = newton.getHTML(fullURL);
+            String jsonstring = NewtonDataAccessObject.getHTML(fullURL);
             final JSONObject apiResult = new JSONObject(jsonstring).getJSONObject("queryresult");
             System.out.println(apiResult);
             int numpods = apiResult.getInt("numpods");
