@@ -43,7 +43,8 @@ public class EquationsInteractor implements EquationsInputBoundary {
         }
         catch (APIAccessException exception) {
             exception.printStackTrace();
-            equationsOutputBoundary.prepareCritPointsFailureView("Errror extracting critical points: " + exception.getMessage());
+            equationsOutputBoundary.prepareCritPointsFailureView(
+                    "Errror extracting critical points: " + exception.getMessage());
         }
     }
 }
