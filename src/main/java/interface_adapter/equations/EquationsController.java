@@ -1,10 +1,13 @@
 package interface_adapter.equations;
 
+import java.util.Arrays;
+
 import entity.ODESystem;
 import use_case.equations.EquationsInputBoundary;
 
-import java.util.Arrays;
-
+/**
+ * Controller for the Equations use case that executes task based on user input.
+ */
 public class EquationsController {
     private final EquationsInputBoundary equationsInteractor;
 
@@ -12,19 +15,25 @@ public class EquationsController {
         this.equationsInteractor = equationsInteractor;
     }
 
+    /**
+     * Executes the task requested by the user.
+     * @param task The task to be executed
+     * @param equations The equations input by the user
+     */
     public void execute(String task, String[] equations) {
+        final ODESystem system = new ODESystem(equations,
+                Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
         switch (task) {
-
             case "solve":
-                equationsInteractor.executeSolve();
+                equationsInteractor.executeSolve(system);
                 break;
 
             case "critpoints":
-                ODESystem system = new ODESystem(equations, Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
                 equationsInteractor.extractCriticalPoints(system);
+                break;
+
+            default:
                 break;
         }
     }
-
-
 }

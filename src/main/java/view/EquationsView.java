@@ -1,23 +1,36 @@
 package view;
 
-import entity.ODESystem;
-import interface_adapter.equations.EquationResultState;
-import interface_adapter.equations.EquationsController;
-import interface_adapter.equations.EquationsViewModel;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+
+import entity.ODESystem;
+import interface_adapter.equations.EquationResultState;
+import interface_adapter.equations.EquationsController;
+import interface_adapter.equations.EquationsViewModel;
+
+/**
+ * A sub-view of the MainView for the equations use case where the user can input equations
+ * and view solutions/critical points.
+ */
 public class EquationsView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    private final EquationsViewModel equationsViewModel;
+    private static final int TEXT_FIELD_WIDTH = 20;
 
-    private final ArrayList<String> equationList = new ArrayList<>();
+    private final EquationsViewModel equationsViewModel;
 
     private final JPanel equationDisplay = new JPanel();
 
@@ -27,10 +40,12 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
     private final JButton solveBtn = new JButton("Solve System");
 
     private final JPanel criticalPointsOutput = new JPanel();
-    private final JLabel solutionOutput = new JLabel();
+    private final JPanel solutionOutput = new JPanel();
 
     private final JLabel criticalPointsLabel = new JLabel("Critical Points:");
     private final JLabel solutionLabel = new JLabel("Solution to System:");
+
+    private final JLabel errorLabel = new JLabel("Error trying to extract critical points: ");
 
     private EquationsController equationsController;
 
@@ -44,24 +59,15 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         headingLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.add(headingLabel);
 
-        // Button Panel Top
-        final JPanel buttonPanelTop = new JPanel();
-
-        // Add button
-        addEquationBtn.addActionListener(e -> addNewEquation(ODESystem.VARIABLES[equationDisplay.getComponentCount()] + "' = "));
-        buttonPanelTop.add(addEquationBtn);
-
-        // Remove button
-        removeEquationBtn.addActionListener(e -> removePreviousEquation());
-        buttonPanelTop.add(removeEquationBtn);
-
-        this.add(buttonPanelTop);
+        // Add Top Button Panel
+        createTopButtonPanel();
 
         // Add Equations
         equationDisplay.setLayout(new BoxLayout(equationDisplay, BoxLayout.Y_AXIS));
 
         // Scrollable view
-        JScrollPane scrollPane = new JScrollPane(equationDisplay, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        final JScrollPane scrollPane = new JScrollPane(equationDisplay,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane);
 
         addNewEquation("x' = ");
@@ -70,8 +76,8 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         // Button Panel Bottom
         final JPanel buttonPanelBottom = new JPanel();
 
-        criticalPointsBtn.addActionListener(e -> {
-            ArrayList<String> equations = new ArrayList<>();
+        criticalPointsBtn.addActionListener(event -> {
+            final ArrayList<String> equations = new ArrayList<>();
             for (Component equationPanel : equationDisplay.getComponents()) {
                 if (equationPanel instanceof JPanel) {
                     equations.add(((JTextField) ((JPanel) equationPanel).getComponent(1)).getText());
@@ -81,7 +87,15 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         });
         buttonPanelBottom.add(criticalPointsBtn);
 
-        solveBtn.addActionListener(e -> {});
+        solveBtn.addActionListener(event -> {
+            final ArrayList<String> equations = new ArrayList<>();
+            for (Component equationPanel : equationDisplay.getComponents()) {
+                if (equationPanel instanceof JPanel) {
+                    equations.add(((JTextField) ((JPanel) equationPanel).getComponent(1)).getText());
+                }
+            }
+            equationsController.execute("solve", equations.toArray(new String[0]));
+        });
         buttonPanelBottom.add(solveBtn);
 
         this.add(buttonPanelBottom);
@@ -92,16 +106,37 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         criticalPointsOutput.setLayout(new BoxLayout(criticalPointsOutput, BoxLayout.Y_AXIS));
         solutionLabel.setVisible(false);
         solutionOutput.setVisible(false);
+        solutionOutput.setLayout(new BoxLayout(solutionOutput, BoxLayout.Y_AXIS));
         this.add(criticalPointsLabel);
         this.add(criticalPointsOutput);
         this.add(solutionLabel);
         this.add(solutionOutput);
+
+        errorLabel.setVisible(false);
+        this.add(errorLabel);
+    }
+
+    private void createTopButtonPanel() {
+        // Button Panel Top
+        final JPanel buttonPanelTop = new JPanel();
+
+        // Add button
+        addEquationBtn.addActionListener(event -> {
+            addNewEquation(ODESystem.VARIABLES[equationDisplay.getComponentCount()] + "' = ");
+        });
+        buttonPanelTop.add(addEquationBtn);
+
+        // Remove button
+        removeEquationBtn.addActionListener(event -> removePreviousEquation());
+        buttonPanelTop.add(removeEquationBtn);
+
+        this.add(buttonPanelTop);
     }
 
     private void addNewEquation(String label) {
-        JPanel newEquation = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        final JPanel newEquation = new JPanel(new FlowLayout(FlowLayout.LEFT));
         newEquation.add(new JLabel(label));
-        newEquation.add(new JTextField("0", 20));
+        newEquation.add(new JTextField("0", TEXT_FIELD_WIDTH));
         equationDisplay.add(newEquation);
         this.revalidate();
     }
@@ -125,24 +160,54 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         final EquationResultState state = (EquationResultState) evt.getNewValue();
         setCriticalPoints(state);
         setSolution(state);
+        setError(state);
     }
 
     private void setCriticalPoints(EquationResultState state) {
-        String[] criticalPoints = state.getCriticalPoints();
+        final ImageIcon[] criticalPoints = state.getCriticalPoints();
         if (criticalPoints != null) {
             criticalPointsOutput.removeAll();
             criticalPointsLabel.setVisible(true);
             criticalPointsOutput.setVisible(true);
 
-            for (String criticalPoint : criticalPoints) {
+            for (ImageIcon criticalPoint : criticalPoints) {
                 criticalPointsOutput.add(new JLabel(criticalPoint));
             }
-        } else {
+        }
+        else {
             criticalPointsLabel.setVisible(false);
             criticalPointsOutput.removeAll();
             criticalPointsOutput.setVisible(false);
         }
     }
 
-    private void setSolution(EquationResultState state) {}
+    private void setSolution(EquationResultState state) {
+        final ImageIcon[] solutions = state.getSolutions();
+        if (solutions != null) {
+            solutionOutput.removeAll();
+            solutionLabel.setVisible(true);
+            solutionOutput.setVisible(true);
+
+            for (ImageIcon solution : solutions) {
+                solutionOutput.add(new JLabel(solution));
+            }
+        }
+        else {
+            solutionLabel.setVisible(false);
+            solutionOutput.removeAll();
+            solutionOutput.setVisible(false);
+        }
+    }
+
+    private void setError(EquationResultState state) {
+        final String error = state.getError();
+        if (error != null) {
+            errorLabel.setVisible(true);
+            errorLabel.setText(error);
+        }
+        else {
+            errorLabel.setVisible(false);
+            errorLabel.setText("");
+        }
+    }
 }
