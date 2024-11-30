@@ -16,9 +16,9 @@ public class NewtonDataAccessObject implements PhasePortraitDataAccessInterface 
      * copied from internet, performs GET action and return the results from newton api
      * @param urlToRead
      * @return
-     * @throws Exception
+     * @throws IOException
      */
-    public static String getHTML(String urlToRead) throws Exception {
+    public static String getHTML(String urlToRead) throws IOException {
         StringBuilder result = new StringBuilder();
         URL url = new URL(urlToRead);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
