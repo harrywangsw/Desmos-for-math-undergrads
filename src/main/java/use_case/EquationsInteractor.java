@@ -6,6 +6,10 @@ import use_case.equations.EquationsDataAccessInterface;
 import use_case.equations.EquationsInputBoundary;
 import use_case.equations.EquationsOutputBoundary;
 
+/**
+ * Equations Interactor for the use cases of extracting critical points and
+ * solving the differential equations analytically.
+ */
 public class EquationsInteractor implements EquationsInputBoundary {
 
     private final EquationsDataAccessInterface equationsDataAccessInterface;
@@ -21,12 +25,12 @@ public class EquationsInteractor implements EquationsInputBoundary {
     public void executeSolve(ODESystem system) {
         System.out.println("Solving equations");
         try {
-            String[] solutions = equationsDataAccessInterface.getSolution(system);
+            final String[] solutions = equationsDataAccessInterface.getSolution(system);
             equationsOutputBoundary.prepareSolutionsSuccessView(solutions);
         }
-        catch (APIAccessException e) {
-            e.printStackTrace();
-            equationsOutputBoundary.prepareSolutionsFailureView();
+        catch (APIAccessException exception) {
+            exception.printStackTrace();
+            equationsOutputBoundary.prepareSolutionsFailureView("Error analyzing solutions: " + exception.getMessage());
         }
     }
 
@@ -34,13 +38,12 @@ public class EquationsInteractor implements EquationsInputBoundary {
     public void extractCriticalPoints(ODESystem system) {
         System.out.println("Extracting critical points");
         try {
-            String[] criticalPoints = equationsDataAccessInterface.getCritPoints(system);
+            final String[] criticalPoints = equationsDataAccessInterface.getCritPoints(system);
             equationsOutputBoundary.prepareCritPointsSuccessView(criticalPoints);
         }
-        catch (APIAccessException e) {
-            e.printStackTrace();
-            equationsOutputBoundary.prepareCritPointsFailureView();
+        catch (APIAccessException exception) {
+            exception.printStackTrace();
+            equationsOutputBoundary.prepareCritPointsFailureView("Errror extracting critical points: " + exception.getMessage());
         }
     }
-
 }

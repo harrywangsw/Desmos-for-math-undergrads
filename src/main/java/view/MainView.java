@@ -1,20 +1,8 @@
 package view;
 
-import data_access.EquationsDataAccessObject;
-import interface_adapter.equations.EquationsController;
-import interface_adapter.equations.EquationsPresenter;
-import interface_adapter.equations.EquationsViewModel;
 import interface_adapter.main.MainController;
-import interface_adapter.main.MainViewModel;
-import interface_adapter.note.NoteController;
-import use_case.EquationsInteractor;
-import use_case.NoteInteractor;
-import use_case.equations.EquationsDataAccessInterface;
-import use_case.equations.EquationsOutputBoundary;
-import use_case.note.NoteDataAccessInterface;
 
 import javax.swing.*;
-import java.util.List;
 
 public class MainView extends JPanel {
     private final JButton runButton = new JButton("Run");

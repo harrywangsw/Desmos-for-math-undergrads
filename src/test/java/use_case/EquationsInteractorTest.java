@@ -1,7 +1,7 @@
 package use_case;
 
 import entity.ODESystem;
-import entity.User;
+
 import org.junit.Test;
 import use_case.equations.APIAccessException;
 import use_case.equations.EquationsDataAccessInterface;
@@ -36,7 +36,7 @@ public class EquationsInteractorTest {
             }
 
             @Override
-            public void prepareCritPointsFailureView() {fail(null);
+            public void prepareCritPointsFailureView(String error) {fail(null);
 
             }
 
@@ -49,7 +49,7 @@ public class EquationsInteractorTest {
             }
 
             @Override
-            public void prepareSolutionsFailureView() {fail(null);
+            public void prepareSolutionsFailureView(String error) {fail(null);
 
             }
         };
@@ -84,7 +84,7 @@ public class EquationsInteractorTest {
             }
 
             @Override
-            public void prepareCritPointsFailureView() {fail(null);
+            public void prepareCritPointsFailureView(String error) {fail(null);
 
             }
 
@@ -97,7 +97,7 @@ public class EquationsInteractorTest {
             }
 
             @Override
-            public void prepareSolutionsFailureView() {fail(null);
+            public void prepareSolutionsFailureView(String error) {fail(null);
 
             }
         };

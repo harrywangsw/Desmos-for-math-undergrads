@@ -1,29 +1,15 @@
 package app;
 
-import data_access.EquationsDataAccessObject;
 import interface_adapter.equations.EquationsController;
 import interface_adapter.equations.EquationsPresenter;
 import interface_adapter.equations.EquationsViewModel;
-import interface_adapter.main.MainController;
-import interface_adapter.main.MainViewModel;
-import interface_adapter.note.NoteController;
-import interface_adapter.note.NotePresenter;
-import interface_adapter.note.NoteViewModel;
 import use_case.EquationsInteractor;
-import use_case.MainInteractor;
-import use_case.NoteInteractor;
-import use_case.NoteOutputBoundary;
 import use_case.equations.EquationsDataAccessInterface;
 import use_case.equations.EquationsOutputBoundary;
-import use_case.note.NoteDataAccessInterface;
 import view.EquationsView;
-import view.MainView;
-import view.NoteView;
-
-import javax.swing.*;
 
 /**
- * Builder for the Equations View
+ * Builder for the Equations View.
  */
 public class EquationsBuilder {
     private EquationsDataAccessInterface equationsDAO;
@@ -72,7 +58,7 @@ public class EquationsBuilder {
     }
 
     /**
-     * Returns the built equations view
+     * Returns the built equations view.
      * @return the equationsView
      */
     public EquationsView build() {
