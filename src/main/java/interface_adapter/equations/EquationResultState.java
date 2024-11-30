@@ -1,5 +1,7 @@
 package interface_adapter.equations;
 
+import javax.swing.ImageIcon;
+
 import entity.ODESystem;
 
 /**
@@ -7,8 +9,8 @@ import entity.ODESystem;
  */
 public class EquationResultState {
     private ODESystem odeSystem;
-    private String[] criticalPoints;
-    private String[] solutions;
+    private ImageIcon[] criticalPoints;
+    private ImageIcon[] solutions;
     private String error;
 
     public EquationResultState(String[] equations, String[] variables) {
@@ -28,19 +30,19 @@ public class EquationResultState {
         this.odeSystem = new ODESystem(equations, variables);
     }
 
-    public String[] getCriticalPoints() {
+    public ImageIcon[] getCriticalPoints() {
         return criticalPoints;
     }
 
-    public void setCriticalPoints(String[] criticalPoints) {
+    public void setCriticalPoints(ImageIcon[] criticalPoints) {
         this.criticalPoints = criticalPoints;
     }
 
-    public String[] getSolutions() {
+    public ImageIcon[] getSolutions() {
         return solutions;
     }
 
-    public void setSolutions(String[] solutions) {
+    public void setSolutions(ImageIcon[] solutions) {
         this.solutions = solutions;
     }
 

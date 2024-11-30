@@ -6,11 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -167,20 +164,14 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
     }
 
     private void setCriticalPoints(EquationResultState state) {
-        final String[] criticalPoints = state.getCriticalPoints();
+        final ImageIcon[] criticalPoints = state.getCriticalPoints();
         if (criticalPoints != null) {
             criticalPointsOutput.removeAll();
             criticalPointsLabel.setVisible(true);
             criticalPointsOutput.setVisible(true);
 
-            try {
-
-                for (String criticalPoint : criticalPoints) {
-                    criticalPointsOutput.add(new JLabel(new ImageIcon(ImageIO.read(new URL(criticalPoint)))));
-                }
-            }
-            catch (IOException exception) {
-                exception.printStackTrace();
+            for (ImageIcon criticalPoint : criticalPoints) {
+                criticalPointsOutput.add(new JLabel(criticalPoint));
             }
         }
         else {
@@ -191,20 +182,14 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
     }
 
     private void setSolution(EquationResultState state) {
-        final String[] solutions = state.getSolutions();
+        final ImageIcon[] solutions = state.getSolutions();
         if (solutions != null) {
             solutionOutput.removeAll();
             solutionLabel.setVisible(true);
             solutionOutput.setVisible(true);
 
-            try {
-
-                for (String solution : solutions) {
-                    solutionOutput.add(new JLabel(new ImageIcon(ImageIO.read(new URL(solution)))));
-                }
-            }
-            catch (IOException exception) {
-                exception.printStackTrace();
+            for (ImageIcon solution : solutions) {
+                solutionOutput.add(new JLabel(solution));
             }
         }
         else {

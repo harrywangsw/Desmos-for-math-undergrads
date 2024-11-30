@@ -49,7 +49,8 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
                     .getJSONObject(0).getJSONArray("subpods");
             final ArrayList<String> results = new ArrayList<>();
             for (int i = 0; i < solutions.length(); i++) {
-                results.add(solutions.getJSONObject(i).getJSONObject("img").getString("src"));
+                results.add(solutions.getJSONObject(i)
+                        .getJSONObject("img").getString("src"));
             }
             return results.toArray(new String[0]);
         }
@@ -79,7 +80,8 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
                     .getJSONObject(0).getJSONArray("subpods");
             final ArrayList<String> results = new ArrayList<>();
             for (int i = 0; i < solutions.length(); i++) {
-                results.add(solutions.getJSONObject(i).getJSONObject("img").getString("src"));
+                results.add(solutions.getJSONObject(i)
+                        .getJSONObject("img").getString("src"));
             }
             return results.toArray(new String[0]);
         }
