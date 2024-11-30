@@ -1,9 +1,12 @@
 package app;
 
+import data_access.EquationsDataAccessObject;
 import interface_adapter.main.MainController;
 import interface_adapter.main.MainViewModel;
 import interface_adapter.note.NoteController;
 import use_case.MainInteractor;
+import use_case.equations.EquationsDataAccessInterface;
+import view.EquationsView;
 import view.MainView;
 
 import javax.swing.*;
@@ -30,7 +33,11 @@ public class MainAppBuilder {
     }
 
     public MainAppBuilder addMainView() {
-        mainView = new MainView();
+        EquationsBuilder equationsBuilder = new EquationsBuilder();
+        EquationsDataAccessObject equationsDAO = new EquationsDataAccessObject();
+        EquationsView equationsView = equationsBuilder.addEquationsDAO(equationsDAO)
+                .addEquationsView().addEquationsUseCase().build();
+        mainView = new MainView(equationsView);
         return this;
     }
 

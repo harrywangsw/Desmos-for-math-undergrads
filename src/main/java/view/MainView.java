@@ -24,8 +24,9 @@ public class MainView extends JPanel {
     private final JComboBox<String> dropDownMenu = new JComboBox<>(menuItems);
     private MainController mainController;
 //    private final MainViewModel mainViewModel;
+    private EquationsView equationsView;
 
-    public MainView() {
+    public MainView(EquationsView equationsView) {
 //        this.mainViewModel = mainViewModel;
         final JPanel rightCornerButtons = new JPanel();
         rightCornerButtons.add(runButton);
@@ -47,22 +48,9 @@ public class MainView extends JPanel {
         );
 
         this.add(dropDownMenu);
-        this.add(buildEquationsView());
+        this.equationsView = equationsView;
+        this.add(equationsView);
         this.add(rightCornerButtons);
-    }
-
-    private EquationsView buildEquationsView() {
-        final EquationsDataAccessInterface equationsDAO = new EquationsDataAccessObject();
-        final EquationsViewModel equationsViewModel = new EquationsViewModel();
-        final EquationsView equationsView = new EquationsView(equationsViewModel);
-
-        final EquationsOutputBoundary equationsOutputBoundary = new EquationsPresenter(equationsViewModel);
-        final EquationsInteractor equationsInteractor = new EquationsInteractor(equationsDAO, equationsOutputBoundary);
-        final EquationsController controller = new EquationsController(equationsInteractor);
-
-        equationsView.setEquationsController(controller);
-
-        return equationsView;
     }
 
     public void setMainController(MainController controller) {this.mainController = controller;}
