@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class GraphView {
-    public static void main(String[] args) throws Exception {
+    public static JFrame plotGraph() throws Exception {
         NewtonDataAccessObject newtonDataAccessObject = new NewtonDataAccessObject();
         List<List<Float>> full_sol = newtonDataAccessObject.eulersolve(new String[]{"x^2"}, new String[]{"x"}, new Float[]{1f}, 0.8f);
         double[][] array = new double[2][full_sol.size()];
@@ -26,7 +26,7 @@ public class GraphView {
             array[1][i] = full_sol.get(i).get(0); // we're isolating one component from the vector [x(t), y(t), z(t), ...]
             array[0][i] = i* NewtonDataAccessObject.INTERVAL;
         }
-        plot(array);
+        return plot(array);
     }
 
     /**
@@ -34,7 +34,7 @@ public class GraphView {
      * @param func 2d array of size 2, first element stores the x values, 2nd stores the y values
      * @throws Exception
      */
-    public static void plot(double[][] func) throws Exception {
+    public static JFrame plot(double[][] func) throws Exception {
         DefaultXYDataset dataset = new DefaultXYDataset();
         dataset.addSeries("test_func", func);
         JFreeChart chart = ChartFactory.createXYLineChart("plot", "t", "x", dataset, PlotOrientation.VERTICAL, false, false, false);
@@ -43,7 +43,7 @@ public class GraphView {
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".png");
         int width = 800;
         int height = 600;
-        ChartUtilities.saveChartAsPNG(imageFile, chart, width, height);
+
     System.out.println("Chart saved as: " + imageFile.getAbsolutePath());
         ChartPanel chartPanel = new ChartPanel(chart);
         JPanel panel = new JPanel();
@@ -100,6 +100,7 @@ public class GraphView {
         frame.add(panel, BorderLayout.SOUTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        return frame;
     }
     private static void updateAxisRange(JFreeChart chart, String xMin, String xMax, String yMin, String yMax) {
         // Parse the input range for X and Y axes

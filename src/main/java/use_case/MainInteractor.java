@@ -2,6 +2,7 @@ package use_case;
 
 import use_case.main.GraphDataAccessInterface;
 import use_case.main.MainInputBoundary;
+import view.GraphView;
 
 public class MainInteractor implements MainInputBoundary {
 
@@ -17,6 +18,11 @@ public class MainInteractor implements MainInputBoundary {
     @Override
     public void executePlot() {
         System.out.println("Temporary Plot");
+        try {
+            GraphView.plotGraph().setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
