@@ -1,5 +1,7 @@
 package use_case.phaseportrait;
 
+import java.util.List;
+
 import org.jfree.chart.JFreeChart;
 
 /**
@@ -12,5 +14,5 @@ public interface PhasePortraitOutputBoundary {
      * @param plot the plot
      * @param vector_scale scale
      */
-    void changechart(JFreeChart plot, float vector_scale);
+    void changechart(JFreeChart plot, float vector_scale, List<List<Float>> vectors);
 }

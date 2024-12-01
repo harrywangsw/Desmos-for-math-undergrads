@@ -25,6 +25,13 @@ public class PhasePortraitAppBuilder {
     public static final int HEIGHT = 300;
     public static final int WIDTH = 400;
 
+    public static void main(String[] args) throws Exception {
+        String[] vars = {"x", "y"};
+        String[] exps = {"x", "y"};
+        ODESystem sys = new ODESystem(exps, vars);
+        makePhase(sys);
+    }
+
     /**
      * Builder function for phase portrait use case.
      * @param sys the ode system
