@@ -1,8 +1,17 @@
 package use_case;
 
+import use_case.main.GraphDataAccessInterface;
 import use_case.main.MainInputBoundary;
 
 public class MainInteractor implements MainInputBoundary {
+
+    private final GraphDataAccessInterface graphDataAccessInterface;
+    private final MainOutputBoundary mainOutputBoundary;
+
+    public MainInteractor(GraphDataAccessInterface graphDataAccessInterface, MainOutputBoundary mainOutputBoundary) {
+        this.graphDataAccessInterface = graphDataAccessInterface;
+        this.mainOutputBoundary = mainOutputBoundary;
+    }
 
 
     @Override
@@ -23,5 +32,6 @@ public class MainInteractor implements MainInputBoundary {
     @Override
     public void executePreviousGraphs() {
         System.out.println("This will eventually allow a new window to pop up that shows previously obtained graphs");
+
     }
 }

@@ -2,6 +2,7 @@ package view;
 import data_access.NewtonDataAccessObject;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
@@ -10,6 +11,9 @@ import org.jfree.chart.plot.PlotOrientation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class GraphView {
@@ -34,6 +38,13 @@ public class GraphView {
         DefaultXYDataset dataset = new DefaultXYDataset();
         dataset.addSeries("test_func", func);
         JFreeChart chart = ChartFactory.createXYLineChart("plot", "t", "x", dataset, PlotOrientation.VERTICAL, false, false, false);
+
+        File imageFile = new File("./graphs/" + LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".png");
+        int width = 800;
+        int height = 600;
+        ChartUtilities.saveChartAsPNG(imageFile, chart, width, height);
+    System.out.println("Chart saved as: " + imageFile.getAbsolutePath());
         ChartPanel chartPanel = new ChartPanel(chart);
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
