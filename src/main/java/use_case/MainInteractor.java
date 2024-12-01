@@ -31,7 +31,6 @@ public class MainInteractor implements MainInputBoundary {
 
     @Override
     public void executePreviousGraphs() {
-        mainOutputBoundary.
         System.out.println("This will eventually allow a new window to pop up that shows previously obtained graphs");
 
     }
