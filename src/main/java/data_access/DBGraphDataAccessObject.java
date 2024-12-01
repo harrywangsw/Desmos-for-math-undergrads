@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
+import java.util.HashMap;
 
 import entity.Graph;
 import use_case.main.GraphDataAccessInterface;
@@ -53,25 +54,24 @@ public class DBGraphDataAccessObject implements GraphDataAccessInterface {
 
 
     @Override
-    public List<Graph> loadAllGraphs() throws DataAccessException {
-        String selectQuery = "SELECT equation, path_to_image FROM Graph";
-        List<Graph> graphList = new ArrayList<>();
+    public List<Map<String, String>> loadAllGraphs() throws DataAccessException {
+    String selectQuery = "SELECT equation, path_to_image FROM Graph";
+    List<Map<String, String>> graphList = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+    try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+         ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (resultSet.next()) {
-                String equation = resultSet.getString("equation");
-                String pathToImage = resultSet.getString("path_to_image");
+        while (resultSet.next()) {
+            Map<String, String> graphMap = new HashMap<>();
+            graphMap.put("equation", resultSet.getString("equation"));
+            graphMap.put("path_to_image", resultSet.getString("path_to_image"));
 
-                Graph graph = new Graph(equation, pathToImage);
-                graphList.add(graph);
-            }
-        } catch (SQLException e) {
-            throw new DataAccessException("Error loading graph data - " + e.getMessage(), e);
+            graphList.add(graphMap);
         }
-
-        return graphList;
+    } catch (SQLException e) {
+        throw new DataAccessException("Error loading graph data - " + e.getMessage(), e);
     }
 
+    return graphList;
+}
 }

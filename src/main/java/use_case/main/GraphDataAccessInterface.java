@@ -11,5 +11,5 @@ public interface GraphDataAccessInterface {
 
     String saveGraph(Map<String, String> graphMap) throws DataAccessException;
 
-    List<Graph> loadAllGraphs() throws DataAccessException;
+    List<Map<String, String>> loadAllGraphs() throws DataAccessException;
 }
