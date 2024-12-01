@@ -8,4 +8,6 @@ import java.util.Map;
 public interface PreviousGraphsOutputBoundary {
 
     void displayGraphs(List<Map<String, String>> graphList);
+
+    void preparePreviousGraphFailView(String error);
 }
