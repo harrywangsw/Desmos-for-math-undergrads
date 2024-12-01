@@ -39,6 +39,8 @@ public class PhasePortraitState {
         this.vector_scale = scale;
     }
 
+    public void setUnitvectors(List<List<Float>> vectors) {this.unit_vectors = vectors;}
+
     public float getscale() {return vector_scale;};
     public List<List<Float>> getunit_vectors() {return unit_vectors;};
     public JFreeChart getplot(){return plot;};

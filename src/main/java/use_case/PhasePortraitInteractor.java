@@ -108,7 +108,7 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
             vectors.add(Arrays.asList(unit_vectors.get(i).get(0), unit_vectors.get(i).get(1),
                     unit_vectors.get(i).get(2) * vector_scale, unit_vectors.get(i).get(1 + 2) * vector_scale));
         }
-        phasePortraitOutputBoundary.changechart(createchart(vectors), vector_scale);
+        phasePortraitOutputBoundary.changechart(createchart(vectors), vector_scale, unit_vectors);
         return createchart(vectors);
     }
 
@@ -119,6 +119,7 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
         this.lowerbound = lb;
         this.leftbound = leftb;
         this.rightbound = rb;
-        phasePortraitOutputBoundary.changechart(createchart(createphasevectors(expression, variable)), vector_size);
+        List<List<Float>> vectors = createphasevectors(expression, variable);
+        phasePortraitOutputBoundary.changechart(createchart(vectors), vector_size, vectors);
     }
 }

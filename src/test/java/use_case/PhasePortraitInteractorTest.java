@@ -38,7 +38,7 @@ public class PhasePortraitInteractorTest {
         PhasePortraitOutputBoundary testOutput = new PhasePortraitOutputBoundary() {
 
             @Override
-            public void changechart(JFreeChart plot, float vector_scale) {
+            public void changechart(JFreeChart plot, float vector_scale, List<List<Float>> vectors) {
 
             }
         };
@@ -77,7 +77,7 @@ public class PhasePortraitInteractorTest {
         PhasePortraitOutputBoundary testOutput = new PhasePortraitOutputBoundary() {
 
             @Override
-            public void changechart(JFreeChart plot, float vector_scale) {
+            public void changechart(JFreeChart plot, float vector_scale, List<List<Float>> vectors) {
 
             }
         };
@@ -117,7 +117,7 @@ public class PhasePortraitInteractorTest {
         PhasePortraitOutputBoundary testOutput = new PhasePortraitOutputBoundary() {
 
             @Override
-            public void changechart(JFreeChart plot, float vector_scale) {
+            public void changechart(JFreeChart plot, float vector_scale, List<List<Float>> vectors) {
 
             }
         };
