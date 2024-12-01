@@ -1,22 +1,31 @@
 package data_access;
-import java.io.*;
-import java.net.*;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONObject;
-import use_case.phase_portrait.PhasePortraitDataAccessInterface;
 
+import use_case.equations.APIAccessException;
+import use_case.phaseportrait.PhasePortraitDataAccessInterface;
+
+/**
+ * Data access object for using newton API.
+ */
 public class NewtonDataAccessObject implements PhasePortraitDataAccessInterface {
-    //interval for euler's method
-    public static final float interval = 0.001f;
+    public static final float INTERVAL = 0.001f;
 
     /**
-     * copied from internet, performs GET action and return the results from newton api
-     * @param urlToRead
-     * @return
-     * @throws IOException
+     * Copied from internet, performs GET action and return the results from newton api.
+     *
+     * @param urlToRead the newton api url
+     * @return return string from newton api
+     * @throws IOException when newton api returns error
      */
     public static String getHTML(String urlToRead) throws IOException {
         StringBuilder result = new StringBuilder();
@@ -25,7 +34,7 @@ public class NewtonDataAccessObject implements PhasePortraitDataAccessInterface 
         conn.setRequestMethod("GET");
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(conn.getInputStream()))) {
-            for (String line; (line = reader.readLine()) != null; ) {
+            for (String line; (line = reader.readLine()) != null;) {
                 result.append(line);
             }
         }
@@ -33,44 +42,55 @@ public class NewtonDataAccessObject implements PhasePortraitDataAccessInterface 
     }
 
     /**
-     * evaluates a single ODE at a point
+     * Evaluates a single ODE at a point.
+     *
      * @param expression one of the equations in our system of ODE
-     * @param variable the characters representing the variables
-     * @param point the specific point we're evaluating the ode at
-     * @return
-     * @throws Exception
+     * @param variable   the characters representing the variables
+     * @param point      the specific point we're evaluating the ode at
+     * @return the result of the evaluation
+     * @throws RuntimeException when newton api returns error
+     * @throws APIAccessException when newton api returns error
      */
-    public float evaluate_single_ODE_at_point(String expression, String[] variable, List<Float> point) throws Exception
-    {
-        for (int i = 0; i < variable.length; i++){
-            expression = expression.replace(variable[i], "("+String.format("%.12f", point.get(i))+")");
+    public float evaluatesingleOdeatpoint(String expression, String[] variable,
+                                          List<Float> point) throws APIAccessException {
+        String exp = expression;
+        for (int i = 0; i < variable.length; i++) {
+            exp = exp.replace(variable[i], "(" + String.format("%.12f", point.get(i)) + ")");
         }
-        String jsonstring = getHTML("https://newton.vercel.app/api/v2/simplify/"+expression);
+        String jsonstring = null;
+        try {
+            jsonstring = getHTML("https://newton.vercel.app/api/v2/simplify/" + exp);
+        }
+        catch (IOException err) {
+            throw new RuntimeException(err);
+        }
         JSONObject json = new JSONObject(jsonstring);
         return Float.parseFloat(json.getString("result"));
     }
 
     /**
-     * performs Euler's method for a system of ODEs
+     * Performs Euler's method for a system of ODEs.
+     *
      * @param expressions the expressions for the time derivatives (i.e. if the system of ODE is x'=2x
-     *                                                                                           y'=y^2+x, expression would be ["2x", "y^2+x"]
-     * @param vars the characters representing the variables
-     * @param initial_conditions
-     * @param end_time the endpoint of euler method.
-     * @return
-     * @throws Exception
+     *                    y'=y^2+x, expression would be ["2x", "y^2+x"]
+     * @param vars        the characters representing the variables
+     * @param ico initial condition
+     * @param end_time    the endpoint of euler method.
+     * @return the numerica solution
+     * @throws APIAccessException when newton returns error
      */
     @Override
-    public List<List<Float>> euler_solve(String[] expressions, String[] vars, Float[] initial_conditions, float end_time) throws Exception {
+    public List<List<Float>> eulersolve(String[] expressions, String[] vars, Float[] ico,
+                                        float end_time) throws APIAccessException {
         List<List<Float>> result = new ArrayList<List<Float>>();
-        result.add(Arrays.asList(initial_conditions));
-        for (int i = 0; i < end_time/interval; i++){
+        result.add(Arrays.asList(ico));
+        for (int i = 0; i < end_time / INTERVAL; i++) {
             List<Float> current = new ArrayList<>(result.get(result.size() - 1));
-            List<Float> next_point = new ArrayList<Float>();
+            List<Float> nextpoint = new ArrayList<Float>();
             for (int j = 0; j < expressions.length; j++) {
-                next_point.add(current.get(j)+interval*evaluate_single_ODE_at_point(expressions[j], vars, current));
+                nextpoint.add(current.get(j) + INTERVAL * evaluatesingleOdeatpoint(expressions[j], vars, current));
             }
-            result.add(next_point);
+            result.add(nextpoint);
         }
         return result;
     }

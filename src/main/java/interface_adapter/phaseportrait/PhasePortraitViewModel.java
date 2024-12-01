@@ -1,10 +1,10 @@
-package interface_adapter.phase_portrait;
+package interface_adapter.phaseportrait;
 
-import entity.ODESystem;
 import interface_adapter.ViewModel;
 
-import java.util.List;
-
+/**
+ * View model used to store and update/track changes to the state of the phase portrait.
+ */
 public class PhasePortraitViewModel extends ViewModel<PhasePortraitState> {
     public PhasePortraitViewModel(PhasePortraitState state) {
         super("phase portrait");

@@ -15,12 +15,12 @@ import java.util.List;
 public class GraphView {
     public static void main(String[] args) throws Exception {
         NewtonDataAccessObject newtonDataAccessObject = new NewtonDataAccessObject();
-        List<List<Float>> full_sol = newtonDataAccessObject.euler_solve(new String[]{"x^2"}, new String[]{"x"}, new Float[]{1f}, 0.8f);
+        List<List<Float>> full_sol = newtonDataAccessObject.eulersolve(new String[]{"x^2"}, new String[]{"x"}, new Float[]{1f}, 0.8f);
         double[][] array = new double[2][full_sol.size()];
 
         for (int i = 0; i < full_sol.size(); i++) {
             array[1][i] = full_sol.get(i).get(0); // we're isolating one component from the vector [x(t), y(t), z(t), ...]
-            array[0][i] = i* NewtonDataAccessObject.interval;
+            array[0][i] = i* NewtonDataAccessObject.INTERVAL;
         }
         plot(array);
     }

@@ -1,4 +1,4 @@
-package interface_adapter.phase_portrait;
+package interface_adapter.phaseportrait;
 
 import entity.ODESystem;
 import org.jfree.chart.JFreeChart;
