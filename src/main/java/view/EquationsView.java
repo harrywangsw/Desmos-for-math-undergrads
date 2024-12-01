@@ -56,7 +56,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         this.equationsViewModel.addPropertyChangeListener(this);
 
         final JLabel headingLabel = new JLabel("Differential Equations:");
-        headingLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        headingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(headingLabel);
 
         // Add Top Button Panel
@@ -101,10 +101,16 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         this.add(buttonPanelBottom);
 
         // Outputs
+        initializeOutputLabels();
+    }
+
+    private void initializeOutputLabels() {
         criticalPointsLabel.setVisible(false);
+        criticalPointsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         criticalPointsOutput.setVisible(false);
         criticalPointsOutput.setLayout(new BoxLayout(criticalPointsOutput, BoxLayout.Y_AXIS));
         solutionLabel.setVisible(false);
+        solutionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         solutionOutput.setVisible(false);
         solutionOutput.setLayout(new BoxLayout(solutionOutput, BoxLayout.Y_AXIS));
         this.add(criticalPointsLabel);
@@ -113,6 +119,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         this.add(solutionOutput);
 
         errorLabel.setVisible(false);
+        errorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(errorLabel);
     }
 
@@ -171,13 +178,17 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
             criticalPointsOutput.setVisible(true);
 
             for (ImageIcon criticalPoint : criticalPoints) {
-                criticalPointsOutput.add(new JLabel(criticalPoint));
+                final JLabel outputLabel = new JLabel(criticalPoint);
+                outputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                criticalPointsOutput.add(outputLabel);
             }
+            this.revalidate();
         }
         else {
             criticalPointsLabel.setVisible(false);
             criticalPointsOutput.removeAll();
             criticalPointsOutput.setVisible(false);
+            this.revalidate();
         }
     }
 
@@ -189,13 +200,17 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
             solutionOutput.setVisible(true);
 
             for (ImageIcon solution : solutions) {
-                solutionOutput.add(new JLabel(solution));
+                final JLabel outputLabel = new JLabel(solution);
+                outputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                solutionOutput.add(outputLabel);
             }
+            this.revalidate();
         }
         else {
             solutionLabel.setVisible(false);
             solutionOutput.removeAll();
             solutionOutput.setVisible(false);
+            this.revalidate();
         }
     }
 
@@ -204,10 +219,12 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         if (error != null) {
             errorLabel.setVisible(true);
             errorLabel.setText(error);
+            this.revalidate();
         }
         else {
             errorLabel.setVisible(false);
             errorLabel.setText("");
+            this.revalidate();
         }
     }
 }

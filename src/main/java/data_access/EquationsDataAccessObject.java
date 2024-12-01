@@ -72,12 +72,16 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
         try {
             final String jsonstring = NewtonDataAccessObject.getHTML(fullUrl);
             final JSONObject apiResult = new JSONObject(jsonstring).getJSONObject("queryresult");
+            System.out.println(apiResult);
             final int numpods = apiResult.getInt("numpods");
             if (numpods == 0) {
-                throw new APIAccessException("There are no solutions");
+                throw new APIAccessException("There are no critical points");
             }
-            final JSONArray solutions = apiResult.getJSONArray("pods")
-                    .getJSONObject(0).getJSONArray("subpods");
+            final JSONObject resultPod = apiResult.getJSONArray("pods").getJSONObject(0);
+            if (!"Solve".equals(resultPod.getString("scanner"))) {
+                throw new APIAccessException("There are no critical points");
+            }
+            final JSONArray solutions = resultPod.getJSONArray("subpods");
             final ArrayList<String> results = new ArrayList<>();
             for (int i = 0; i < solutions.length(); i++) {
                 results.add(solutions.getJSONObject(i)
