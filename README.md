@@ -1,10 +1,40 @@
-# Desmos-for-math-undergrads
+# PhaseFlow
 Team members: 
 - Harry (harrywangsw)
 - Brian (Brian031205)
 - Hasnain (Hasnaink17)
 - Paarth (paarth7777)
 - Tanayjyot (Tanayjyot Singh Chawla)
+# Table of Contents  
+[Summary](#headers)  
+[Features](#headers)
+[Installation](#headers)
+[Use Guide](#headers)
+[Feedback](#headers)
+<a name="headers"/>
+## Summary
+This is a set of computational tools related to Ordinary Differential Equations.
+After inputting the equation of interest, the user can then choose to plot a time-series solution including the critical points, the phase portrait, or see the solution in a symbolic form.
+Its purpose is to help math undergrads in their study of ODE. If you you would like to verify your solution or deepen your understanding through visualization, this program is for you.
 
-# User Stories
-As a math program student, I want to be able to switch between different units like degrees and radians so that I can input the expression and get the output expression in both units.
+## Features
+Input a system of first-order ODE and initial conditions.
+Graph the numerical solutio of a 1D ODE and the phase portrait of 2D system of ODE.
+Display the critical points of any system of ODEs
+DIsplays the analytic solution of the system of ODE (if it exists)
+
+## Installation
+
+## Use Guide
+### Find&plot numerical solution
+### Find analytical solution
+### Find critical points
+### Plot Phase Portrait
+Input your ODE in the main program view. Select "plot phase portrait" in the scrolldown menu. ![Screenshot 2024-12-01 130042](https://github.com/user-attachments/assets/6e4cd06f-79cf-44d1-8de6-4eaf756afb5b)
+The programm will open a new window, where you can change the scale of the vectors and the view window
+![Screenshot 2024-12-01 130354](https://github.com/user-attachments/assets/380efe22-728f-484f-8b3b-182bb6f7c986)
+![Screenshot 2024-12-01 131556](https://github.com/user-attachments/assets/b42ef04e-637a-4f37-9e89-379205a2a042)
+
+## Feedback and Contribution
+Please report any feedback in the issues page(https://github.com/harrywangsw/Desmos-for-math-undergrads/issues)
+We are not accepting contributions.
