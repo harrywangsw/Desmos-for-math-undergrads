@@ -5,13 +5,6 @@ Team members:
 - Hasnain (Hasnaink17)
 - Paarth (paarth7777)
 - Tanayjyot (Tanayjyot Singh Chawla)
-# Table of Contents  
-[Summary](#headers)  
-[Features](#headers)
-[Installation](#headers)
-[Use Guide](#headers)
-[Feedback](#headers)
-<a name="headers"/>
 ## Summary
 This is a set of computational tools related to Ordinary Differential Equations.
 After inputting the equation of interest, the user can then choose to plot a time-series solution including the critical points, the phase portrait, or see the solution in a symbolic form.
