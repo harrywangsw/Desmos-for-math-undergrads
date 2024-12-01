@@ -1,5 +1,6 @@
 package view;
 import data_access.NewtonDataAccessObject;
+import entity.ODESystem;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
@@ -17,9 +18,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class GraphView {
-    public static JFrame plotGraph() throws Exception {
+    public static JFrame plotGraph(ODESystem system) throws Exception {
+        if (system.getVariables().length > 1){
+            System.out.println("only 1D systems have plotting support");
+            return null;
+        }
         NewtonDataAccessObject newtonDataAccessObject = new NewtonDataAccessObject();
-        List<List<Float>> full_sol = newtonDataAccessObject.eulersolve(new String[]{"x^2"}, new String[]{"x"}, new Float[]{1f}, 0.8f);
+        List<List<Float>> full_sol = newtonDataAccessObject.eulersolve(system.getEquations(), system.getVariables(), system.getInitialConditions(), 8f);
         double[][] array = new double[2][full_sol.size()];
 
         for (int i = 0; i < full_sol.size(); i++) {

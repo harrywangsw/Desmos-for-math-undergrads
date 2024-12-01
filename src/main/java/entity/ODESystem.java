@@ -9,6 +9,7 @@ public class ODESystem {
 
     private String[] equations;
     private String[] variables;
+    private Float[] initialconditions;
 
     public ODESystem(String[] equations, String[] variables) {
         this.equations = equations;
@@ -22,4 +23,6 @@ public class ODESystem {
     public String[] getVariables() {
         return variables;
     }
+
+    public Float[] getInitialConditions() {return initialconditions;}
 }
