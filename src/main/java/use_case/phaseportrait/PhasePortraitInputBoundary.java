@@ -2,8 +2,12 @@ package use_case.phaseportrait;
 
 import java.util.List;
 
+import entity.ODESystem;
+import interface_adapter.phaseportrait.PhasePortraitPresenter;
+import interface_adapter.phaseportrait.PhasePortraitViewModel;
 import org.jfree.chart.JFreeChart;
 import use_case.equations.APIAccessException;
+import view.PhasePortraitView;
 
 /**
  * A interface.
@@ -46,4 +50,6 @@ public interface PhasePortraitInputBoundary {
      */
     void changeviewbox(String[] expression, String[] variable, float upb, float lob, float leftb,
                        float rib, float vector_size) throws APIAccessException;
+
+    void makePhase(PhasePortraitViewModel viewModel, PhasePortraitOutputBoundary outputboundary, ODESystem sys) throws Exception;
 }
