@@ -10,7 +10,7 @@ Team members:
 1. [Summary](#introduction)
 2. [Features](#paragraph1)
 3. [Installation](#paragraph2)
-4. [use Guide](#paragraph3)
+4. [Use Guide](#paragraph3)
 5. [Feedback and Contribution](#paragraph4)
 
 ## Summary <a name="introduction"></a>
