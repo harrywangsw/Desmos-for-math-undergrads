@@ -15,6 +15,7 @@ public class MainView extends JPanel {
     private EquationsView equationsView;
 
     public MainView(EquationsView equationsView) {
+        this.equationsView = equationsView;
 //        this.mainViewModel = mainViewModel;
         final JPanel rightCornerButtons = new JPanel();
         rightCornerButtons.add(runButton);
@@ -24,19 +25,18 @@ public class MainView extends JPanel {
         runButton.addActionListener(
                 evt -> {
                     if (evt.getSource().equals(runButton)) {
-                        mainController.execute( (String) dropDownMenu.getSelectedItem());
+                        mainController.execute( (String) dropDownMenu.getSelectedItem(), equationsView.getequations());
                     }
-        });
+                });
 
         helpButton.addActionListener( evt -> {
             if (evt.getSource().equals(helpButton)) {
-                mainController.execute("help");
+                mainController.execute("help", new String[0]);
             }
                 }
         );
 
         this.add(dropDownMenu);
-        this.equationsView = equationsView;
         this.add(equationsView);
         this.add(rightCornerButtons);
     }

@@ -2,6 +2,7 @@ package interface_adapter.phaseportrait;
 
 import use_case.PhasePortraitInteractor;
 import use_case.equations.APIAccessException;
+import use_case.phaseportrait.PhasePortraitInputBoundary;
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
 
 /**
@@ -9,14 +10,14 @@ import use_case.phaseportrait.PhasePortraitOutputBoundary;
  */
 public class PhasePortraitController {
 
-    private final PhasePortraitInteractor phasePortraitInteractor;
+    private final PhasePortraitInputBoundary phasePortraitInteractor;
 
     /**
      * Creat the controller.
      * @param phasePortraitInteractor interactor
      * @param phasePortraitOutputBoundary output
      */
-    public PhasePortraitController(PhasePortraitInteractor phasePortraitInteractor,
+    public PhasePortraitController(PhasePortraitInputBoundary phasePortraitInteractor,
                                    PhasePortraitOutputBoundary phasePortraitOutputBoundary) {
         this.phasePortraitInteractor = phasePortraitInteractor;
     }

@@ -15,14 +15,15 @@ public class MainController {
      * Execute all the main tasks from the main use cases
      * @param task the task to be executed
      */
-    public void execute(String task) {
+
+    public void execute(String task, String[] equations) {
        switch (task) {
            case "Plot":
-               mainInteractor.executePlot();
+               mainInteractor.executePlot(equations);
                break;
 
            case "Draw Phase Portrait":
-               mainInteractor.executePhasePotrait();
+               mainInteractor.executePhasePotrait(equations);
                break;
 
            case "Show Previous Graphs":

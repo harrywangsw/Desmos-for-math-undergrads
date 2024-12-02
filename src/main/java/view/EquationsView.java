@@ -183,8 +183,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
                 criticalPointsOutput.add(outputLabel);
             }
             this.revalidate();
-        }
-        else {
+        } else {
             criticalPointsLabel.setVisible(false);
             criticalPointsOutput.removeAll();
             criticalPointsOutput.setVisible(false);
@@ -205,8 +204,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
                 solutionOutput.add(outputLabel);
             }
             this.revalidate();
-        }
-        else {
+        } else {
             solutionLabel.setVisible(false);
             solutionOutput.removeAll();
             solutionOutput.setVisible(false);
@@ -220,11 +218,20 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
             errorLabel.setVisible(true);
             errorLabel.setText(error);
             this.revalidate();
-        }
-        else {
+        } else {
             errorLabel.setVisible(false);
             errorLabel.setText("");
             this.revalidate();
         }
+    }
+
+    public String[] getequations() {
+        final ArrayList<String> equations = new ArrayList<>();
+        for (Component equationPanel : equationDisplay.getComponents()) {
+            if (equationPanel instanceof JPanel) {
+                equations.add(((JTextField) ((JPanel) equationPanel).getComponent(1)).getText());
+            }
+        }
+        return equations.toArray(new String[0]);
     }
 }

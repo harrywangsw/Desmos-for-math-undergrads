@@ -2,9 +2,9 @@ package use_case.main;
 
 public interface MainInputBoundary {
 
-    void executePlot();
+    void executePlot(String[] equations);
 
-    void executePhasePotrait();
+    void executePhasePotrait(String[] equations);
 
     void executeHelp();
 

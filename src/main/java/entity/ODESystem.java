@@ -25,4 +25,8 @@ public class ODESystem {
     }
 
     public Float[] getInitialConditions() {return initialconditions;}
+
+    public void setInitialConditions(Float[] initialconditions){
+        this.initialconditions = initialconditions;
+    }
 }

@@ -1,8 +1,11 @@
 package use_case;
 
+import entity.ODESystem;
 import use_case.main.GraphDataAccessInterface;
 import use_case.main.MainInputBoundary;
 import view.GraphView;
+
+import java.util.Arrays;
 
 public class MainInteractor implements MainInputBoundary {
 
@@ -16,17 +19,21 @@ public class MainInteractor implements MainInputBoundary {
 
 
     @Override
-    public void executePlot() {
+    public void executePlot(String[] equations) {
+        final ODESystem system = new ODESystem(equations,
+                Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
         System.out.println("Temporary Plot");
         try {
-            GraphView.plotGraph().setVisible(true);
+            GraphView.plotGraph(system).setVisible(true);   //TODO
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void executePhasePotrait() {
+    public void executePhasePotrait(String[] equations) {
+        final ODESystem system = new ODESystem(equations,
+                Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
         System.out.println("Temporary Draw Phase Portrait");
     }
 
