@@ -13,7 +13,7 @@ public class PreviousGraphsPresenter implements PreviousGraphsOutputBoundary {
     }
 
     @Override
-    public void displayGraphs(List<Map<String, String>> graphList) {
+    public void displayGraphs(List<String> graphList) {
         previousGraphsViewModel.getState().setPreviousGraphs(graphList);
         previousGraphsViewModel.getState().setError(null);
         previousGraphsViewModel.firePropertyChanged();

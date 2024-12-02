@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 public class PreviousGraphsState {
-    private List<Map<String, String>> previousGraphs;
+    private List<String> previousGraphs;
     private String error;
 
-    public List<Map<String, String>> getPreviousGraphs() {
+    public List<String> getPreviousGraphs() {
         return previousGraphs;
     }
 
-    public void setPreviousGraphs(List<Map<String, String>> previousGraphs) {
+    public void setPreviousGraphs(List<String> previousGraphs) {
         this.previousGraphs = previousGraphs;
     }
 

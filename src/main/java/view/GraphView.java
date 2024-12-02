@@ -48,6 +48,7 @@ public class GraphView {
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".png");
         int width = 800;
         int height = 600;
+        ChartUtilities.saveChartAsPNG(imageFile, chart, width, height);
 
     System.out.println("Chart saved as: " + imageFile.getAbsolutePath());
         ChartPanel chartPanel = new ChartPanel(chart);

@@ -19,7 +19,7 @@ public class DBGraphDataAccessObject implements GraphDataAccessInterface {
 
     @Override
     public String saveGraph(Map<String, String> graphMap) throws DataAccessException {
-        String insertQuery = "INSERT INTO Graph (graph_key, graph_value) VALUES (?, ?)";
+        String insertQuery = "INSERT INTO Graph (equation, path_to_image) VALUES (?, ?)";
 
         try {
             connection.setAutoCommit(false);
