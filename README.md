@@ -23,8 +23,6 @@ Its purpose is to help math undergrads in their study of ODE. If you you would l
 - Graph the numerical solutio of a 1D ODE and the phase portrait of 2D system of ODE.
 - Display the critical points of any system of ODEs
 - Displays the analytic solution of the system of ODE (if it exists)
-- Save a graph in file
-- load a previously saved graph
 
 ## Installation <a name="paragraph2"></a>
 Required software: JDK version 17 or above, IntelliJ IDE (ensure you have Maven setted up)
