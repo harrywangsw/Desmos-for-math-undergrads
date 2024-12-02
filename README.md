@@ -20,8 +20,11 @@ DIsplays the analytic solution of the system of ODE (if it exists)
 
 ## Use Guide
 ### Find&plot numerical solution
+Input you ODE (must be 1 dimensional) and select Plot from the dropdown menu. Click run to see the plot.
 ### Find analytical solution
+Input your ODE and click "solve system" button.
 ### Find critical points
+Input your ODE and click "Find Critical points" button.
 ### Plot Phase Portrait
 Input your ODE in the main program view. Select "plot phase portrait" in the scrolldown menu. ![Screenshot 2024-12-01 130042](https://github.com/user-attachments/assets/6e4cd06f-79cf-44d1-8de6-4eaf756afb5b)
 The programm will open a new window, where you can change the scale of the vectors and the view window

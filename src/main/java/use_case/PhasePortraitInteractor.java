@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import app.PhasePortraitAppBuilder;
+import entity.ODESystem;
+import interface_adapter.phaseportrait.PhasePortraitController;
+import interface_adapter.phaseportrait.PhasePortraitPresenter;
+import interface_adapter.phaseportrait.PhasePortraitState;
+import interface_adapter.phaseportrait.PhasePortraitViewModel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
@@ -15,6 +21,7 @@ import use_case.equations.APIAccessException;
 import use_case.phaseportrait.PhasePortraitDataAccessInterface;
 import use_case.phaseportrait.PhasePortraitInputBoundary;
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
+import view.PhasePortraitView;
 
 /**
  * Implements inputboundary.
@@ -122,4 +129,17 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
         List<List<Float>> vectors = createphasevectors(expression, variable);
         phasePortraitOutputBoundary.changechart(createchart(vectors), vector_size, vectors);
     }
+
+    @Override
+    public void makePhase(PhasePortraitViewModel viewModel, PhasePortraitOutputBoundary outputboundary, ODESystem sys) throws Exception {
+        List<List<Float>> unitvectors = createphasevectors(sys.getEquations(), sys.getVariables());
+        JFreeChart plot = createchart(unitvectors);
+        PhasePortraitState state = new PhasePortraitState(sys, plot, unitvectors, -1, 1, 1, -1, 1);
+        viewModel.setState(state);
+        PhasePortraitView view = new PhasePortraitView(viewModel, this);
+        view.setPhasePortraitController(new PhasePortraitController(this, outputboundary));
+        PhasePortraitAppBuilder.makeView(view);
+    }
+
+
 }
