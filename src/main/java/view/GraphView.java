@@ -1,6 +1,16 @@
 package view;
+
 import data_access.NewtonDataAccessObject;
+
 import entity.ODESystem;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
@@ -10,13 +20,9 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.chart.plot.PlotOrientation;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
+/**
+ * Class used to display the GraphView in Java.
+ */
 public class GraphView {
     public static JFrame plotGraph(ODESystem system) throws Exception {
         if (system.getVariables().length > 1){
@@ -25,7 +31,7 @@ public class GraphView {
         }
         NewtonDataAccessObject newtonDataAccessObject = new NewtonDataAccessObject();
         List<List<Float>> full_sol = newtonDataAccessObject.eulersolve(system.getEquations(), system.getVariables(), system.getInitialConditions(), 8f);
-        double[][] array = new double[2][full_sol.size()];
+        final double[][] array = new double[2][full_sol.size()];
 
         for (int i = 0; i < full_sol.size(); i++) {
             array[1][i] = full_sol.get(i).get(0); // we're isolating one component from the vector [x(t), y(t), z(t), ...]
@@ -38,6 +44,7 @@ public class GraphView {
      * plots a 1d function
      * @param func 2d array of size 2, first element stores the x values, 2nd stores the y values
      * @throws Exception
+     * @return JFrame that helps out with
      */
     public static JFrame plot(double[][] func) throws Exception {
         DefaultXYDataset dataset = new DefaultXYDataset();
@@ -46,23 +53,23 @@ public class GraphView {
 
         File imageFile = new File("./graphs/" + LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".png");
-        int width = 800;
-        int height = 600;
+        final int width = 800;
+        final int height = 600;
         ChartUtilities.saveChartAsPNG(imageFile, chart, width, height);
 
     System.out.println("Chart saved as: " + imageFile.getAbsolutePath());
         ChartPanel chartPanel = new ChartPanel(chart);
-        JPanel panel = new JPanel();
-        JFrame frame = new JFrame();
-        JTextField xMin = new JTextField(10);
-        JTextField xMax= new JTextField(10);
-        JTextField yMin = new JTextField(10);
-        JTextField yMax = new JTextField(10);
-        JButton updateButton = new JButton("Update");
-        JButton shiftUpButton = new JButton("Up");
-        JButton shiftDownButton = new JButton("Down");
-        JButton shiftLeftButton = new JButton("Left");
-        JButton shiftRightButton = new JButton("Right");
+        final JPanel panel = new JPanel();
+        final JFrame frame = new JFrame();
+        final JTextField xMin = new JTextField(10);
+        final JTextField yMin = new JTextField(10);
+        final JTextField xMax= new JTextField(10);
+        final JTextField yMax = new JTextField(10);
+        final JButton updateButton = new JButton("Update");
+        final JButton shiftUpButton = new JButton("Up");
+        final JButton shiftDownButton = new JButton("Down");
+        final JButton shiftLeftButton = new JButton("Left");
+        final JButton shiftRightButton = new JButton("Right");
 
         updateButton.addActionListener(e -> {
             String xMinValue = xMin.getText();
@@ -126,7 +133,8 @@ public class GraphView {
             xAxis.setRange(xMinValue, xMaxValue);
             yAxis.setRange(yMinValue, yMaxValue);
 
-        } catch (NumberFormatException exception) {
+        }
+        catch (NumberFormatException exception) {
             JOptionPane.showMessageDialog(null,"Invalid input");
         }
     }
@@ -139,7 +147,7 @@ public class GraphView {
         double minX = xAxis.getLowerBound();
         double maxX = xAxis.getUpperBound();
 
-        xAxis.setRange(minX+1, maxX+1);
+        xAxis.setRange(minX + 1, maxX + 1);
 
     }
 
@@ -148,11 +156,10 @@ public class GraphView {
         XYPlot plot = chart.getXYPlot();
         ValueAxis xAxis = plot.getDomainAxis();
 
-        double minX = xAxis.getLowerBound();
-        double maxX = xAxis.getUpperBound();
+        final double minX = xAxis.getLowerBound();
+        final double maxX = xAxis.getUpperBound();
 
-        xAxis.setRange(minX-1, maxX-1);
-
+        xAxis.setRange(minX - 1, maxX - 1);
     }
 
     private static void YUp(JFreeChart chart) {
@@ -160,10 +167,10 @@ public class GraphView {
         XYPlot plot = chart.getXYPlot();
         ValueAxis yAxis = plot.getRangeAxis();
 
-        double minY = yAxis.getLowerBound();
-        double maxY = yAxis.getUpperBound();
+        final double minY = yAxis.getLowerBound();
+        final double maxY = yAxis.getUpperBound();
 
-        yAxis.setRange(minY+1, maxY + 1);
+        yAxis.setRange(minY + 1, maxY + 1);
     }
 
 
@@ -172,10 +179,10 @@ public class GraphView {
         XYPlot plot = chart.getXYPlot();
         ValueAxis yAxis = plot.getRangeAxis();
 
-        double minY = yAxis.getLowerBound();
-        double maxY = yAxis.getUpperBound();
+        final double minY = yAxis.getLowerBound();
+        final double maxY = yAxis.getUpperBound();
 
-        yAxis.setRange(minY - 1, maxY-1);
+        yAxis.setRange(minY - 1, maxY - 1);
     }
 
 }

@@ -1,7 +1,6 @@
 package app;
 
 import data_access.EquationsDataAccessObject;
-import entity.Graph;
 import interface_adapter.main.MainController;
 import interface_adapter.main.MainPresenter;
 import interface_adapter.main.MainViewModel;
@@ -9,9 +8,7 @@ import interface_adapter.previous_graphs.PreviousGraphsPresenter;
 import interface_adapter.previous_graphs.PreviousGraphsViewModel;
 import use_case.MainInteractor;
 import use_case.PreviousGraphsOutputBoundary;
-import use_case.equations.EquationsDataAccessInterface;
 import view.EquationsView;
-import view.PreviousGraphsView;
 import use_case.MainOutputBoundary;
 import use_case.main.GraphDataAccessInterface;
 import view.MainView;
@@ -19,7 +16,7 @@ import view.MainView;
 import javax.swing.*;
 
 /**
- * Builder for the Main Application
+ * Builder for the Main Application.
  */
 public class MainAppBuilder {
     public static final int HEIGHT = 500;
@@ -31,6 +28,11 @@ public class MainAppBuilder {
     private MainView mainView;
     private GraphDataAccessInterface graphDAO;
 
+    /**
+     *
+     * @param graphDataAccess
+     * @return MainAppBuilder
+     */
     public MainAppBuilder addGraphDAO(GraphDataAccessInterface graphDataAccess) {
         this.graphDAO = graphDataAccess;
         return this;

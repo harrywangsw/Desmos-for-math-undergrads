@@ -5,11 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import entity.Graph;
 import use_case.main.GraphDataAccessInterface;
 import use_case.note.DataAccessException;
 
@@ -17,9 +16,15 @@ public class DBGraphDataAccessObject implements GraphDataAccessInterface {
 
     private Connection connection;
 
+    /**
+     * Returns a mapping from the graph to be saved in MySQL.
+     * @param graphMap
+     * @return
+     * @throws DataAccessException
+     */
     @Override
     public String saveGraph(Map<String, String> graphMap) throws DataAccessException {
-        String insertQuery = "INSERT INTO Graph (equation, path_to_image) VALUES (?, ?)";
+        final String insertQuery = "INSERT INTO Graph (equation, path_to_image) VALUES (?, ?)";
 
         try {
             connection.setAutoCommit(false);
@@ -36,7 +41,8 @@ public class DBGraphDataAccessObject implements GraphDataAccessInterface {
 
             connection.commit();
             return "Graph data saved successfully.";
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             try {
                 connection.rollback();
             } catch (SQLException rollbackException) {
