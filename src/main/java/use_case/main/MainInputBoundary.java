@@ -4,12 +4,30 @@ import use_case.note.DataAccessException;
 
 public interface MainInputBoundary {
 
+    /**
+     * Load all graphs.
+     * @param equations equations
+     */
+
     void executePlot(String[] equations);
 
-    void executePhasePotrait(String[] equations) throws Exception;
+    /**
+     * Execute phase portrait.
+     * @param equations equations
+     * @throws Exception Exception
+     */
+
+    void executePhasePortrait(String[] equations) throws Exception;
+    /**
+     * Execute Help.
+     */
 
     void executeHelp();
 
+    /**
+     * Execute previous graphs.
+     * @throws DataAccessException DataAccessException
+     */
     void executePreviousGraphs() throws DataAccessException;
 
 }

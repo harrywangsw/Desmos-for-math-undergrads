@@ -1,6 +1,6 @@
 package interface_adapter.phaseportrait;
 
-import use_case.equations.APIAccessException;
+import use_case.equations.ApiAccessException;
 import use_case.phaseportrait.PhasePortraitInputBoundary;
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
 
@@ -37,10 +37,10 @@ public class PhasePortraitController {
      * @param rib right bound
      * @param lowerbound lower b
      * @param upperbound upper b
-     * @throws APIAccessException when newton api returns error
+     * @throws ApiAccessException when newton api returns error
      */
     public void changeviewbox(PhasePortraitState state, float leb, float rib,
-                              float lowerbound, float upperbound) throws APIAccessException {
+                              float lowerbound, float upperbound) throws ApiAccessException {
         phasePortraitInteractor.changeviewbox(state.getsystem().getEquations(),
                 state.getsystem().getVariables(), lowerbound, upperbound, leb, rib, state.getscale());
     }

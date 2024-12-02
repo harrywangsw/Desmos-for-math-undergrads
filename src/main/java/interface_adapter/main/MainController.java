@@ -26,7 +26,7 @@ public class MainController {
 
             case "Draw Phase Portrait":
                 try {
-                    mainInteractor.executePhasePotrait(equations);
+                    mainInteractor.executePhasePortrait(equations);
                 }
                 catch (Exception e) {
                     System.out.println("Can't plot phase portrait");

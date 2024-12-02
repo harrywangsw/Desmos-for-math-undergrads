@@ -3,7 +3,7 @@ package use_case;
 import entity.OdeSystem;
 
 import org.junit.Test;
-import use_case.equations.APIAccessException;
+import use_case.equations.ApiAccessException;
 import use_case.equations.EquationsDataAccessInterface;
 import use_case.equations.EquationsOutputBoundary;
 
@@ -16,12 +16,12 @@ public class EquationsInteractorTest {
         EquationsDataAccessInterface noteDAO = new EquationsDataAccessInterface() {
             String[] testStr = new String[]{"10", "15"};
             @Override
-            public String[] getSolution(OdeSystem system) throws APIAccessException {
+            public String[] getSolution(OdeSystem system) throws ApiAccessException {
                 return testStr;
             }
 
             @Override
-            public String[] getCritPoints(OdeSystem system) throws APIAccessException {
+            public String[] getCritPoints(OdeSystem system) throws ApiAccessException {
                 return testStr;
             }
         };
@@ -64,12 +64,12 @@ public class EquationsInteractorTest {
         EquationsDataAccessInterface noteDAO = new EquationsDataAccessInterface() {
             String[] testStr = new String[]{"10", "15"};
             @Override
-            public String[] getSolution(OdeSystem system) throws APIAccessException {
+            public String[] getSolution(OdeSystem system) throws ApiAccessException {
                 return testStr;
             }
 
             @Override
-            public String[] getCritPoints(OdeSystem system) throws APIAccessException {
+            public String[] getCritPoints(OdeSystem system) throws ApiAccessException {
                 return testStr;
             }
         };

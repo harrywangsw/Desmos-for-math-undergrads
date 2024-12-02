@@ -45,7 +45,7 @@ public class MainInteractor implements MainInputBoundary {
     }
 
     @Override
-    public void executePhasePotrait(String[] equations) throws Exception {
+    public void executePhasePortrait(String[] equations) throws Exception {
         final OdeSystem system = new OdeSystem(equations,
                 Arrays.copyOfRange(OdeSystem.VARIABLES, 0, equations.length));
         PhasePortraitViewModel viewModel = new PhasePortraitViewModel(new PhasePortraitState(system));

@@ -2,14 +2,15 @@ package use_case.phaseportrait;
 
 import java.util.List;
 
+import org.jfree.chart.JFreeChart;
+
 import entity.OdeSystem;
 import interface_adapter.phaseportrait.PhasePortraitViewModel;
-import org.jfree.chart.JFreeChart;
-import use_case.equations.APIAccessException;
-
+import use_case.equations.ApiAccessException;
 /**
  * A interface.
  */
+
 public interface PhasePortraitInputBoundary {
     /**
      * A method for creating the vectors in the phase portrait.
@@ -44,10 +45,10 @@ public interface PhasePortraitInputBoundary {
      * @param leftb left bound
      * @param rib right bound
      * @param vector_size desired vector size
-     * @throws APIAccessException when the newton api call returns error
+     * @throws ApiAccessException when the newton api call returns error
      */
     void changeviewbox(String[] expression, String[] variable, float upb, float lob, float leftb,
-                       float rib, float vector_size) throws APIAccessException;
+                       float rib, float vector_size) throws ApiAccessException;
 
     void makePhase(PhasePortraitViewModel viewModel, PhasePortraitOutputBoundary outputboundary, OdeSystem sys) throws Exception;
 }

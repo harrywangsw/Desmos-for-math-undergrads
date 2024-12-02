@@ -16,7 +16,7 @@ import org.jfree.chart.renderer.xy.VectorRenderer;
 import org.jfree.data.xy.VectorSeries;
 import org.jfree.data.xy.VectorSeriesCollection;
 
-import use_case.equations.APIAccessException;
+import use_case.equations.ApiAccessException;
 import use_case.phaseportrait.PhasePortraitDataAccessInterface;
 import use_case.phaseportrait.PhasePortraitInputBoundary;
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
@@ -55,7 +55,7 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
      * @throws Exception when newton api call returns errors
      */
     public List<List<Float>> createphasevectors(String[] expression,
-                                                String[] variable) throws APIAccessException {
+                                                String[] variable) throws ApiAccessException {
         List<List<Float>> vectors = new ArrayList<>();
         List<List<Float>> unitvect = new ArrayList<>();
         for (int i = 0; i < vectoramount; i++) {
@@ -120,7 +120,7 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
 
     @Override
     public void changeviewbox(String[] expression, String[] variable, float upb, float lb,
-                              float leftb, float rb, float vector_size) throws APIAccessException {
+                              float leftb, float rb, float vector_size) throws ApiAccessException {
         this.upperbound = upb;
         this.lowerbound = lb;
         this.leftbound = leftb;

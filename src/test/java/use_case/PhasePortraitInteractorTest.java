@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.List;
 
 import org.jfree.chart.JFreeChart;
-import use_case.equations.APIAccessException;
+import use_case.equations.ApiAccessException;
 import use_case.phaseportrait.PhasePortraitDataAccessInterface;
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
 
@@ -25,12 +25,12 @@ public class PhasePortraitInteractorTest {
             );
 
             @Override
-            public float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws APIAccessException {
+            public float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws ApiAccessException {
                 return 10;
             }
 
             @Override
-            public List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws APIAccessException {
+            public List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws ApiAccessException {
                 return testList;
             }
         };
@@ -64,12 +64,12 @@ public class PhasePortraitInteractorTest {
             );
 
             @Override
-            public float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws APIAccessException {
+            public float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws ApiAccessException {
                 return 10;
             }
 
             @Override
-            public List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws APIAccessException {
+            public List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws ApiAccessException {
                 return testList;
             }
         };
@@ -104,12 +104,12 @@ public class PhasePortraitInteractorTest {
             );
 
             @Override
-            public float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws APIAccessException {
+            public float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws ApiAccessException {
                 return 10;
             }
 
             @Override
-            public List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws APIAccessException {
+            public List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws ApiAccessException {
                 return testList;
             }
         };
