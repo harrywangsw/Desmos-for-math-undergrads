@@ -24,7 +24,8 @@ public class GraphView {
             return null;
         }
         NewtonDataAccessObject newtonDataAccessObject = new NewtonDataAccessObject();
-        List<List<Float>> full_sol = newtonDataAccessObject.eulersolve(system.getEquations(), system.getVariables(), system.getInitialConditions(), 8f);
+        List<List<Float>> full_sol = newtonDataAccessObject.eulersolve(system.getEquations(), system.getVariables(),
+                system.getInitialConditions(), 8f);
         double[][] array = new double[2][full_sol.size()];
 
         for (int i = 0; i < full_sol.size(); i++) {
@@ -42,14 +43,15 @@ public class GraphView {
     public static JFrame plot(double[][] func) throws Exception {
         DefaultXYDataset dataset = new DefaultXYDataset();
         dataset.addSeries("test_func", func);
-        JFreeChart chart = ChartFactory.createXYLineChart("plot", "t", "x", dataset, PlotOrientation.VERTICAL, false, false, false);
+        JFreeChart chart = ChartFactory.createXYLineChart("plot", "t", "x", dataset,
+                PlotOrientation.VERTICAL, false, false, false);
 
         File imageFile = new File("./graphs/" + LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".png");
         int width = 800;
         int height = 600;
 
-    System.out.println("Chart saved as: " + imageFile.getAbsolutePath());
+        System.out.println("Chart saved as: " + imageFile.getAbsolutePath());
         ChartPanel chartPanel = new ChartPanel(chart);
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();

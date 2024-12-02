@@ -12,18 +12,19 @@ import view.EquationsView;
  * Builder for the Equations View.
  */
 public class EquationsBuilder {
-    private EquationsDataAccessInterface equationsDAO;
+    private EquationsDataAccessInterface equationsDao;
     private EquationsViewModel equationsViewModel = new EquationsViewModel();
     private EquationsView equationsView;
     private EquationsInteractor equationsInteractor;
 
     /**
      * Sets the EquationsDAO to be used in this application.
+     *
      * @param equationsDataAccess the DAO to use
      * @return this builder
      */
-    public EquationsBuilder addEquationsDAO(EquationsDataAccessInterface equationsDataAccess) {
-        equationsDAO = equationsDataAccess;
+    public EquationsBuilder addequationsdao(EquationsDataAccessInterface equationsDataAccess) {
+        equationsDao = equationsDataAccess;
         return this;
     }
 
@@ -37,7 +38,7 @@ public class EquationsBuilder {
     public EquationsBuilder addEquationsUseCase() {
         final EquationsOutputBoundary equationsOutputBoundary = new EquationsPresenter(equationsViewModel);
         equationsInteractor = new EquationsInteractor(
-                equationsDAO, equationsOutputBoundary);
+                equationsDao, equationsOutputBoundary);
 
         final EquationsController controller = new EquationsController(equationsInteractor);
         if (equationsView == null) {
