@@ -27,7 +27,7 @@ public class PhasePortraitController {
      * @param vectorscale the desired scale
      */
     public void changescale(PhasePortraitState state, float vectorscale) {
-        phasePortraitInteractor.changescale(state.getunit_vectors(), vectorscale);
+        phasePortraitInteractor.changescale(state.getunitVectors(), vectorscale);
     }
 
     /**
