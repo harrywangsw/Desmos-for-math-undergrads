@@ -18,7 +18,7 @@ import use_case.phaseportrait.PhasePortraitDataAccessInterface;
  * Data access object for using newton API.
  */
 public class NewtonDataAccessObject implements PhasePortraitDataAccessInterface {
-    public static final float INTERVAL = 0.001f;
+    public static final float INTERVAL = 0.1f;
 
     /**
      * Copied from internet, performs GET action and return the results from newton api.

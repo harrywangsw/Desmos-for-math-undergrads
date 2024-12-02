@@ -36,7 +36,7 @@ public class MainInteractor implements MainInputBoundary {
     public void executePlot(String[] equations) {
         final ODESystem system = new ODESystem(equations,
                 Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
-        system.setInitialConditions(new Float[]{1.2F, 2.0F});
+        system.setInitialConditions(new Float[]{1.2F});
         System.out.println("Temporary Plot");
         try {
             GraphView.plotGraph(system).setVisible(true);   //TODO
