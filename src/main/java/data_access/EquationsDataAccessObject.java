@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import entity.ODESystem;
+import entity.OdeSystem;
 import use_case.equations.APIAccessException;
 import use_case.equations.EquationsDataAccessInterface;
 
@@ -26,7 +26,7 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
             + "&output=" + API_OUTPUT_TYPE + "&format=" + API_OUTPUT_FORMAT + "&includepodid=Result&input=Solve+";
 
     @Override
-    public String[] getSolution(ODESystem system) throws APIAccessException {
+    public String[] getSolution(OdeSystem system) throws APIAccessException {
 
         final StringBuilder query = new StringBuilder();
         final String[] equations = system.getEquations();
@@ -60,7 +60,7 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
     }
 
     @Override
-    public String[] getCritPoints(ODESystem system) throws APIAccessException {
+    public String[] getCritPoints(OdeSystem system) throws APIAccessException {
 
         final StringBuilder query = new StringBuilder();
         for (String equation : system.getEquations()) {

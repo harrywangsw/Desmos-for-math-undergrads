@@ -2,13 +2,13 @@ package interface_adapter.equations;
 
 import javax.swing.ImageIcon;
 
-import entity.ODESystem;
+import entity.OdeSystem;
 
 /**
  * The State of the result after processing equations.
  */
 public class EquationResultState {
-    private ODESystem odeSystem;
+    private OdeSystem odeSystem;
     private ImageIcon[] criticalPoints;
     private ImageIcon[] solutions;
     private String error;
@@ -17,7 +17,7 @@ public class EquationResultState {
         this.setOdeSystem(equations, variables);
     }
 
-    public ODESystem getOdeSystem() {
+    public OdeSystem getOdeSystem() {
         return odeSystem;
     }
 
@@ -27,7 +27,7 @@ public class EquationResultState {
      * @param variables the variables associated with the equations.
      */
     public void setOdeSystem(String[] equations, String[] variables) {
-        this.odeSystem = new ODESystem(equations, variables);
+        this.odeSystem = new OdeSystem(equations, variables);
     }
 
     public ImageIcon[] getCriticalPoints() {

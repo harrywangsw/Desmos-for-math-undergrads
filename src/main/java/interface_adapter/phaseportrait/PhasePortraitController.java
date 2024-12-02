@@ -1,6 +1,5 @@
 package interface_adapter.phaseportrait;
 
-import use_case.PhasePortraitInteractor;
 import use_case.equations.APIAccessException;
 import use_case.phaseportrait.PhasePortraitInputBoundary;
 import use_case.phaseportrait.PhasePortraitOutputBoundary;

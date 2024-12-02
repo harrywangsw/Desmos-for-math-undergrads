@@ -1,6 +1,6 @@
 package use_case.equations;
 
-import entity.ODESystem;
+import entity.OdeSystem;
 
 /**
  * Data Access Interface for the Equations use cases.
@@ -13,7 +13,7 @@ public interface EquationsDataAccessInterface {
      * @return the solutions to the given system of ODES
      * @throws APIAccessException if there is an error access the API or the data returned by it
      */
-    String[] getSolution(ODESystem system) throws APIAccessException;
+    String[] getSolution(OdeSystem system) throws APIAccessException;
 
     /**
      * Gets the critical points for the given system using the API.
@@ -22,5 +22,5 @@ public interface EquationsDataAccessInterface {
      * @return the critical points of the given system of ODES
      * @throws APIAccessException if there is an error access the API or the data returned by it
      */
-    String[] getCritPoints(ODESystem system) throws APIAccessException;
+    String[] getCritPoints(OdeSystem system) throws APIAccessException;
 }

@@ -41,7 +41,7 @@ public class MainAppBuilder {
     /**
      * Builder for the Main Application.
      * @return this
-     * @throws new RuntimeException.
+     * @throws RuntimeException e
      */
 
     public MainAppBuilder addMainUseCase() {

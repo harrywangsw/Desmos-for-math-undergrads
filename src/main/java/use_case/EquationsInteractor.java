@@ -1,6 +1,6 @@
 package use_case;
 
-import entity.ODESystem;
+import entity.OdeSystem;
 import use_case.equations.APIAccessException;
 import use_case.equations.EquationsDataAccessInterface;
 import use_case.equations.EquationsInputBoundary;
@@ -22,7 +22,7 @@ public class EquationsInteractor implements EquationsInputBoundary {
     }
 
     @Override
-    public void executeSolve(ODESystem system) {
+    public void executeSolve(OdeSystem system) {
         System.out.println("Solving equations");
         try {
             final String[] solutions = equationsDataAccessInterface.getSolution(system);
@@ -35,7 +35,7 @@ public class EquationsInteractor implements EquationsInputBoundary {
     }
 
     @Override
-    public void extractCriticalPoints(ODESystem system) {
+    public void extractCriticalPoints(OdeSystem system) {
         System.out.println("Extracting critical points");
         try {
             final String[] criticalPoints = equationsDataAccessInterface.getCritPoints(system);

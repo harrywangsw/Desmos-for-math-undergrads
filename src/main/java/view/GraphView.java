@@ -1,9 +1,8 @@
 package view;
 import data_access.NewtonDataAccessObject;
-import entity.ODESystem;
+import entity.OdeSystem;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
@@ -18,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class GraphView {
-    public static JFrame plotGraph(ODESystem system) throws Exception {
+    public static JFrame plotGraph(OdeSystem system) throws Exception {
         if (system.getVariables().length > 1){
             System.out.println("only 1D systems have plotting support");
             return null;

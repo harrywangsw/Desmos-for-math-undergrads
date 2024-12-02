@@ -5,9 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import app.PhasePortraitAppBuilder;
-import entity.ODESystem;
+import entity.OdeSystem;
 import interface_adapter.phaseportrait.PhasePortraitController;
-import interface_adapter.phaseportrait.PhasePortraitPresenter;
 import interface_adapter.phaseportrait.PhasePortraitState;
 import interface_adapter.phaseportrait.PhasePortraitViewModel;
 import org.jfree.chart.JFreeChart;
@@ -131,7 +130,7 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
     }
 
     @Override
-    public void makePhase(PhasePortraitViewModel viewModel, PhasePortraitOutputBoundary outputboundary, ODESystem sys) throws Exception {
+    public void makePhase(PhasePortraitViewModel viewModel, PhasePortraitOutputBoundary outputboundary, OdeSystem sys) throws Exception {
         List<List<Float>> unitvectors = createphasevectors(sys.getEquations(), sys.getVariables());
         JFreeChart plot = createchart(unitvectors);
         PhasePortraitState state = new PhasePortraitState(sys, plot, unitvectors, -1, 1, 1, -1, 1);

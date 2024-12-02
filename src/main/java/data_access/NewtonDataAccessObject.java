@@ -28,9 +28,9 @@ public class NewtonDataAccessObject implements PhasePortraitDataAccessInterface 
      * @throws IOException when newton api returns error
      */
     public static String getHTML(String urlToRead) throws IOException {
-        StringBuilder result = new StringBuilder();
-        URL url = new URL(urlToRead);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        final StringBuilder result = new StringBuilder();
+        final URL url = new URL(urlToRead);
+        final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(conn.getInputStream()))) {
@@ -64,7 +64,7 @@ public class NewtonDataAccessObject implements PhasePortraitDataAccessInterface 
         catch (IOException err) {
             throw new RuntimeException(err);
         }
-        JSONObject json = new JSONObject(jsonstring);
+        final JSONObject json = new JSONObject(jsonstring);
         return Float.parseFloat(json.getString("result"));
     }
 
@@ -82,11 +82,11 @@ public class NewtonDataAccessObject implements PhasePortraitDataAccessInterface 
     @Override
     public List<List<Float>> eulersolve(String[] expressions, String[] vars, Float[] ico,
                                         float end_time) throws APIAccessException {
-        List<List<Float>> result = new ArrayList<List<Float>>();
+        final List<List<Float>> result = new ArrayList<List<Float>>();
         result.add(Arrays.asList(ico));
         for (int i = 0; i < end_time / INTERVAL; i++) {
-            List<Float> current = new ArrayList<>(result.get(result.size() - 1));
-            List<Float> nextpoint = new ArrayList<Float>();
+            final List<Float> current = new ArrayList<>(result.get(result.size() - 1));
+            final List<Float> nextpoint = new ArrayList<Float>();
             for (int j = 0; j < expressions.length; j++) {
                 nextpoint.add(current.get(j) + INTERVAL * evaluatesingleOdeatpoint(expressions[j], vars, current));
             }

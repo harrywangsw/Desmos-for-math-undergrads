@@ -1,6 +1,6 @@
 package use_case;
 
-import entity.ODESystem;
+import entity.OdeSystem;
 
 import org.junit.Test;
 import use_case.equations.APIAccessException;
@@ -16,12 +16,12 @@ public class EquationsInteractorTest {
         EquationsDataAccessInterface noteDAO = new EquationsDataAccessInterface() {
             String[] testStr = new String[]{"10", "15"};
             @Override
-            public String[] getSolution(ODESystem system) throws APIAccessException {
+            public String[] getSolution(OdeSystem system) throws APIAccessException {
                 return testStr;
             }
 
             @Override
-            public String[] getCritPoints(ODESystem system) throws APIAccessException {
+            public String[] getCritPoints(OdeSystem system) throws APIAccessException {
                 return testStr;
             }
         };
@@ -56,7 +56,7 @@ public class EquationsInteractorTest {
         EquationsInteractor equationsInteractor = new EquationsInteractor(noteDAO, noteOB);
         String[] testEquations = {"x=10", "y=15"};
         String[] testVariables = {"x", "y"};
-        ODESystem system = new ODESystem(testEquations, testVariables);
+        OdeSystem system = new OdeSystem(testEquations, testVariables);
         equationsInteractor.executeSolve(system);
     }
     @Test
@@ -64,12 +64,12 @@ public class EquationsInteractorTest {
         EquationsDataAccessInterface noteDAO = new EquationsDataAccessInterface() {
             String[] testStr = new String[]{"10", "15"};
             @Override
-            public String[] getSolution(ODESystem system) throws APIAccessException {
+            public String[] getSolution(OdeSystem system) throws APIAccessException {
                 return testStr;
             }
 
             @Override
-            public String[] getCritPoints(ODESystem system) throws APIAccessException {
+            public String[] getCritPoints(OdeSystem system) throws APIAccessException {
                 return testStr;
             }
         };
@@ -104,7 +104,7 @@ public class EquationsInteractorTest {
         EquationsInteractor equationsInteractor = new EquationsInteractor(noteDAO, noteOB);
         String[] testEquations = {"x=10", "y=15"};
         String[] testVariables = {"x", "y"};
-        ODESystem system = new ODESystem(testEquations, testVariables);
+        OdeSystem system = new OdeSystem(testEquations, testVariables);
         equationsInteractor.extractCriticalPoints(system);
     }
 }
