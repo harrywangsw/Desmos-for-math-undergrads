@@ -25,6 +25,12 @@ Display the critical points of any system of ODEs
 DIsplays the analytic solution of the system of ODE (if it exists)
 
 ## Installation <a name="paragraph2"></a>
+Required software: JDK version 17 or above, IntelliJ IDE (ensure you have Maven setted up)
+1. Download and un-zip the project files
+2. in IntelliJ IDE, go to File|Open and select pom.xml file in the root of the project folder. (See the following page for more details on Maven in IntelliJ: https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start).
+3. Maven will automatically install any dependencies.
+4. Run src/main/java/app/MainGraphApplication.java to start the program.
+
 
 ## Use Guide <a name="paragraph3"></a>
 ### Find&plot numerical solution
