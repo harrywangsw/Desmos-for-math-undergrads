@@ -1,5 +1,6 @@
 package use_case;
 
+import app.PhasePortraitAppBuilder;
 import entity.ODESystem;
 import use_case.main.GraphDataAccessInterface;
 import use_case.main.MainInputBoundary;
@@ -31,10 +32,10 @@ public class MainInteractor implements MainInputBoundary {
     }
 
     @Override
-    public void executePhasePotrait(String[] equations) {
+    public void executePhasePotrait(String[] equations) throws Exception {
         final ODESystem system = new ODESystem(equations,
                 Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
-        System.out.println("Temporary Draw Phase Portrait");
+        PhasePortraitAppBuilder.makePhase(system);
     }
 
     @Override

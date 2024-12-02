@@ -4,7 +4,7 @@ public interface MainInputBoundary {
 
     void executePlot(String[] equations);
 
-    void executePhasePotrait(String[] equations);
+    void executePhasePotrait(String[] equations) throws Exception;
 
     void executeHelp();
 

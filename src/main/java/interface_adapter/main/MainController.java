@@ -23,7 +23,12 @@ public class MainController {
                break;
 
            case "Draw Phase Portrait":
-               mainInteractor.executePhasePotrait(equations);
+               try{
+                   mainInteractor.executePhasePotrait(equations);
+               }
+               catch(Exception e){
+                   System.out.println("Can't plot phase portrait");
+               }
                break;
 
            case "Show Previous Graphs":
