@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 
-import entity.Graph;
 import use_case.main.GraphDataAccessInterface;
 import use_case.note.DataAccessException;
 

@@ -1,16 +1,12 @@
 package app;
 
 import data_access.EquationsDataAccessObject;
-import entity.Graph;
 import interface_adapter.main.MainController;
 import interface_adapter.main.MainPresenter;
-import interface_adapter.main.MainViewModel;
-import interface_adapter.note.NoteController;
 import interface_adapter.previous_graphs.PreviousGraphsPresenter;
 import interface_adapter.previous_graphs.PreviousGraphsViewModel;
 import use_case.MainInteractor;
 import use_case.PreviousGraphsOutputBoundary;
-import use_case.equations.EquationsDataAccessInterface;
 import view.EquationsView;
 import use_case.MainOutputBoundary;
 import use_case.main.GraphDataAccessInterface;
@@ -52,7 +48,7 @@ public class MainAppBuilder {
     public MainAppBuilder addMainView() {
         EquationsBuilder equationsBuilder = new EquationsBuilder();
         EquationsDataAccessObject equationsDAO = new EquationsDataAccessObject();
-        EquationsView equationsView = equationsBuilder.addEquationsDAO(equationsDAO)
+        EquationsView equationsView = equationsBuilder.addEquationsDao(equationsDAO)
                 .addEquationsView().addEquationsUseCase().build();
         mainView = new MainView(equationsView);
         return this;
