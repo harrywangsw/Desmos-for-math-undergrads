@@ -19,10 +19,12 @@ After inputting the equation of interest, the user can then choose to plot a tim
 Its purpose is to help math undergrads in their study of ODE. If you you would like to verify your solution or deepen your understanding through visualization, this program is for you.
 
 ## Features <a name="paragraph1"></a>
-Input a system of first-order ODE and initial conditions.
-Graph the numerical solutio of a 1D ODE and the phase portrait of 2D system of ODE.
-Display the critical points of any system of ODEs
-DIsplays the analytic solution of the system of ODE (if it exists)
+- Input a system of first-order ODE and initial conditions.
+- Graph the numerical solutio of a 1D ODE and the phase portrait of 2D system of ODE.
+- Display the critical points of any system of ODEs
+- Displays the analytic solution of the system of ODE (if it exists)
+- Save a graph in file
+- load a previously saved graph
 
 ## Installation <a name="paragraph2"></a>
 Required software: JDK version 17 or above, IntelliJ IDE (ensure you have Maven setted up)
