@@ -22,15 +22,15 @@ import view.PhasePortraitView;
  * App builder for phaseportrait.
  */
 public class PhasePortraitAppBuilder {
-    public static final int HEIGHT = 300;
-    public static final int WIDTH = 400;
+    public static final int HEIGHT = 600;
+    public static final int WIDTH = 800;
 
-    public static void main(String[] args) throws Exception {
-        String[] vars = {"x", "y"};
-        String[] exps = {"x", "y"};
-        ODESystem sys = new ODESystem(exps, vars);
-        makePhase(sys);
-    }
+//    public static void main(String[] args) throws Exception {
+//        String[] vars = {"x", "y"};
+//        String[] exps = {"x", "y"};
+//        ODESystem sys = new ODESystem(exps, vars);
+//        makePhase(sys);
+//    }
 
     /**
      * Builder function for phase portrait use case.
