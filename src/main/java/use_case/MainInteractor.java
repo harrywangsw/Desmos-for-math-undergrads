@@ -4,6 +4,8 @@ import app.PhasePortraitAppBuilder;
 import entity.ODESystem;
 import use_case.main.GraphDataAccessInterface;
 import use_case.main.MainInputBoundary;
+import use_case.note.DataAccessException;
+import use_case.phaseportrait.PhasePortraitOutputBoundary;
 import view.GraphView;
 
 import java.util.Arrays;
@@ -12,10 +14,13 @@ public class MainInteractor implements MainInputBoundary {
 
     private final GraphDataAccessInterface graphDataAccessInterface;
     private final MainOutputBoundary mainOutputBoundary;
+    private final PreviousGraphsOutputBoundary previousGraphsOutputBoundary;
 
-    public MainInteractor(GraphDataAccessInterface graphDataAccessInterface, MainOutputBoundary mainOutputBoundary) {
+    public MainInteractor(GraphDataAccessInterface graphDataAccessInterface, MainOutputBoundary mainOutputBoundary,
+                          PreviousGraphsOutputBoundary previousGraphsOutputBoundary) {
         this.graphDataAccessInterface = graphDataAccessInterface;
         this.mainOutputBoundary = mainOutputBoundary;
+        this.previousGraphsOutputBoundary = previousGraphsOutputBoundary;
     }
 
 
@@ -23,6 +28,7 @@ public class MainInteractor implements MainInputBoundary {
     public void executePlot(String[] equations) {
         final ODESystem system = new ODESystem(equations,
                 Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
+        system.setInitialConditions(new Float[]{1.2F, 2.0F});
         System.out.println("Temporary Plot");
         try {
             GraphView.plotGraph(system).setVisible(true);   //TODO
@@ -44,8 +50,9 @@ public class MainInteractor implements MainInputBoundary {
     }
 
     @Override
-    public void executePreviousGraphs() {
-        System.out.println("This will eventually allow a new window to pop up that shows previously obtained graphs");
+    public void executePreviousGraphs() throws DataAccessException {
+        PreviousGraphsInteractor previousGraphsInteractor = new PreviousGraphsInteractor(graphDataAccessInterface, previousGraphsOutputBoundary);
+        previousGraphsInteractor.executePreviousGraphs();
 
     }
 }

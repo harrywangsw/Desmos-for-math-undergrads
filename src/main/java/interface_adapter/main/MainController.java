@@ -2,6 +2,7 @@ package interface_adapter.main;
 
 
 import use_case.main.MainInputBoundary;
+import use_case.note.DataAccessException;
 
 public class MainController {
 
@@ -16,7 +17,7 @@ public class MainController {
      * @param task the task to be executed
      */
 
-    public void execute(String task, String[] equations) {
+    public void execute(String task, String[] equations) throws DataAccessException {
        switch (task) {
            case "Plot":
                mainInteractor.executePlot(equations);

@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.main.MainController;
+import use_case.note.DataAccessException;
 
 import javax.swing.*;
 
@@ -25,13 +26,21 @@ public class MainView extends JPanel {
         runButton.addActionListener(
                 evt -> {
                     if (evt.getSource().equals(runButton)) {
-                        mainController.execute( (String) dropDownMenu.getSelectedItem(), equationsView.getequations());
+                        try {
+                            mainController.execute( (String) dropDownMenu.getSelectedItem(), equationsView.getequations());
+                        } catch (DataAccessException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 });
 
         helpButton.addActionListener( evt -> {
             if (evt.getSource().equals(helpButton)) {
-                mainController.execute("help", new String[0]);
+                try {
+                    mainController.execute("help", new String[0]);
+                } catch (DataAccessException e) {
+                    throw new RuntimeException(e);
+                }
             }
                 }
         );

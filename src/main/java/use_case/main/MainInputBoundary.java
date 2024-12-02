@@ -1,5 +1,7 @@
 package use_case.main;
 
+import use_case.note.DataAccessException;
+
 public interface MainInputBoundary {
 
     void executePlot(String[] equations);
@@ -8,6 +10,6 @@ public interface MainInputBoundary {
 
     void executeHelp();
 
-    void executePreviousGraphs();
+    void executePreviousGraphs() throws DataAccessException;
 
 }
