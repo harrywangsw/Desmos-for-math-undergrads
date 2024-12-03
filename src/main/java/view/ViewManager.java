@@ -30,5 +30,13 @@ public class ViewManager implements PropertyChangeListener {
             final String viewModelName = (String) evt.getNewValue();
             cardLayout.show(views, viewModelName);
         }
+        else {
+            System.out.println("event does not equal state");
+        }
+    }
+
+    public void navigate(String viewModelName) {
+        cardLayout.show(views, viewModelName);
+        System.out.println("Should show screen here");
     }
 }

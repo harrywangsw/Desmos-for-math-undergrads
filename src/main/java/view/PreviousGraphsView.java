@@ -10,12 +10,12 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.List;
 
-public class PreviousGraphsView extends JPanel {
+public class PreviousGraphsView extends JPanel implements PropertyChangeListener{
     private final PreviousGraphsViewModel previousGraphsViewModel;
     private final String viewName = "Previous Graphs";
     public PreviousGraphsView(PreviousGraphsViewModel previousGraphsViewModel) {
         this.previousGraphsViewModel = previousGraphsViewModel;
-//        this.previousGraphsViewModel.addPropertyChangeListener(this);
+        this.previousGraphsViewModel.addPropertyChangeListener(this);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         removeAll();
@@ -82,5 +82,10 @@ public class PreviousGraphsView extends JPanel {
 
     public String getViewName(){
         return viewName;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final PreviousGraphsState previousGraphsState = (PreviousGraphsState) evt.getNewValue();
     }
 }

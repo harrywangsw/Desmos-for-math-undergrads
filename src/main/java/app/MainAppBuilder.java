@@ -12,8 +12,10 @@ import use_case.PreviousGraphsOutputBoundary;
 import use_case.main.GraphDataAccessInterface;
 import view.EquationsView;
 import view.MainView;
+import view.ViewManager;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Builder for the Main Application.

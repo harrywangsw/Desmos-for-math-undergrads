@@ -2,7 +2,9 @@ package interface_adapter.previous_graphs;
 
 import interface_adapter.ViewManagerModel;
 import use_case.PreviousGraphsOutputBoundary;
+import view.ViewManager;
 
+import java.beans.PropertyChangeEvent;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +25,9 @@ public class PreviousGraphsPresenter implements PreviousGraphsOutputBoundary {
 
         viewManagerModel.setState(previousGraphsViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+        System.out.println(viewManagerModel.getViewName());
+//        viewManager.navigate(viewManagerModel.getViewName());
+        System.out.println("Everything till here runs");
     }
 
     @Override

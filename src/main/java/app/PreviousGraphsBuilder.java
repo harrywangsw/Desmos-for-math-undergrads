@@ -8,6 +8,7 @@ import use_case.PreviousGraphsInteractor;
 import use_case.PreviousGraphsOutputBoundary;
 import view.PhasePortraitView;
 import view.PreviousGraphsView;
+import view.ViewManager;
 
 import javax.swing.*;
 
