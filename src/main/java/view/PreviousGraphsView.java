@@ -1,5 +1,8 @@
 package view;
 
+import interface_adapter.previous_graphs.PreviousGraphsState;
+import interface_adapter.previous_graphs.PreviousGraphsViewModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
@@ -7,43 +10,51 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.List;
 
-public class PreviousGraphsView extends JPanel implements PropertyChangeListener {
-    public PreviousGraphsView() {
+public class PreviousGraphsView extends JPanel {
+    private final PreviousGraphsViewModel previousGraphsViewModel;
+    private final String viewName = "Previous Graphs";
+    public PreviousGraphsView(PreviousGraphsViewModel previousGraphsViewModel) {
+        this.previousGraphsViewModel = previousGraphsViewModel;
+//        this.previousGraphsViewModel.addPropertyChangeListener(this);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    }
 
-    /**
-     * Updates the view with the given list of image file paths.
-     */
-    public void displayGraphs(List<String> imagePaths) {
         removeAll();
 
-        for (String imagePath : imagePaths) {
-            JPanel graphPanel = new JPanel(new BorderLayout());
-            graphPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        final PreviousGraphsState previousGraphsState = previousGraphsViewModel.getState();
+        List<String> imagePaths = previousGraphsState.getPreviousGraphs();
+        if (imagePaths != null) {
+            for (String imagePath : imagePaths) {
+                JPanel graphPanel = new JPanel(new BorderLayout());
+                graphPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-            String timestamp = extractTimestampFromPath(imagePath);
+                String timestamp = extractTimestampFromPath(imagePath);
 
-            JLabel imageLabel;
-            try {
-                ImageIcon imageIcon = new ImageIcon(imagePath);
-                imageLabel = new JLabel(imageIcon);
-            } catch (Exception e) {
-                imageLabel = new JLabel("Image not found: " + imagePath);
+                JLabel imageLabel;
+                try {
+                    ImageIcon imageIcon = new ImageIcon(imagePath);
+                    imageLabel = new JLabel(imageIcon);
+                } catch (Exception e) {
+                    imageLabel = new JLabel("Image not found: " + imagePath);
+                }
+
+                JLabel timestampLabel = new JLabel("Created: " + timestamp);
+                timestampLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+                graphPanel.add(imageLabel, BorderLayout.CENTER);
+                graphPanel.add(timestampLabel, BorderLayout.SOUTH);
+
+                add(graphPanel);
             }
 
-            JLabel timestampLabel = new JLabel("Created: " + timestamp);
-            timestampLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-            graphPanel.add(imageLabel, BorderLayout.CENTER);
-            graphPanel.add(timestampLabel, BorderLayout.SOUTH);
-
-            add(graphPanel);
+            revalidate();
+            repaint();
+        } else{
+            JLabel cautionLabel = new JLabel("No previous graphs found");
+            add(cautionLabel);
         }
 
-        revalidate();
-        repaint();
-    }
+
+        }
 
     /**
      * Extracts the timestamp from the file path.
@@ -60,16 +71,16 @@ public class PreviousGraphsView extends JPanel implements PropertyChangeListener
             return "Unknown";
         }
     }
+//
+//    /**
+//     * Handles property change events from the ViewModel.
+//     */
+//    @Override
+//    public void propertyChange(PropertyChangeEvent evt) {
+//        final PreviousGraphsState previousGraphsState = (PreviousGraphsState) evt.getNewValue();
+//    }
 
-    /**
-     * Handles property change events from the ViewModel.
-     */
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if ("state".equals(evt.getPropertyName()) && evt.getNewValue() instanceof List) {
-            @SuppressWarnings("unchecked")
-            List<String> imagePaths = (List<String>) evt.getNewValue();
-            displayGraphs(imagePaths);
-        }
+    public String getViewName(){
+        return viewName;
     }
 }

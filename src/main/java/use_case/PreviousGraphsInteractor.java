@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PreviousGraphsInteractor implements PreviousGraphsInputBoundary {
-    private final GraphDataAccessInterface graphDataAccessInterface;
+//    private final GraphDataAccessInterface graphDataAccessInterface;
     private final PreviousGraphsOutputBoundary previousGraphsOutputBoundary;
 
-    public PreviousGraphsInteractor(GraphDataAccessInterface graphDataAccessInterface, PreviousGraphsOutputBoundary previousGraphsOutputBoundary) {
-        this.graphDataAccessInterface = graphDataAccessInterface;
+    public PreviousGraphsInteractor(PreviousGraphsOutputBoundary previousGraphsOutputBoundary) {
         this.previousGraphsOutputBoundary = previousGraphsOutputBoundary;
     }
 

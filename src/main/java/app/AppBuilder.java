@@ -37,14 +37,15 @@ public class AppBuilder {
 
     public AppBuilder(){cardPanel.setLayout(cardLayout);}
 
-    public EquationsView addEquationsView(){
-        equationsViewModel = new EquationsViewModel();
-        equationsView = new EquationsView(equationsViewModel);
-        return equationsView;
-    }
+//    public EquationsView addEquationsView(){
+//        equationsViewModel = new EquationsViewModel();
+//        equationsView = new EquationsView(equationsViewModel);
+//        return equationsView;
+//    }
 
     public AppBuilder addMainView(){
-        mainView = new MainView(this.addEquationsView());
+        MainAppBuilder mainAppBuilder = new MainAppBuilder();
+        mainView = mainAppBuilder.addMainView().addMainUseCase().build();
         cardPanel.add(mainView, mainView.getViewName());
         return this;
     }
@@ -52,7 +53,8 @@ public class AppBuilder {
     public AppBuilder addPhasePortraitView(){
         phasePortraitViewModel = new PhasePortraitViewModel(new PhasePortraitState());
         phasePortraitView = new PhasePortraitView(phasePortraitViewModel);
-        cardPanel.add(mainView, mainView.getViewName());
+
+        cardPanel.add(phasePortraitView, phasePortraitView.getViewName());
         return this;
     }
 
@@ -60,6 +62,14 @@ public class AppBuilder {
 //        graphViewModel = new GraphViewModel(new GraphState());
 //        graphView = new GraphView(graphViewModel);
 //    }
+
+    public AppBuilder addPreviousGraphsView(){
+        PreviousGraphsBuilder previousGraphsBuilder = new PreviousGraphsBuilder();
+        previousGraphsView = previousGraphsBuilder.addPreviousGraphsView()
+                .addPreviousGraphsUseCase(viewManagerModel).buildForView();
+        cardPanel.add(previousGraphsView, previousGraphsView.getViewName());
+        return this;
+    }
 
     public JFrame build() {
         final JFrame application = new JFrame("PhaseFlow");

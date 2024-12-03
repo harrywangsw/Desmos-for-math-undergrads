@@ -11,17 +11,17 @@ public class MainView extends JPanel {
     private final JButton runButton = new JButton("Run");
     private final JButton helpButton = new JButton("Help");
     private final JTextField inputFunctionArea = new JTextField(10);
-    private final String[] menuItems = {"Plot", "Draw Phase Portrait"};
+    private final String[] menuItems = {"Plot", "Draw Phase Portrait", "Show Previous Graphs"};
     private final JComboBox<String> dropDownMenu = new JComboBox<>(menuItems);
     private MainController mainController;
 //    private final ViewModel<String> viewModel;
     private EquationsView equationsView;
-    private PreviousGraphsView previousGraphsView;
+//    private PreviousGraphsView previousGraphsView;
 
     public MainView(EquationsView equationsView) {
         this.equationsView = equationsView;
 //        this.viewModel = viewModel;
-        this.previousGraphsView = new PreviousGraphsView();
+//        this.previousGraphsView = new PreviousGraphsView();
 
         final JPanel rightCornerButtons = new JPanel();
         rightCornerButtons.add(runButton);

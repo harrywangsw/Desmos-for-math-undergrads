@@ -8,6 +8,11 @@ public class Application {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
                 .addMainView()
-                .addPhasePortraitView().build();
+                .addPhasePortraitView()
+                .addPreviousGraphsView()
+                .build();
+
+        application.pack();
+        application.setVisible(true);
     }
 }

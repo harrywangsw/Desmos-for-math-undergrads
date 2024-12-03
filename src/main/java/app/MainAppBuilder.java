@@ -1,6 +1,7 @@
 package app;
 
 import data_access.EquationsDataAccessObject;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.main.MainController;
 import interface_adapter.main.MainPresenter;
 import interface_adapter.previous_graphs.PreviousGraphsPresenter;
@@ -26,6 +27,7 @@ public class MainAppBuilder {
     private PreviousGraphsViewModel previousGraphsViewModel = new PreviousGraphsViewModel();
     private MainView mainView;
     private GraphDataAccessInterface graphDao;
+    private ViewManagerModel viewManagerModel = new ViewManagerModel();
     //    private MainInteractor mainInteractor;
 
     /**
@@ -47,7 +49,7 @@ public class MainAppBuilder {
     public MainAppBuilder addMainUseCase() {
         final MainOutputBoundary mainOutputBoundary = new MainPresenter();
         final PreviousGraphsOutputBoundary previousGraphsOutputBoundary =
-                new PreviousGraphsPresenter(previousGraphsViewModel);
+                new PreviousGraphsPresenter(previousGraphsViewModel, viewManagerModel);
         mainInteractor = new MainInteractor(graphDao, mainOutputBoundary, previousGraphsOutputBoundary);
         final MainController controller = new MainController(mainInteractor);
         if (mainView == null) {
@@ -74,13 +76,14 @@ public class MainAppBuilder {
      * Builder for the Main Application.
      * @return frame
      */
-    public JFrame build() {
-        final JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Desmos for Math Undergrad");
-        frame.setSize(WIDTH, HEIGHT);
-        frame.add(mainView);
-
-        return frame;
+    public MainView build() {
+//        final JFrame frame = new JFrame();
+//        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        frame.setTitle("Desmos for Math Undergrad");
+//        frame.setSize(WIDTH, HEIGHT);
+//        frame.add(mainView);
+//
+//        return frame;
+        return this.mainView;
     }
 }

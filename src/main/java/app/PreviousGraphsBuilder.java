@@ -1,44 +1,39 @@
 package app;
 
+import interface_adapter.ViewManagerModel;
+import interface_adapter.previous_graphs.PreviousGraphsController;
+import interface_adapter.previous_graphs.PreviousGraphsPresenter;
+import interface_adapter.previous_graphs.PreviousGraphsViewModel;
+import use_case.PreviousGraphsInteractor;
+import use_case.PreviousGraphsOutputBoundary;
 import view.PhasePortraitView;
+import view.PreviousGraphsView;
 
 import javax.swing.*;
 
 public class PreviousGraphsBuilder {
-    public static final int HEIGHT = 600;
-    public static final int WIDTH = 800;
+    private PreviousGraphsViewModel previousGraphsViewModel = new PreviousGraphsViewModel();
+    private PreviousGraphsView previousGraphsView;
+    private PreviousGraphsInteractor previousGraphsInteractor;
 
-//    public static void main(String[] args) throws Exception {
-//        String[] vars = {"x", "y"};
-//        String[] exps = {"x", "y"};
-//        ODESystem sys = new ODESystem(exps, vars);
-//        makePhase(sys);
-//    }
-
-    /**
-     * Builder function for phase portrait use case.
-     * @param view the Jframe containing the phase portrait's view
-     * @throws Exception when the api call returns error
-     */
-    public static void makeView(PhasePortraitView view) throws Exception {
-
-//        PhasePortraitViewModel viewModel = new PhasePortraitViewModel(new PhasePortraitState(sys));
-//        PhasePortraitOutputBoundary outputboundary = new PhasePortraitPresenter(viewModel);
-//        PhasePortraitDataAccessInterface dataAccessInterface = new NewtonDataAccessObject();
-//        PhasePortraitInteractor interactor = new PhasePortraitInteractor(dataAccessInterface, outputboundary);
-//        List<List<Float>> unitvectors = interactor.createphasevectors(sys.getEquations(), sys.getVariables());
-//        JFreeChart plot = interactor.createchart(unitvectors);
-//        PhasePortraitState state = new PhasePortraitState(sys, plot, unitvectors, -1, 1, 1, -1, 1);
-//        viewModel.setState(state);
-//        PhasePortraitView view = new PhasePortraitView(viewModel, interactor);
-//        view.setPhasePortraitController(new PhasePortraitController(interactor, outputboundary));
-
-        final JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Phase Portrait");
-        frame.setSize(WIDTH, HEIGHT);
-        frame.add(view);
-
-        frame.setVisible(true);
+    public PreviousGraphsBuilder addPreviousGraphsUseCase(ViewManagerModel viewManagerModel){
+        final PreviousGraphsOutputBoundary previousGraphsOutputBoundary = new PreviousGraphsPresenter
+                (previousGraphsViewModel, viewManagerModel);
+        previousGraphsInteractor = new PreviousGraphsInteractor(previousGraphsOutputBoundary);
+        if (previousGraphsView == null){
+            throw new RuntimeException("addPreviousGraphsView must be called first");
+        }
+        return this;
     }
+
+    public PreviousGraphsBuilder addPreviousGraphsView() {
+        previousGraphsViewModel = new PreviousGraphsViewModel();
+        previousGraphsView = new PreviousGraphsView(previousGraphsViewModel);
+        return this;
+    }
+
+    public PreviousGraphsView buildForView() {
+        return this.previousGraphsView;
+    }
+
 }

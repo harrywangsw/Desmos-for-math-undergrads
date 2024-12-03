@@ -24,6 +24,7 @@ import use_case.equations.ApiAccessException;
  */
 public class PhasePortraitView extends JPanel implements ActionListener, PropertyChangeListener {
     private static ChartPanel chartPanel;
+    private String viewName = "phase portrait";
     private final JButton decreasebutton = new JButton("decrease vector scale");
     private final JButton increasebutton = new JButton("increase vector scale");
     private final JTextField vectorscale = new JTextField("change vector scale");
@@ -132,5 +133,9 @@ public class PhasePortraitView extends JPanel implements ActionListener, Propert
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 }
