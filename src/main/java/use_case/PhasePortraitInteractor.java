@@ -135,7 +135,7 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
         JFreeChart plot = createchart(unitvectors);
         PhasePortraitState state = new PhasePortraitState(sys, plot, unitvectors, -1, 1, 1, -1, 1);
         viewModel.setState(state);
-        PhasePortraitView view = new PhasePortraitView(viewModel, this);
+        PhasePortraitView view = new PhasePortraitView(viewModel);
         view.setPhasePortraitController(new PhasePortraitController(this, outputboundary));
         PhasePortraitAppBuilder.makeView(view);
     }

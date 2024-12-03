@@ -22,10 +22,8 @@ public class PreviousGraphsView extends JPanel implements PropertyChangeListener
             JPanel graphPanel = new JPanel(new BorderLayout());
             graphPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-            // Extract the timestamp from the file name
             String timestamp = extractTimestampFromPath(imagePath);
 
-            // Image
             JLabel imageLabel;
             try {
                 ImageIcon imageIcon = new ImageIcon(imagePath);
@@ -34,11 +32,9 @@ public class PreviousGraphsView extends JPanel implements PropertyChangeListener
                 imageLabel = new JLabel("Image not found: " + imagePath);
             }
 
-            // Timestamp label
             JLabel timestampLabel = new JLabel("Created: " + timestamp);
             timestampLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-            // Add components to graph panel
             graphPanel.add(imageLabel, BorderLayout.CENTER);
             graphPanel.add(timestampLabel, BorderLayout.SOUTH);
 

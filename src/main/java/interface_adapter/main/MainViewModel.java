@@ -1,7 +1,7 @@
 package interface_adapter.main;
 
-import javax.annotation.Nullable;
+//import javax.annotation.Nullable;
 
-@Nullable
+//@Nullable
 public class MainViewModel {
 }
