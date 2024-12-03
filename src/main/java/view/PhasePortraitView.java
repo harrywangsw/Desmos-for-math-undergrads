@@ -60,7 +60,7 @@ public class PhasePortraitView extends JPanel implements ActionListener, Propert
         this.add(bounds);
         this.add(chartPanel);
 
-        JFreeChart plot = phasePortraitViewModel.getState().getplot();
+        final JFreeChart plot = phasePortraitViewModel.getState().getplot();
         this.phasePortraitViewModel = phasePortraitViewModel;
         this.phasePortraitViewModel.addPropertyChangeListener(this);
         chartPanel.setChart(plot);
