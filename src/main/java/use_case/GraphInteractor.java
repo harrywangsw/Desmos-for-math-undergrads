@@ -127,7 +127,7 @@ public class GraphInteractor implements GraphInputBoundary {
 
     public JFreeChart plot(double[][] func) {
         final DefaultXYDataset dataset = new DefaultXYDataset();
-        dataset.addSeries("test_func", func);
+        dataset.addSeries("", func);
         final JFreeChart chart = ChartFactory.createXYLineChart("plot", "t", "x", dataset,
                 PlotOrientation.VERTICAL, false, false, false);
         return chart;
