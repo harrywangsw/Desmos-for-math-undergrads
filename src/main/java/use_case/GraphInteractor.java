@@ -41,9 +41,9 @@ public class GraphInteractor implements GraphInputBoundary {
             array[0][i] = i * NewtonDataAccessObject.INTERVAL;
         }
         JFreeChart chart = plot(array);
+        graphOutputBoundary.changegraph(chart);
         GraphView view = new GraphView(viewModel);
         view.setController(new GraphController(this));
-        graphOutputBoundary.changegraph(chart);
         GraphAppBuilder.makeView(view);
     }
 
