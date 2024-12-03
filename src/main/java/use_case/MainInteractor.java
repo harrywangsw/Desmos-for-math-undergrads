@@ -2,9 +2,14 @@ package use_case;
 
 import data_access.NewtonDataAccessObject;
 import entity.OdeSystem;
+import interface_adapter.graph.GraphPresenter;
+import interface_adapter.graph.GraphState;
+import interface_adapter.graph.GraphViewModel;
 import interface_adapter.phaseportrait.PhasePortraitPresenter;
 import interface_adapter.phaseportrait.PhasePortraitState;
 import interface_adapter.phaseportrait.PhasePortraitViewModel;
+import org.jfree.chart.JFreeChart;
+import use_case.graph.GraphOutputBoundary;
 import use_case.main.GraphDataAccessInterface;
 import use_case.main.MainInputBoundary;
 
@@ -38,7 +43,11 @@ public class MainInteractor implements MainInputBoundary {
         system.setInitialConditions(new Float[]{1.2F});
         System.out.println("Temporary Plot");
         try {
-            GraphView.plotGraph(system).setVisible(true);   //TODO
+            GraphState state = new GraphState();
+            GraphViewModel viewModel = new GraphViewModel(state);
+            GraphOutputBoundary boundary = new GraphPresenter(viewModel);
+            GraphInteractor interactor = new GraphInteractor(boundary);
+            interactor.makegraph(system);
         } catch (Exception e) {
             e.printStackTrace();
         }
