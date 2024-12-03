@@ -47,7 +47,7 @@ public class MainInteractor implements MainInputBoundary {
             GraphViewModel viewModel = new GraphViewModel(state);
             GraphOutputBoundary boundary = new GraphPresenter(viewModel);
             GraphInteractor interactor = new GraphInteractor(boundary);
-            interactor.makegraph(system);
+            interactor.makegraph(system, viewModel);
         } catch (Exception e) {
             e.printStackTrace();
         }
