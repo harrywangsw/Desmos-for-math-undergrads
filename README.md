@@ -4,7 +4,7 @@ Team members:
 - Brian (Brian031205)
 - Hasnain (Hasnaink17)
 - Paarth (paarth7777)
-- Tanayjyot (Tanayjyot Singh Chawla)
+- Tanayjyot (tanayjyot)
 
 # Table of contents
 1. [Summary](#introduction)
