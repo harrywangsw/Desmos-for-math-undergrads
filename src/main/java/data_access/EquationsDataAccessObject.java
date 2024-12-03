@@ -9,8 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import entity.ODESystem;
-import use_case.equations.APIAccessException;
+import entity.OdeSystem;
+import use_case.equations.ApiAccessException;
 import use_case.equations.EquationsDataAccessInterface;
 
 /**
@@ -26,7 +26,7 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
             + "&output=" + API_OUTPUT_TYPE + "&format=" + API_OUTPUT_FORMAT + "&includepodid=Result&input=Solve+";
 
     @Override
-    public String[] getSolution(ODESystem system) throws APIAccessException {
+    public String[] getSolution(OdeSystem system) throws ApiAccessException {
 
         final StringBuilder query = new StringBuilder();
         final String[] equations = system.getEquations();
@@ -43,7 +43,7 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
             final JSONObject apiResult = new JSONObject(jsonstring).getJSONObject("queryresult");
             final int numpods = apiResult.getInt("numpods");
             if (numpods == 0) {
-                throw new APIAccessException("There are no solutions");
+                throw new ApiAccessException("There are no solutions");
             }
             final JSONArray solutions = apiResult.getJSONArray("pods")
                     .getJSONObject(0).getJSONArray("subpods");
@@ -55,12 +55,12 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
             return results.toArray(new String[0]);
         }
         catch (JSONException | IOException exception) {
-            throw new APIAccessException(exception.getMessage());
+            throw new ApiAccessException(exception.getMessage());
         }
     }
 
     @Override
-    public String[] getCritPoints(ODESystem system) throws APIAccessException {
+    public String[] getCritPoints(OdeSystem system) throws ApiAccessException {
 
         final StringBuilder query = new StringBuilder();
         for (String equation : system.getEquations()) {
@@ -75,11 +75,11 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
             System.out.println(apiResult);
             final int numpods = apiResult.getInt("numpods");
             if (numpods == 0) {
-                throw new APIAccessException("There are no critical points");
+                throw new ApiAccessException("There are no critical points");
             }
             final JSONObject resultPod = apiResult.getJSONArray("pods").getJSONObject(0);
             if (!"Solve".equals(resultPod.getString("scanner"))) {
-                throw new APIAccessException("There are no critical points");
+                throw new ApiAccessException("There are no critical points");
             }
             final JSONArray solutions = resultPod.getJSONArray("subpods");
             final ArrayList<String> results = new ArrayList<>();
@@ -90,7 +90,7 @@ public class EquationsDataAccessObject implements EquationsDataAccessInterface {
             return results.toArray(new String[0]);
         }
         catch (JSONException | IOException exception) {
-            throw new APIAccessException(exception.getMessage());
+            throw new ApiAccessException(exception.getMessage());
         }
     }
 }

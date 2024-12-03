@@ -1,8 +1,7 @@
 package use_case;
 
-import app.PhasePortraitAppBuilder;
 import data_access.NewtonDataAccessObject;
-import entity.ODESystem;
+import entity.OdeSystem;
 import interface_adapter.phaseportrait.PhasePortraitPresenter;
 import interface_adapter.phaseportrait.PhasePortraitState;
 import interface_adapter.phaseportrait.PhasePortraitViewModel;
@@ -34,8 +33,8 @@ public class MainInteractor implements MainInputBoundary {
 
     @Override
     public void executePlot(String[] equations) {
-        final ODESystem system = new ODESystem(equations,
-                Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
+        final OdeSystem system = new OdeSystem(equations,
+                Arrays.copyOfRange(OdeSystem.VARIABLES, 0, equations.length));
         system.setInitialConditions(new Float[]{1.2F});
         System.out.println("Temporary Plot");
         try {
@@ -46,9 +45,9 @@ public class MainInteractor implements MainInputBoundary {
     }
 
     @Override
-    public void executePhasePotrait(String[] equations) throws Exception {
-        final ODESystem system = new ODESystem(equations,
-                Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
+    public void executePhasePortrait(String[] equations) throws Exception {
+        final OdeSystem system = new OdeSystem(equations,
+                Arrays.copyOfRange(OdeSystem.VARIABLES, 0, equations.length));
         PhasePortraitViewModel viewModel = new PhasePortraitViewModel(new PhasePortraitState(system));
         PhasePortraitOutputBoundary outputboundary = new PhasePortraitPresenter(viewModel);
         PhasePortraitDataAccessInterface dataAccessInterface = new NewtonDataAccessObject();

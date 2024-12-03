@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import entity.ODESystem;
+import entity.OdeSystem;
 import interface_adapter.equations.EquationResultState;
 import interface_adapter.equations.EquationsController;
 import interface_adapter.equations.EquationsViewModel;
@@ -129,7 +129,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
 
         // Add button
         addEquationBtn.addActionListener(event -> {
-            addNewEquation(ODESystem.VARIABLES[equationDisplay.getComponentCount()] + "' = ");
+            addNewEquation(OdeSystem.VARIABLES[equationDisplay.getComponentCount()] + "' = ");
         });
         buttonPanelTop.add(addEquationBtn);
 

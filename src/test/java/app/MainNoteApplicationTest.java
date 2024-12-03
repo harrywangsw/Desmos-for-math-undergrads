@@ -36,7 +36,7 @@ public class MainNoteApplicationTest {
         };
 
         final NoteAppBuilder builder = new NoteAppBuilder();
-        app = builder.addNoteDAO(noteDataAccess)
+        app = builder.addNoteDao(noteDataAccess)
                 .addNoteView()
                 .addNoteUseCase().build();
 
