@@ -2,7 +2,7 @@ package use_case.phaseportrait;
 
 import java.util.List;
 
-import use_case.equations.APIAccessException;
+import use_case.equations.ApiAccessException;
 
 /**
  * A dataaccess interface.
@@ -14,9 +14,9 @@ public interface PhasePortraitDataAccessInterface {
      * @param vars variable
      * @param point the point
      * @return the result of the evaluation, x_dot
-     * @throws APIAccessException when newton api call returns error
+     * @throws ApiAccessException when newton api call returns error
      */
-    float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws APIAccessException;
+    float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws ApiAccessException;
 
     /**
      * Solve the ode numerically using forward euler.
@@ -25,7 +25,7 @@ public interface PhasePortraitDataAccessInterface {
      * @param ico initial conditions
      * @param end_time end time for the euler algorithm
      * @return the solutions for the time series
-     * @throws APIAccessException when newton api returns errors
+     * @throws ApiAccessException when newton api returns errors
      */
-    List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws APIAccessException;
+    List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws ApiAccessException;
 }

@@ -6,9 +6,9 @@ import javax.swing.WindowConstants;
 import interface_adapter.note.NoteController;
 import interface_adapter.note.NotePresenter;
 import interface_adapter.note.NoteViewModel;
-import use_case.note.NoteDataAccessInterface;
 import use_case.NoteInteractor;
 import use_case.NoteOutputBoundary;
+import use_case.note.NoteDataAccessInterface;
 import view.NoteView;
 
 /**
@@ -17,7 +17,7 @@ import view.NoteView;
 public class NoteAppBuilder {
     public static final int HEIGHT = 300;
     public static final int WIDTH = 400;
-    private NoteDataAccessInterface noteDAO;
+    private NoteDataAccessInterface noteDao;
     private NoteViewModel noteViewModel = new NoteViewModel();
     private NoteView noteView;
     private NoteInteractor noteInteractor;
@@ -27,8 +27,8 @@ public class NoteAppBuilder {
      * @param noteDataAccess the DAO to use
      * @return this builder
      */
-    public NoteAppBuilder addNoteDAO(NoteDataAccessInterface noteDataAccess) {
-        noteDAO = noteDataAccess;
+    public NoteAppBuilder addNoteDao(NoteDataAccessInterface noteDataAccess) {
+        noteDao = noteDataAccess;
         return this;
     }
 
@@ -42,7 +42,7 @@ public class NoteAppBuilder {
     public NoteAppBuilder addNoteUseCase() {
         final NoteOutputBoundary noteOutputBoundary = new NotePresenter(noteViewModel);
         noteInteractor = new NoteInteractor(
-                noteDAO, noteOutputBoundary);
+                noteDao, noteOutputBoundary);
 
         final NoteController controller = new NoteController(noteInteractor);
         if (noteView == null) {

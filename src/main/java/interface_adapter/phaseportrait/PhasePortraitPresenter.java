@@ -20,6 +20,7 @@ public class PhasePortraitPresenter implements PhasePortraitOutputBoundary {
      * Change the phase plot.
      * @param plot the new plot
      * @param vector_scale scale
+     * @param vectors vectors
      */
     public void changechart(JFreeChart plot, float vector_scale, List<List<Float>> vectors) {
         phasePortraitViewModel.getState().setchart(plot);

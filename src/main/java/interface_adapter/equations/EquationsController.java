@@ -2,7 +2,7 @@ package interface_adapter.equations;
 
 import java.util.Arrays;
 
-import entity.ODESystem;
+import entity.OdeSystem;
 import use_case.equations.EquationsInputBoundary;
 
 /**
@@ -21,8 +21,8 @@ public class EquationsController {
      * @param equations The equations input by the user
      */
     public void execute(String task, String[] equations) {
-        final ODESystem system = new ODESystem(equations,
-                Arrays.copyOfRange(ODESystem.VARIABLES, 0, equations.length));
+        final OdeSystem system = new OdeSystem(equations,
+                Arrays.copyOfRange(OdeSystem.VARIABLES, 0, equations.length));
         switch (task) {
             case "solve":
                 equationsInteractor.executeSolve(system);

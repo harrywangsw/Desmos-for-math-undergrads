@@ -19,10 +19,11 @@ public class EquationsBuilder {
 
     /**
      * Sets the EquationsDAO to be used in this application.
+     *
      * @param equationsDataAccess the DAO to use
      * @return this builder
      */
-    public EquationsBuilder addEquationsDao(EquationsDataAccessInterface equationsDataAccess) {
+    public EquationsBuilder addequationsdao(EquationsDataAccessInterface equationsDataAccess) {
         equationsDao = equationsDataAccess;
         return this;
     }

@@ -18,7 +18,7 @@ import interface_adapter.phaseportrait.PhasePortraitController;
 import interface_adapter.phaseportrait.PhasePortraitState;
 import interface_adapter.phaseportrait.PhasePortraitViewModel;
 import use_case.PhasePortraitInteractor;
-import use_case.equations.APIAccessException;
+import use_case.equations.ApiAccessException;
 
 /**
  * View for phase portrait.
@@ -87,7 +87,7 @@ public class PhasePortraitView extends JPanel implements ActionListener, Propert
                         Float.parseFloat(leftb.getText()), Float.parseFloat(rb.getText()),
                         Float.parseFloat(lb.getText()), Float.parseFloat(ub.getText()));
             }
-            catch (APIAccessException err) {
+            catch (ApiAccessException err) {
                 throw new RuntimeException(err);
             }
         });
