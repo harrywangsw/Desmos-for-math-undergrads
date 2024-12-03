@@ -1,6 +1,10 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +12,10 @@ import java.util.List;
 
 import javax.swing.*;
 
+import interface_adapter.graph.GraphController;
+import interface_adapter.graph.GraphState;
+import interface_adapter.phaseportrait.PhasePortraitController;
+import interface_adapter.phaseportrait.PhasePortraitState;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -18,8 +26,63 @@ import org.jfree.data.xy.DefaultXYDataset;
 
 import data_access.NewtonDataAccessObject;
 import entity.OdeSystem;
+import use_case.GraphInteractor;
 
-public class GraphView {
+public class GraphView extends JPanel implements ActionListener, PropertyChangeListener {
+    private static GraphController graphcontroller;
+    private ChartPanel chartPanel;
+
+    public GraphView(JFreeChart chart) {
+        chartPanel = new ChartPanel(chart);
+        final JTextField xMin = new JTextField(10);
+        final JTextField xMax= new JTextField(10);
+        final JTextField yMin = new JTextField(10);
+        final JTextField yMax = new JTextField(10);
+        final JButton updateButton = new JButton("Update");
+        final JButton shiftUpButton = new JButton("Up");
+        final JButton shiftDownButton = new JButton("Down");
+        final JButton shiftLeftButton = new JButton("Left");
+        final JButton shiftRightButton = new JButton("Right");
+
+        updateButton.addActionListener(e -> {
+            final String xMinValue = xMin.getText();
+            final String xMaxValue = xMax.getText();
+            final String yMinValue = yMin.getText();
+            final String yMaxValue = yMax.getText();
+
+            // Parse the input ranges and update the chart axes
+            updateAxisRange(chart, xMinValue, xMaxValue, yMinValue, yMaxValue);
+        });
+
+        shiftUpButton.addActionListener(e -> {
+            yUp(chart);
+        });
+        shiftDownButton.addActionListener(e -> {
+            yDown(chart);
+        });
+        shiftLeftButton.addActionListener(e -> {
+            xDown(chart);
+        });
+        shiftRightButton.addActionListener(e -> {
+            xUp(chart);
+        });
+
+        this.add(new JLabel("X min:"));
+        this.add(xMin);
+        this.add(new JLabel("X max:"));
+        this.add(xMax);
+        this.add(new JLabel("Y min:"));
+        this.add(yMin);
+        this.add(new JLabel("Y max:"));
+        this.add(yMax);
+        this.add(updateButton);
+        this.add(shiftUpButton);
+        this.add(shiftDownButton);
+        this.add(shiftLeftButton);
+        this.add(shiftRightButton);
+
+        this.add(chartPanel, BorderLayout.CENTER);
+    }
     public static JFrame plotGraph(OdeSystem system) throws Exception {
         if (system.getVariables().length > 1) {
             System.out.println("only 1D systems have plotting support");
@@ -42,7 +105,6 @@ public class GraphView {
      * @param func 2d array of size 2, first element stores the x values, 2nd stores the y values
      * @throws Exception e
      */
-
     public static JFrame plot(double[][] func) throws Exception {
         final DefaultXYDataset dataset = new DefaultXYDataset();
         dataset.addSeries("test_func", func);
@@ -75,20 +137,20 @@ public class GraphView {
             final String yMaxValue = yMax.getText();
 
             // Parse the input ranges and update the chart axes
-            updateAxisRange(chart, xMinValue, xMaxValue, yMinValue, yMaxValue);
+            graphcontroller.change(chart, xMinValue, xMaxValue, yMinValue, yMaxValue);
         });
 
         shiftUpButton.addActionListener(e -> {
-            yUp(chart);
+            graphcontroller.smallchange(chart, "yup");
         });
         shiftDownButton.addActionListener(e -> {
-            yDown(chart);
+            graphcontroller.smallchange(chart, "ydown");
         });
         shiftLeftButton.addActionListener(e -> {
-            xDown(chart);
+            graphcontroller.smallchange(chart, "xdown");
         });
         shiftRightButton.addActionListener(e -> {
-            xUp(chart);
+            graphcontroller.smallchange(chart, "xup");
         });
 
         panel.add(new JLabel("X min:"));
@@ -183,4 +245,19 @@ public class GraphView {
         yAxis.setRange(minY - 1, maxY - 1);
     }
 
+    public void setController(GraphController graphcontroller) {
+        this.graphcontroller = graphcontroller;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final GraphState state = (GraphState) evt.getNewValue();
+        System.out.println("wtf");
+        chartPanel.setChart(state.getChart());
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
