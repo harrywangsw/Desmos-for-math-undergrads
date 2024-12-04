@@ -8,6 +8,7 @@ import org.jfree.chart.JFreeChart;
 import use_case.equations.ApiAccessException;
 import use_case.phaseportrait.PhasePortraitDataAccessInterface;
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
+import entity.OdeSystem;
 
 import static org.junit.Assert.*;
 
@@ -156,5 +157,33 @@ public class PhasePortraitInteractorTest {
         String[] expression = {"x", "y"};
         String[] variable = {"x", "y"};
         phasePortraitInteractor.changeviewbox(expression, variable, 1f, -1f, -1f, 1f, 1f);
+    }
+    @Test
+    public void test_createchart_withEmptyVectors() {
+        List<List<Float>> vectors = List.of();
+
+        PhasePortraitDataAccessInterface testInterface = new PhasePortraitDataAccessInterface() {
+            @Override
+            public float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws ApiAccessException {
+                return 0;
+            }
+
+            @Override
+            public List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws ApiAccessException {
+                return null;
+            }
+        };
+
+        PhasePortraitOutputBoundary testOutput = new PhasePortraitOutputBoundary() {
+            @Override
+            public void changechart(JFreeChart plot, float vector_scale, List<List<Float>> vectors) {
+            }
+        };
+
+        PhasePortraitInteractor phasePortraitInteractor = new PhasePortraitInteractor(testInterface, testOutput);
+        JFreeChart chart = phasePortraitInteractor.createchart(vectors);
+
+        assertNotNull(chart);
+        assertEquals("Phase portrait", chart.getTitle().getText());
     }
 }
