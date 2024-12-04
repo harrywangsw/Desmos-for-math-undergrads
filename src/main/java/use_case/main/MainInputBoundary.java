@@ -1,7 +1,5 @@
 package use_case.main;
 
-import use_case.note.DataAccessException;
-
 public interface MainInputBoundary {
 
     /**

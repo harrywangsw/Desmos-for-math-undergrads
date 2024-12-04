@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import use_case.main.GraphDataAccessInterface;
-import use_case.note.DataAccessException;
+import use_case.main.DataAccessException;
 
 public class DBGraphDataAccessObject implements GraphDataAccessInterface {
 

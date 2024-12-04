@@ -8,17 +8,14 @@ import interface_adapter.graph.GraphViewModel;
 import interface_adapter.phaseportrait.PhasePortraitPresenter;
 import interface_adapter.phaseportrait.PhasePortraitState;
 import interface_adapter.phaseportrait.PhasePortraitViewModel;
-import org.jfree.chart.JFreeChart;
 import use_case.graph.GraphOutputBoundary;
-import use_case.main.GraphDataAccessInterface;
 import use_case.main.MainInputBoundary;
 
-import use_case.note.DataAccessException;
+import use_case.main.DataAccessException;
 
 import use_case.phaseportrait.PhasePortraitDataAccessInterface;
 
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
-import view.GraphView;
 
 import java.util.Arrays;
 

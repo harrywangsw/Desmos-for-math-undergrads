@@ -1,7 +1,7 @@
 package view;
 
 import interface_adapter.main.MainController;
-import use_case.note.DataAccessException;
+import use_case.main.DataAccessException;
 
 import javax.swing.*;
 

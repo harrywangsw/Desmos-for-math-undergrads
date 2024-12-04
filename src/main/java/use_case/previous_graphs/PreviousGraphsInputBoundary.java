@@ -1,9 +1,6 @@
 package use_case.previous_graphs;
 
-import entity.Graph;
-import use_case.note.DataAccessException;
-
-import java.util.List;
+import use_case.main.DataAccessException;
 
 public interface PreviousGraphsInputBoundary {
 

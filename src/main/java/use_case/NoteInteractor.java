@@ -1,7 +1,7 @@
 package use_case;
 
 import entity.User;
-import use_case.note.DataAccessException;
+import use_case.main.DataAccessException;
 import use_case.note.NoteDataAccessInterface;
 import use_case.note.NoteInputBoundary;
 

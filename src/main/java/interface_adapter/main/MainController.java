@@ -1,7 +1,7 @@
 package interface_adapter.main;
 
 import use_case.main.MainInputBoundary;
-import use_case.note.DataAccessException;
+import use_case.main.DataAccessException;
 
 public class MainController {
 

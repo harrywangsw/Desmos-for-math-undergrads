@@ -1,4 +1,4 @@
-package use_case.note;
+package use_case.main;
 
 import java.sql.SQLException;
 
