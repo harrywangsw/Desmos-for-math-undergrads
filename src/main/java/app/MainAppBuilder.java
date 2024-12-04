@@ -51,8 +51,10 @@ public class MainAppBuilder {
                                          PreviousGraphsInteractor previousGraphsInteractor) {
         final MainOutputBoundary mainOutputBoundary = new MainPresenter();
         final PreviousGraphsOutputBoundary previousGraphsOutputBoundary =
+
                 new PreviousGraphsPresenter(previousGraphsViewModel, viewManagerModel);
         mainInteractor = new MainInteractor(phasePortraitInteractor, viewManagerModel, previousGraphsInteractor);
+
         final MainController controller = new MainController(mainInteractor);
         if (mainView == null) {
             throw new RuntimeException("addMainView must be called before addMainUseCase");

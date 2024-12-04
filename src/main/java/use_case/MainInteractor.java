@@ -70,6 +70,7 @@ public class MainInteractor implements MainInputBoundary {
     @Override
     public void executePreviousGraphs() throws DataAccessException {
 //        PreviousGraphsInteractor previousGraphsInteractor = new PreviousGraphsInteractor(previousGraphsOutputBoundary);
+
         previousGraphsInteractor.executePreviousGraphs();
 
     }

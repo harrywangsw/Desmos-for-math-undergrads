@@ -1,9 +1,9 @@
 package view;
 
+import javax.swing.*;
+
 import interface_adapter.main.MainController;
 import use_case.note.DataAccessException;
-
-import javax.swing.*;
 
 public class MainView extends JPanel {
 
@@ -17,24 +17,25 @@ public class MainView extends JPanel {
 
     public MainView(EquationsView equationsView) {
         this.equationsView = equationsView;
-
         final JPanel rightCornerButtons = new JPanel();
         rightCornerButtons.add(runButton);
         rightCornerButtons.add(helpButton);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         dropDownMenu.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
-        runButton.addActionListener(evt -> {
-            if (evt.getSource().equals(runButton)) {
-                try {
-                    mainController.execute((String) dropDownMenu.getSelectedItem(), equationsView.getEquations());
-                } catch (DataAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+        runButton.addActionListener(
+                evt -> {
+                    if (evt.getSource().equals(runButton)) {
+                        try {
+                            mainController.execute((String) dropDownMenu.getSelectedItem(), equationsView.getequations());
+                        }
+                        catch (DataAccessException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
 
-        helpButton.addActionListener(evt -> {
+        helpButton.addActionListener( evt -> {
             if (evt.getSource().equals(helpButton)) {
                 try {
                     mainController.execute("help", new String[0]);
@@ -52,5 +53,4 @@ public class MainView extends JPanel {
     public void setMainController(MainController controller) {
         this.mainController = controller;
     }
-
 }

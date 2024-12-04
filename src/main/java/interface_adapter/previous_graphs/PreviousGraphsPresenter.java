@@ -28,6 +28,7 @@ public class PreviousGraphsPresenter implements PreviousGraphsOutputBoundary {
         System.out.println(viewManagerModel.getViewName());
 //        viewManager.navigate(viewManagerModel.getViewName());
         System.out.println("Everything till here runs");
+
     }
 
     @Override

@@ -227,6 +227,10 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
             this.revalidate();
         }
     }
+    /**
+     * Get equations.
+     * @return array of string
+     */
 
     /**
      * Returns the equations from the text fields as input by the user.

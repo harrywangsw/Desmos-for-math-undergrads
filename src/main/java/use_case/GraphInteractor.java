@@ -5,6 +5,7 @@ import app.PhasePortraitAppBuilder;
 import data_access.NewtonDataAccessObject;
 import entity.OdeSystem;
 import interface_adapter.graph.GraphController;
+import interface_adapter.graph.GraphViewModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
@@ -25,7 +26,7 @@ public class GraphInteractor implements GraphInputBoundary {
         this.graphOutputBoundary = graphOutputBoundary;
     }
     @Override
-    public void makegraph(OdeSystem system) throws ApiAccessException {
+    public void makegraph(OdeSystem system, GraphViewModel viewModel) throws ApiAccessException {
         if (system.getVariables().length > 1) {
             System.out.println("only 1D systems have plotting support");
         }
@@ -40,9 +41,9 @@ public class GraphInteractor implements GraphInputBoundary {
             array[0][i] = i * NewtonDataAccessObject.INTERVAL;
         }
         JFreeChart chart = plot(array);
-        GraphView view = new GraphView(chart);
-        view.setController(new GraphController(this));
         graphOutputBoundary.changegraph(chart);
+        GraphView view = new GraphView(viewModel);
+        view.setController(new GraphController(this));
         GraphAppBuilder.makeView(view);
     }
 
@@ -126,7 +127,7 @@ public class GraphInteractor implements GraphInputBoundary {
 
     public JFreeChart plot(double[][] func) {
         final DefaultXYDataset dataset = new DefaultXYDataset();
-        dataset.addSeries("test_func", func);
+        dataset.addSeries("", func);
         final JFreeChart chart = ChartFactory.createXYLineChart("plot", "t", "x", dataset,
                 PlotOrientation.VERTICAL, false, false, false);
         return chart;
