@@ -46,13 +46,14 @@ public class AppBuilder {
 
     public AppBuilder addMainView(){
         MainAppBuilder mainAppBuilder = new MainAppBuilder();
-        mainView = mainAppBuilder.addMainView().addMainUseCase().build();
+        mainView = mainAppBuilder.addMainView().addMainUseCase(phasePortraitInteractor, viewManagerModel).build();
         appPanel.add(mainView, 0);
         return this;
     }
 
     public AppBuilder addPhasePortraitView(){
-        phasePortraitViewModel = new PhasePortraitViewModel(new PhasePortraitState());
+        phasePortraitViewModel = new PhasePortraitViewModel(new PhasePortraitState(null, null,
+                null, 1, 1, -1, -1, 1));
         phasePortraitView = new PhasePortraitView(phasePortraitViewModel);
 
         final PhasePortraitOutputBoundary outputboundary = new PhasePortraitPresenter(phasePortraitViewModel);

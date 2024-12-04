@@ -8,6 +8,7 @@ import interface_adapter.previous_graphs.PreviousGraphsPresenter;
 import interface_adapter.previous_graphs.PreviousGraphsViewModel;
 import use_case.MainInteractor;
 import use_case.MainOutputBoundary;
+import use_case.PhasePortraitInteractor;
 import use_case.PreviousGraphsOutputBoundary;
 import use_case.main.GraphDataAccessInterface;
 import view.EquationsView;
@@ -48,11 +49,13 @@ public class MainAppBuilder {
      * @throws RuntimeException e
      */
 
-    public MainAppBuilder addMainUseCase() {
+    public MainAppBuilder addMainUseCase(PhasePortraitInteractor phasePortraitInteractor,
+                                         ViewManagerModel viewManagerModel) {
         final MainOutputBoundary mainOutputBoundary = new MainPresenter();
         final PreviousGraphsOutputBoundary previousGraphsOutputBoundary =
                 new PreviousGraphsPresenter(previousGraphsViewModel, viewManagerModel);
-        mainInteractor = new MainInteractor(graphDao, mainOutputBoundary, previousGraphsOutputBoundary);
+        mainInteractor = new MainInteractor(graphDao, mainOutputBoundary, previousGraphsOutputBoundary,
+                phasePortraitInteractor, viewManagerModel);
         final MainController controller = new MainController(mainInteractor);
         if (mainView == null) {
             throw new RuntimeException("addMainView must be called before addMainUseCase");

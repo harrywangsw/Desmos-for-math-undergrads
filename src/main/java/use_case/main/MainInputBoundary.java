@@ -30,4 +30,9 @@ public interface MainInputBoundary {
      */
     void executePreviousGraphs() throws DataAccessException;
 
+    /**
+     * Goes back to the home page.
+     */
+    void executeHome();
+
 }

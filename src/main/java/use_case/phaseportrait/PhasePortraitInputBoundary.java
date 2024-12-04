@@ -50,5 +50,5 @@ public interface PhasePortraitInputBoundary {
     void changeviewbox(String[] expression, String[] variable, float upb, float lob, float leftb,
                        float rib, float vector_size) throws ApiAccessException;
 
-    void makePhase(PhasePortraitViewModel viewModel, PhasePortraitOutputBoundary outputboundary, OdeSystem sys) throws Exception;
+    void makePhase(OdeSystem sys) throws Exception;
 }

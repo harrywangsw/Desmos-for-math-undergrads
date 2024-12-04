@@ -1,7 +1,6 @@
 package view;
 
-import java.awt.Component;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -64,6 +63,7 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         // Scrollable view
         final JScrollPane scrollPane = new JScrollPane(equationDisplay,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(0, 100));
         this.add(scrollPane);
 
         final JLabel headingLabel = new JLabel("Differential Equations:");

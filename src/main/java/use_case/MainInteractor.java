@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import data_access.NewtonDataAccessObject;
 import entity.OdeSystem;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.graph.GraphPresenter;
 import interface_adapter.graph.GraphState;
 import interface_adapter.graph.GraphViewModel;
@@ -25,14 +26,18 @@ public class MainInteractor implements MainInputBoundary {
     private final GraphDataAccessInterface graphDataAccessInterface;
     private final MainOutputBoundary mainOutputBoundary;
     private final PreviousGraphsOutputBoundary previousGraphsOutputBoundary;
+    private final PhasePortraitInteractor phasePortraitInteractor;
+    private final ViewManagerModel viewManagerModel;
 
     public MainInteractor(GraphDataAccessInterface graphDataAccessInterface, MainOutputBoundary mainOutputBoundary,
-                          PreviousGraphsOutputBoundary previousGraphsOutputBoundary) {
+                          PreviousGraphsOutputBoundary previousGraphsOutputBoundary,
+                          PhasePortraitInteractor phasePortraitInteractor, ViewManagerModel viewManagerModel) {
         this.graphDataAccessInterface = graphDataAccessInterface;
         this.mainOutputBoundary = mainOutputBoundary;
         this.previousGraphsOutputBoundary = previousGraphsOutputBoundary;
+        this.phasePortraitInteractor = phasePortraitInteractor;
+        this.viewManagerModel = viewManagerModel;
     }
-
 
     @Override
     public void executePlot(String[] equations) {
@@ -55,8 +60,14 @@ public class MainInteractor implements MainInputBoundary {
     public void executePhasePortrait(String[] equations) throws Exception {
         final OdeSystem system = new OdeSystem(equations,
                 Arrays.copyOfRange(OdeSystem.VARIABLES, 0, equations.length));
-
+//        PhasePortraitViewModel viewModel = new PhasePortraitViewModel(new PhasePortraitState(system));
+//        PhasePortraitOutputBoundary outputboundary = new PhasePortraitPresenter(viewModel);
+//        PhasePortraitDataAccessInterface dataAccessInterface = new NewtonDataAccessObject();
+//        PhasePortraitInteractor interactor = new PhasePortraitInteractor(dataAccessInterface, outputboundary);
 //        interactor.makePhase(viewModel, outputboundary, system);
+        phasePortraitInteractor.makePhase(system);
+        viewManagerModel.setState("phase portrait");
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override
@@ -69,5 +80,11 @@ public class MainInteractor implements MainInputBoundary {
         PreviousGraphsInteractor previousGraphsInteractor = new PreviousGraphsInteractor(previousGraphsOutputBoundary);
         previousGraphsInteractor.executePreviousGraphs();
 
+    }
+
+    @Override
+    public void executeHome() {
+        viewManagerModel.setState("Home");
+        viewManagerModel.firePropertyChanged();
     }
 }
