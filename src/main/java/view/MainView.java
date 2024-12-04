@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 
 import interface_adapter.main.MainController;
-import use_case.note.DataAccessException;
+import use_case.main.DataAccessException;
 
 public class MainView extends JPanel {
     private final JButton runButton = new JButton("Run");
