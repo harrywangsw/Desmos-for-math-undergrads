@@ -55,10 +55,6 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         this.equationsViewModel = equationsViewModel;
         this.equationsViewModel.addPropertyChangeListener(this);
 
-        final JLabel headingLabel = new JLabel("Differential Equations:");
-        headingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(headingLabel);
-
         // Add Top Button Panel
         createTopButtonPanel();
 
@@ -69,6 +65,10 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         final JScrollPane scrollPane = new JScrollPane(equationDisplay,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane);
+
+        final JLabel headingLabel = new JLabel("Differential Equations:");
+        headingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        equationDisplay.add(headingLabel);
 
         addNewEquation("x' = ");
         addNewEquation("y' = ");
@@ -183,7 +183,8 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
                 criticalPointsOutput.add(outputLabel);
             }
             this.revalidate();
-        } else {
+        }
+        else {
             criticalPointsLabel.setVisible(false);
             criticalPointsOutput.removeAll();
             criticalPointsOutput.setVisible(false);
@@ -204,7 +205,8 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
                 solutionOutput.add(outputLabel);
             }
             this.revalidate();
-        } else {
+        }
+        else {
             solutionLabel.setVisible(false);
             solutionOutput.removeAll();
             solutionOutput.setVisible(false);
@@ -218,14 +220,19 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
             errorLabel.setVisible(true);
             errorLabel.setText(error);
             this.revalidate();
-        } else {
+        }
+        else {
             errorLabel.setVisible(false);
             errorLabel.setText("");
             this.revalidate();
         }
     }
 
-    public String[] getequations() {
+    /**
+     * Returns the equations from the text fields as input by the user.
+     * @return the list of equations input by the user.
+     */
+    public String[] getEquations() {
         final ArrayList<String> equations = new ArrayList<>();
         for (Component equationPanel : equationDisplay.getComponents()) {
             if (equationPanel instanceof JPanel) {

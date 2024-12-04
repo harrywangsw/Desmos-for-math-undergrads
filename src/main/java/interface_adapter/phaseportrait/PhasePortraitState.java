@@ -7,7 +7,7 @@ import org.jfree.chart.JFreeChart;
 
 import entity.OdeSystem;
 
-//@Nullable
+// @Nullable
 public class PhasePortraitState {
     private float vectorScale;
     private float leftBound;
