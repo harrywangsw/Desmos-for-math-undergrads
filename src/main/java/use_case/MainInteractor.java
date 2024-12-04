@@ -24,13 +24,11 @@ import java.util.Arrays;
 
 public class MainInteractor implements MainInputBoundary {
 
-    private final GraphDataAccessInterface graphDataAccessInterface;
     private final MainOutputBoundary mainOutputBoundary;
     private final PreviousGraphsOutputBoundary previousGraphsOutputBoundary;
 
-    public MainInteractor(GraphDataAccessInterface graphDataAccessInterface, MainOutputBoundary mainOutputBoundary,
+    public MainInteractor(MainOutputBoundary mainOutputBoundary,
                           PreviousGraphsOutputBoundary previousGraphsOutputBoundary) {
-        this.graphDataAccessInterface = graphDataAccessInterface;
         this.mainOutputBoundary = mainOutputBoundary;
         this.previousGraphsOutputBoundary = previousGraphsOutputBoundary;
     }
@@ -71,7 +69,7 @@ public class MainInteractor implements MainInputBoundary {
 
     @Override
     public void executePreviousGraphs() throws DataAccessException {
-        PreviousGraphsInteractor previousGraphsInteractor = new PreviousGraphsInteractor(graphDataAccessInterface, previousGraphsOutputBoundary);
+        PreviousGraphsInteractor previousGraphsInteractor = new PreviousGraphsInteractor(previousGraphsOutputBoundary);
         previousGraphsInteractor.executePreviousGraphs();
 
     }
