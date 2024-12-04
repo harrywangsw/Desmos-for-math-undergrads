@@ -27,7 +27,7 @@ public class MainView extends JPanel {
                 evt -> {
                     if (evt.getSource().equals(runButton)) {
                         try {
-                            mainController.execute((String) dropDownMenu.getSelectedItem(), equationsView.getequations());
+                            mainController.execute((String) dropDownMenu.getSelectedItem(), equationsView.getEquations());
                         }
                         catch (DataAccessException e) {
                             throw new RuntimeException(e);
