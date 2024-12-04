@@ -5,39 +5,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import javax.swing.*;
+
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 
 import interface_adapter.graph.GraphController;
 import interface_adapter.graph.GraphState;
 import interface_adapter.graph.GraphViewModel;
-import interface_adapter.phaseportrait.PhasePortraitController;
-import interface_adapter.phaseportrait.PhasePortraitState;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.xy.DefaultXYDataset;
-
-import data_access.NewtonDataAccessObject;
-import entity.OdeSystem;
-import use_case.GraphInteractor;
 
 public class GraphView extends JPanel implements ActionListener, PropertyChangeListener {
     private static GraphController graphcontroller;
     private ChartPanel chartPanel;
 
     public GraphView(GraphViewModel view) {
-        JFreeChart chart = view.getState().getChart();
+        final JFreeChart chart = view.getState().getChart();
         chartPanel = new ChartPanel(chart);
         final JTextField xMin = new JTextField(10);
-        final JTextField xMax= new JTextField(10);
+        final JTextField xMax = new JTextField(10);
         final JTextField yMin = new JTextField(10);
         final JTextField yMax = new JTextField(10);
         final JButton updateButton = new JButton("Update");
