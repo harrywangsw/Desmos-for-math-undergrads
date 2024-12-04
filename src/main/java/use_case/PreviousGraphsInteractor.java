@@ -18,10 +18,10 @@ public class PreviousGraphsInteractor implements PreviousGraphsInputBoundary {
     public void executePreviousGraphs() {
         List<String> graphPaths = new ArrayList<>();
 
-        File graphFolder = new File("./graphs/");
+        final File graphFolder = new File("./graphs/");
 
         if (graphFolder.exists() && graphFolder.isDirectory()) {
-            File[] files = graphFolder.listFiles();
+            final File[] files = graphFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile()) {
