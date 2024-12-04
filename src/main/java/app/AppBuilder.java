@@ -13,6 +13,7 @@ import interface_adapter.phaseportrait.PhasePortraitState;
 import interface_adapter.phaseportrait.PhasePortraitViewModel;
 import interface_adapter.previous_graphs.PreviousGraphsViewModel;
 import use_case.PhasePortraitInteractor;
+import use_case.PreviousGraphsInteractor;
 import use_case.phaseportrait.PhasePortraitDataAccessInterface;
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
 import view.*;
@@ -34,6 +35,7 @@ public class AppBuilder {
     private MainViewModel mainViewModel;
     private PreviousGraphsView previousGraphsView;
     private PreviousGraphsViewModel previousGraphsViewModel;
+    private PreviousGraphsInteractor previousGraphsInteractor;
     private PhasePortraitView phasePortraitView;
     private PhasePortraitViewModel phasePortraitViewModel;
     private GraphViewModel graphViewModel;
@@ -46,7 +48,8 @@ public class AppBuilder {
 
     public AppBuilder addMainView(){
         MainAppBuilder mainAppBuilder = new MainAppBuilder();
-        mainView = mainAppBuilder.addMainView().addMainUseCase(phasePortraitInteractor, viewManagerModel).build();
+        mainView = mainAppBuilder.addMainView().addMainUseCase(phasePortraitInteractor, viewManagerModel,
+                previousGraphsInteractor).build();
         appPanel.add(mainView, 0);
         return this;
     }
@@ -75,6 +78,7 @@ public class AppBuilder {
         PreviousGraphsBuilder previousGraphsBuilder = new PreviousGraphsBuilder();
         previousGraphsView = previousGraphsBuilder.addPreviousGraphsView()
                 .addPreviousGraphsUseCase(viewManagerModel).buildForView();
+        previousGraphsInteractor = previousGraphsBuilder.getInteractor();
         cardPanel.add(previousGraphsView, previousGraphsView.getViewName());
         return this;
     }

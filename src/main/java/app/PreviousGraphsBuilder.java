@@ -37,4 +37,8 @@ public class PreviousGraphsBuilder {
         return this.previousGraphsView;
     }
 
+    public PreviousGraphsInteractor getInteractor() {
+        return previousGraphsInteractor;
+    }
+
 }
