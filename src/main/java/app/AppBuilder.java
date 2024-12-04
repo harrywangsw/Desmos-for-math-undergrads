@@ -87,7 +87,7 @@ public class AppBuilder {
         previousGraphsView = previousGraphsBuilder.addPreviousGraphsView()
                 .addPreviousGraphsUseCase(viewManagerModel).buildForView();
         previousGraphsInteractor = previousGraphsBuilder.getInteractor();
-        cardPanel.add(previousGraphsView, previousGraphsView.getViewName());
+        cardPanel.add(previousGraphsView, "Previous Graphs");
         return this;
     }
 
