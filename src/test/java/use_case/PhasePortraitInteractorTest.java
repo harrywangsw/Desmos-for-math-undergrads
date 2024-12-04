@@ -130,5 +130,31 @@ public class PhasePortraitInteractorTest {
         JFreeChart chart = phasePortraitInteractor.changescale(unitVectors, vectorScale);
         assertNotNull(chart);
     }
+    @Test
+    public void test_changeviewbox() throws Exception {
+        PhasePortraitDataAccessInterface testInterface = new PhasePortraitDataAccessInterface() {
+            @Override
+            public float evaluatesingleOdeatpoint(String exp, String[] vars, List<Float> point) throws ApiAccessException {
+                return 1;
+            }
 
+            @Override
+            public List<List<Float>> eulersolve(String[] exp, String[] vars, Float[] ico, float end_time) throws ApiAccessException {
+                return null;
+            }
+        };
+
+        PhasePortraitOutputBoundary testOutput = new PhasePortraitOutputBoundary() {
+            @Override
+            public void changechart(JFreeChart plot, float vector_scale, List<List<Float>> vectors) {
+                assertNotNull(plot);
+                assertEquals(100, vectors.size());
+            }
+        };
+
+        PhasePortraitInteractor phasePortraitInteractor = new PhasePortraitInteractor(testInterface, testOutput);
+        String[] expression = {"x", "y"};
+        String[] variable = {"x", "y"};
+        phasePortraitInteractor.changeviewbox(expression, variable, 1f, -1f, -1f, 1f, 1f);
+    }
 }
