@@ -1,15 +1,15 @@
 package view;
 
-
-import interface_adapter.previous_graphs.PreviousGraphsController;
-import interface_adapter.previous_graphs.PreviousGraphsViewModel;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.*;
+
+import interface_adapter.previous_graphs.PreviousGraphsController;
+import interface_adapter.previous_graphs.PreviousGraphsViewModel;
 
 public class PreviousGraphsView extends JPanel {
     private final PreviousGraphsViewModel viewModel;
@@ -22,6 +22,7 @@ public class PreviousGraphsView extends JPanel {
 
     /**
      * Sets the controller for this view.
+     * @param controller controller
      */
     public void setController(PreviousGraphsController controller) {
         this.controller = controller;
@@ -29,29 +30,32 @@ public class PreviousGraphsView extends JPanel {
 
     /**
      * Updates the view with the given list of graphs.
+     * @param graphList graph list
      */
     public void displayGraphs(List<Map<String, String>> graphList) {
-        removeAll(); // Clear previous graphs
+        removeAll();
+        // Clear previous graphs
 
         for (Map<String, String> graph : graphList) {
-            String equation = graph.get("equation");
-            String imagePath = graph.get("path_to_image");
+            final String equation = graph.get("equation");
+            final String imagePath = graph.get("path_to_image");
 
             // Create a panel for each graph
-            JPanel graphPanel = new JPanel(new BorderLayout());
+            final JPanel graphPanel = new JPanel(new BorderLayout());
             graphPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
             // Image
             JLabel imageLabel;
             try {
-                ImageIcon imageIcon = new ImageIcon(imagePath);
+                final ImageIcon imageIcon = new ImageIcon(imagePath);
                 imageLabel = new JLabel(imageIcon);
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 imageLabel = new JLabel("Image not found: " + imagePath);
             }
 
             // Equation
-            JLabel equationLabel = new JLabel(equation);
+            final JLabel equationLabel = new JLabel(equation);
             equationLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             // Add components to graph panel
