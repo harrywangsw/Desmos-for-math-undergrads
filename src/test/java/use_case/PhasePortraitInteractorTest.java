@@ -1,5 +1,9 @@
 package use_case;
 
+import data_access.NewtonDataAccessObject;
+import interface_adapter.phaseportrait.PhasePortraitPresenter;
+import interface_adapter.phaseportrait.PhasePortraitState;
+import interface_adapter.phaseportrait.PhasePortraitViewModel;
 import org.junit.Test;
 
 import java.util.List;
@@ -185,5 +189,18 @@ public class PhasePortraitInteractorTest {
 
         assertNotNull(chart);
         assertEquals("Phase portrait", chart.getTitle().getText());
+    }
+
+    @Test
+    public void testmakephase() throws Exception {
+        String[] expression = {"x", "y"};
+        String[] variable = {"x", "y"};
+        OdeSystem system = new OdeSystem(expression, variable);
+        PhasePortraitViewModel viewModel = new PhasePortraitViewModel(new PhasePortraitState(system));
+        PhasePortraitOutputBoundary testOutput = new PhasePortraitPresenter(viewModel);
+        PhasePortraitInteractor interactor = new PhasePortraitInteractor(new NewtonDataAccessObject(), testOutput);
+        interactor.makePhase(viewModel, testOutput, system);
+        System.out.println(viewModel.getState().getplot().getXYPlot().getRangeAxis().getLowerBound());
+        assertEquals(viewModel.getState().getplot().getXYPlot().getRangeAxis().getLowerBound(), -2.19, 0.001);
     }
 }
