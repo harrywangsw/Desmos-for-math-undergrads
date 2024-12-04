@@ -1,19 +1,19 @@
 package use_case;
-import org.junit.Test;
 
 import java.util.List;
+
+import org.junit.Test;
 
 
 public class MainInteractorTest {
     @Test
     public void testExecutePlotRunsWithoutError() {
-        // Create mock objects manually
         MainOutputBoundary mainOutputMock = new MainOutputBoundary() {
             @Override
             public void preparePreviousGraphView() {
                 System.out.println("This will prepare the previous graph view");
             }
-            // Provide dummy implementations
+
         };
         PreviousGraphsOutputBoundary previousGraphsOutputMock = new PreviousGraphsOutputBoundary() {
             @Override
@@ -31,10 +31,8 @@ public class MainInteractorTest {
 
         MainInteractor mainInteractor = new MainInteractor(mainOutputMock, previousGraphsOutputMock);
 
-        // Define test input
         String[] equations = {"2x", "2y"};
 
-        // Execute method and check no exceptions are thrown
         try {
             mainInteractor.executePlot(equations);
             System.out.println("executePlot ran without error.");
