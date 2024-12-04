@@ -107,4 +107,44 @@ public class EquationsInteractorTest {
         OdeSystem system = new OdeSystem(testEquations, testVariables);
         equationsInteractor.extractCriticalPoints(system);
     }
+    @Test
+    public void testExecuteSolveFailure() {
+        EquationsDataAccessInterface noteDAO = new EquationsDataAccessInterface() {
+            @Override
+            public String[] getSolution(OdeSystem system) throws ApiAccessException {
+                throw new ApiAccessException("API failure");
+            }
+
+            @Override
+            public String[] getCritPoints(OdeSystem system) throws ApiAccessException {
+                return null;
+            }
+        };
+
+        EquationsOutputBoundary noteOB = new EquationsOutputBoundary() {
+            @Override
+            public void prepareCritPointsSuccessView(String[] criticalPoints) {
+                fail("Unexpected method call");
+            }
+
+            @Override
+            public void prepareCritPointsFailureView(String error) {
+                fail("Unexpected method call");
+            }
+
+            @Override
+            public void prepareSolutionsSuccessView(String[] solutions) {
+                fail("Unexpected method call");
+            }
+
+            @Override
+            public void prepareSolutionsFailureView(String error) {
+                assertEquals("Error analyzing solutions: API failure", error);
+            }
+        };
+
+        EquationsInteractor equationsInteractor = new EquationsInteractor(noteDAO, noteOB);
+        OdeSystem system = new OdeSystem(new String[]{"x=10", "y=15"}, new String[]{"x", "y"});
+        equationsInteractor.executeSolve(system);
+    }
 }
