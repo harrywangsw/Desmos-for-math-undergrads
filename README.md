@@ -41,7 +41,8 @@ Input your ODE and click "solve system" button.
 Input your ODE and click "Find Critical points" button.
 ### Plot Phase Portrait
 Input your ODE in the main program view. Select "plot phase portrait" in the scrolldown menu. ![Screenshot 2024-12-01 130042](https://github.com/user-attachments/assets/6e4cd06f-79cf-44d1-8de6-4eaf756afb5b)
-The programm will open a new window, where you can change the scale of the vectors and the view window
+
+The program will open a new window, where you can change the scale of the vectors and the view window
 ![Screenshot 2024-12-01 130354](https://github.com/user-attachments/assets/380efe22-728f-484f-8b3b-182bb6f7c986)
 ![Screenshot 2024-12-01 131556](https://github.com/user-attachments/assets/b42ef04e-637a-4f37-9e89-379205a2a042)
 

@@ -1,9 +1,9 @@
 package view;
 
+import javax.swing.*;
+
 import interface_adapter.main.MainController;
 import use_case.note.DataAccessException;
-
-import javax.swing.*;
 
 public class MainView extends JPanel {
     private final JButton runButton = new JButton("Run");
@@ -12,12 +12,12 @@ public class MainView extends JPanel {
     private final String[] menuItems = {"Plot", "Draw Phase Portrait"};
     private final JComboBox<String> dropDownMenu = new JComboBox<>(menuItems);
     private MainController mainController;
-//    private final MainViewModel mainViewModel;
+    //    private final MainViewModel mainViewModel;
     private EquationsView equationsView;
 
     public MainView(EquationsView equationsView) {
         this.equationsView = equationsView;
-//        this.mainViewModel = mainViewModel;
+        //  this.mainViewModel = mainViewModel;
         final JPanel rightCornerButtons = new JPanel();
         rightCornerButtons.add(runButton);
         rightCornerButtons.add(helpButton);
@@ -27,8 +27,9 @@ public class MainView extends JPanel {
                 evt -> {
                     if (evt.getSource().equals(runButton)) {
                         try {
-                            mainController.execute( (String) dropDownMenu.getSelectedItem(), equationsView.getequations());
-                        } catch (DataAccessException e) {
+                            mainController.execute((String) dropDownMenu.getSelectedItem(), equationsView.getequations());
+                        }
+                        catch (DataAccessException e) {
                             throw new RuntimeException(e);
                         }
                     }
@@ -42,13 +43,14 @@ public class MainView extends JPanel {
                     throw new RuntimeException(e);
                 }
             }
-                }
-        );
+        });
 
         this.add(dropDownMenu);
         this.add(equationsView);
         this.add(rightCornerButtons);
     }
 
-    public void setMainController(MainController controller) {this.mainController = controller;}
+    public void setMainController(MainController controller) {
+        this.mainController = controller;
+    }
 }
