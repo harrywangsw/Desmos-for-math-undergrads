@@ -1,27 +1,48 @@
-- Equitable Use: 
-The primary target of our application is the math undergrads, it acts as a supporting tool for ODE(ordinary differential equation). By using our program they can get the solutions as well as the critical points, it has the function to plot the equations in a graph and display the phase portrait. In the future, we aim to make our program appealing to all users. For those that are not in the math program, we will create a user guideline to introduce them to the basic knowledge of ODE so that they can benefit from our program as well. Additionally we will also add a language select option to the menu so the users with language barrier can understand our program as well.
+# Accessibility Report
 
-- Flexibility in Use: 
-Our program has various functionality for the user to choose, the user can choose to get the solutions and critical points in symbolic form or If they want to look at the solution visually, they can choose the options in the drop down menu to display the visualization of the solution being plotted in a 2D graph, the graph of the phase portrait as well as the previous graph.
+## Principles of Universal Design
 
-- Simple and Intuitive:
-Our program has just one menu and the user can access all the functionality through this menu which is straightforward and easy to use and the graph can also be zoomed in to let the users see the details.
+### Equitable Use
+- **Target Audience**: The application is primarily designed for math undergraduates as a support tool for Ordinary Differential Equations (ODEs).
+- **Core Features**: Users can solve systems of ODEs, identify critical points, and visualize solutions through graphs and phase portraits.
+- **Future Plans**:
+    - Develop user-friendly guidelines to introduce ODE concepts for non-specialists.
+    - Implement a language selection feature to support diverse linguistic backgrounds.
 
-- Perceptible Information:
-Right now our program only has the pictorial mode. In the future, we aim to add the verbal mode to read out the solutions.
+### Flexibility in Use
+- **Adaptable Outputs**: Users can choose between symbolic solutions and graphical visualizations.
+- **Visualization Options**: Solutions can be displayed as 2D graphs or phase portraits, allowing users to interact with the data in various ways.
+- **User Preferences**: The dropdown menu provides easy access to multiple functionalities tailored to different skill levels and learning styles.
 
-- Tolerance of Error:
-When designing our program we tried to minimize the possibility of the occurrence of an error by testing each of our methods using different test cases, we also use throw exceptions in case an error occurs. For example, in the plot function we built, the method will if an inputting error occurs, another window will pop out displaying invalid input.
+### Simple and Intuitive
+- **Streamlined Interface**: A single, straightforward menu provides access to all features.
+- **User-Friendly Navigation**: Designed for first-time users with a minimal learning curve.
+- **Graph Interaction**: Zoom functionality enables users to examine intricate details, enhancing the clarity of visual data.
 
-- Low Physical Effort:
-This principle does not apply to our program since our program is a software that requires no physical effort.
+### Perceptible Information
+- **Current Features**: Information is presented visually through graphs and symbolic outputs.
+- **Planned Enhancements**:
+    - Introduce audio feedback for reading solutions and critical points aloud.
+    - Improve accessibility for users with visual impairments or reading difficulties.
 
-- Size and Space for Approach and Use:
-This principle does not apply to our program since our program is a software that requires no space or mobility.
+### Tolerance for Error
+- **Error Prevention**: Extensive testing ensures reliability and reduces errors.
+- **Error Messages**: Clear prompts, such as "Invalid Input," guide users to correct mistakes.
+- **Robust Design**: Handles unexpected inputs gracefully to maintain program stability.
 
+### Low Physical Effort
+- **Minimal Interaction**: The program requires only basic keyboard and mouse inputs.
+- **Efficient Navigation**: Features are accessible with minimal clicks, reducing physical strain.
 
-If we were to enhance and sell our program, the primary target of our customer would be students, educators, and professionals in math fields. This includes high school and college students who need a supporting tool for visualizing mathematical concepts, such as graphing equations or analyzing data trends. Educators such as teachers and professors could also be our customers. They can use the program as a teaching aid to enhance their lecture quality and improve classroom engagement by demonstrating the visualisation of specific math concepts. Additionally, data analysts could also find the program valuable for modelling and solving complex systems. 
+### Size and Space for Approach and Use
+- **Standard Sizing**: Buttons and text fields follow standard design conventions for ease of use.
+- **Consistent Layout**: Interface elements are spaced consistently for better navigation.
+- **Zoom Functionality**: Enhances visibility for users who need larger displays.
 
+## Target Audience
+Our program is designed for a wide range of users in mathematics and related fields:
 
+Students in high school and college can use the application as a learning aid to solve and visualize ODE solutions. It helps them comprehend complex concepts through both symbolic outputs and graphical visualizations. Educators, such as teachers and professors, can integrate the program into their teaching methods, enhancing lecture quality with clear demonstrations of mathematical principles. Additionally, professionals like engineers and data analysts may find the tool useful for modeling and analyzing dynamic systems, making it suitable for both academic and professional environments.
 
-Certain demographics may be less likely to use the program due to limited access to technology, such as people in some places that have poor internet connection, or people that have an old and slow computer. These individuals might have trouble loading the menu and the graph. Additionally, users with visual impairments might face challenges if the program lacks features like text readers, and people with language barriers might face challenges if the program only supports one language. After addressing these problems, we will try to upgrade more features to our program to follow the principle of universal design as closely as possible.
+## Demographic Considerations
+Certain demographic groups might encounter challenges in accessing or using the program effectively. Visually impaired users may struggle with the lack of screen reader compatibility and audio output features. To address this, planned updates include the integration of text-to-speech functionality and screen reader support. Users in low-resource areas, such as those with limited internet connectivity or older hardware, might face performance issues. Solutions like offline capabilities and optimization for low-end systems will help mitigate these challenges. For non-native speakers, language barriers could pose difficulties. Implementing multi-language support is a priority to enhance accessibility for a global audience. Finally, individuals with limited technical experience might find the program daunting at first. A beginner-friendly "Getting Started" guide and detailed tutorials are planned to simplify onboarding and usage. These updates aim to ensure the program aligns with universal design principles, making it accessible to a diverse range of users.
