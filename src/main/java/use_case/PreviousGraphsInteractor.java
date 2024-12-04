@@ -1,12 +1,11 @@
 package use_case;
 
-import use_case.main.GraphDataAccessInterface;
-import use_case.note.DataAccessException;
 import use_case.previous_graphs.PreviousGraphsInputBoundary;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.io.File;
 
 public class PreviousGraphsInteractor implements PreviousGraphsInputBoundary {
     private final PreviousGraphsOutputBoundary previousGraphsOutputBoundary;
@@ -16,7 +15,7 @@ public class PreviousGraphsInteractor implements PreviousGraphsInputBoundary {
     }
 
     @Override
-    public void executePreviousGraphs() throws DataAccessException {
+    public void executePreviousGraphs() {
         List<String> graphPaths = new ArrayList<>();
 
         File graphFolder = new File("./graphs/");
@@ -31,7 +30,6 @@ public class PreviousGraphsInteractor implements PreviousGraphsInputBoundary {
                 }
             }
         }
-
         previousGraphsOutputBoundary.displayGraphs(graphPaths);
     }
 }
