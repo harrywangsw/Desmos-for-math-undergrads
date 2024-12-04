@@ -94,6 +94,7 @@ public class AppBuilder {
     public JFrame build() {
         final JFrame application = new JFrame("PhaseFlow");
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        application.setSize(800, 600);
         appPanel.add(cardPanel);
         application.add(appPanel);
 

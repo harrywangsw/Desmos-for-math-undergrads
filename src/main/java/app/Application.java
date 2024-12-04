@@ -12,7 +12,6 @@ public class Application {
                 .addMainView()
                 .build();
 
-        application.pack();
         application.setVisible(true);
     }
 }
