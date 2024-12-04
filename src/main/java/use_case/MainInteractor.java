@@ -10,6 +10,7 @@ import interface_adapter.graph.GraphViewModel;
 import use_case.graph.GraphOutputBoundary;
 import use_case.main.MainInputBoundary;
 import use_case.note.DataAccessException;
+import view.GraphView;
 import view.PhasePortraitView;
 
 /**
@@ -40,7 +41,8 @@ public class MainInteractor implements MainInputBoundary {
             GraphOutputBoundary boundary = new GraphPresenter(viewModel);
             GraphInteractor interactor = new GraphInteractor(boundary);
             interactor.makegraph(system);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }

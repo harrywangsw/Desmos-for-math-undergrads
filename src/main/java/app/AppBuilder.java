@@ -4,6 +4,7 @@ import data_access.EquationsDataAccessObject;
 import data_access.NewtonDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.equations.EquationsViewModel;
+import interface_adapter.graph.GraphPresenter;
 import interface_adapter.graph.GraphState;
 import interface_adapter.graph.GraphViewModel;
 import interface_adapter.main.MainViewModel;
@@ -12,8 +13,10 @@ import interface_adapter.phaseportrait.PhasePortraitPresenter;
 import interface_adapter.phaseportrait.PhasePortraitState;
 import interface_adapter.phaseportrait.PhasePortraitViewModel;
 import interface_adapter.previous_graphs.PreviousGraphsViewModel;
+import use_case.GraphInteractor;
 import use_case.PhasePortraitInteractor;
 import use_case.PreviousGraphsInteractor;
+import use_case.graph.GraphOutputBoundary;
 import use_case.phaseportrait.PhasePortraitDataAccessInterface;
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
 import view.*;
@@ -32,13 +35,10 @@ public class AppBuilder {
 
     private MainView mainView;
     private PhasePortraitInteractor phasePortraitInteractor;
-    private MainViewModel mainViewModel;
     private PreviousGraphsView previousGraphsView;
-    private PreviousGraphsViewModel previousGraphsViewModel;
     private PreviousGraphsInteractor previousGraphsInteractor;
     private PhasePortraitView phasePortraitView;
     private PhasePortraitViewModel phasePortraitViewModel;
-    private GraphViewModel graphViewModel;
     private GraphView graphView;
 
     public AppBuilder(){
@@ -70,8 +70,16 @@ public class AppBuilder {
     }
 
 //    public AppBuilder addGraphView(){
-//        graphViewModel = new GraphViewModel(new GraphState());
-//        graphView = new GraphView(graphViewModel);
+//
+//        graphView = new GraphView(null);
+//
+//        GraphState state = new GraphState();
+//        GraphViewModel viewModel = new GraphViewModel(state);
+//        GraphOutputBoundary boundary = new GraphPresenter(viewModel);
+//        GraphInteractor graphInteractor = new GraphInteractor(boundary);
+//
+//        cardPanel.add(graphView, GraphView.viewName);
+//        return this;
 //    }
 
     public AppBuilder addPreviousGraphsView(){
