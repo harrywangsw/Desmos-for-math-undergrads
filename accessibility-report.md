@@ -1,3 +1,4 @@
+# Principle of Universal Design
 - Equitable Use: 
 The primary target of our application is the math undergrads, it acts as a supporting tool for ODE(ordinary differential equation). By using our program they can get the solutions as well as the critical points, it has the function to plot the equations in a graph and display the phase portrait. In the future, we aim to make our program appealing to all users. For those that are not in the math program, we will create a user guideline to introduce them to the basic knowledge of ODE so that they can benefit from our program as well. Additionally we will also add a language select option to the menu so the users with language barrier can understand our program as well.
 
