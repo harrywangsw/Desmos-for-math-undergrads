@@ -42,7 +42,8 @@ public class PreviousGraphsView extends JPanel {
 
             // Create a panel for each graph
             final JPanel graphPanel = new JPanel(new BorderLayout());
-            graphPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            final int border = 10;
+            graphPanel.setBorder(BorderFactory.createEmptyBorder(border, border, border, border));
 
             // Image
             JLabel imageLabel;
