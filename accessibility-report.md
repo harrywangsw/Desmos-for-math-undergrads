@@ -1,4 +1,4 @@
-# Principle of Universal Design
+## Principle of Universal Design
 - Equitable Use: 
 The primary target of our application is the math undergrads, it acts as a supporting tool for ODE(ordinary differential equation). By using our program they can get the solutions as well as the critical points, it has the function to plot the equations in a graph and display the phase portrait. In the future, we aim to make our program appealing to all users. For those that are not in the math program, we will create a user guideline to introduce them to the basic knowledge of ODE so that they can benefit from our program as well. Additionally we will also add a language select option to the menu so the users with language barrier can understand our program as well.
 
@@ -20,9 +20,8 @@ This principle does not apply to our program since our program is a software tha
 - Size and Space for Approach and Use:
 This principle does not apply to our program since our program is a software that requires no space or mobility.
 
-
+## Customer of our program 
 If we were to enhance and sell our program, the primary target of our customer would be students, educators, and professionals in math fields. This includes high school and college students who need a supporting tool for visualizing mathematical concepts, such as graphing equations or analyzing data trends. Educators such as teachers and professors could also be our customers. They can use the program as a teaching aid to enhance their lecture quality and improve classroom engagement by demonstrating the visualisation of specific math concepts. Additionally, data analysts could also find the program valuable for modelling and solving complex systems. 
 
-
-
+## Demographics unlikey to use the program
 Certain demographics may be less likely to use the program due to limited access to technology, such as people in some places that have poor internet connection, or people that have an old and slow computer. These individuals might have trouble loading the menu and the graph. Additionally, users with visual impairments might face challenges if the program lacks features like text readers, and people with language barriers might face challenges if the program only supports one language. After addressing these problems, we will try to upgrade more features to our program to follow the principle of universal design as closely as possible.
