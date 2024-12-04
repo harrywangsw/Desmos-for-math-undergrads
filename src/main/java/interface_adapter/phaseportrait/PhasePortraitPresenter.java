@@ -2,6 +2,7 @@ package interface_adapter.phaseportrait;
 
 import java.util.List;
 
+import entity.OdeSystem;
 import org.jfree.chart.JFreeChart;
 
 import use_case.phaseportrait.PhasePortraitOutputBoundary;
@@ -26,6 +27,13 @@ public class PhasePortraitPresenter implements PhasePortraitOutputBoundary {
         phasePortraitViewModel.getState().setchart(plot);
         phasePortraitViewModel.getState().setscale(vector_scale);
         phasePortraitViewModel.getState().setUnitvectors(vectors);
+        phasePortraitViewModel.firePropertyChanged();
+    }
+
+    public void makeChart(OdeSystem sys, JFreeChart plot, List<List<Float>> unitvectors) {
+        phasePortraitViewModel.getState().setSystem(sys);
+        phasePortraitViewModel.getState().setchart(plot);
+        phasePortraitViewModel.getState().setUnitvectors(unitvectors);
         phasePortraitViewModel.firePropertyChanged();
     }
 }

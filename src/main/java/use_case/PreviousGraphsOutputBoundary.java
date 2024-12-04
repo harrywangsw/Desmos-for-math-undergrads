@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface PreviousGraphsOutputBoundary {
 
+
     /**
      * Display graphs.
      * @param graphList graph list

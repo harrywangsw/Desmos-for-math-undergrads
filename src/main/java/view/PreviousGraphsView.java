@@ -1,9 +1,11 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.util.List;
+
 import java.util.Map;
 
 import javax.swing.*;
@@ -15,10 +17,13 @@ public class PreviousGraphsView extends JPanel {
     private final PreviousGraphsViewModel viewModel;
     private PreviousGraphsController controller;
 
-    public PreviousGraphsView(PreviousGraphsViewModel viewModel) {
-        this.viewModel = viewModel;
+public class PreviousGraphsView extends JPanel implements PropertyChangeListener{
+    private final PreviousGraphsViewModel previousGraphsViewModel;
+    private final String viewName = "Previous Graphs";
+    public PreviousGraphsView(PreviousGraphsViewModel previousGraphsViewModel) {
+        this.previousGraphsViewModel = previousGraphsViewModel;
+        this.previousGraphsViewModel.addPropertyChangeListener(this);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    }
 
     /**
      * Sets the controller for this view.
@@ -71,12 +76,56 @@ public class PreviousGraphsView extends JPanel {
                         controller.execute(graph);
                     }
                 }
-            });
 
-            add(graphPanel);
+                JLabel timestampLabel = new JLabel("Created: " + timestamp);
+                timestampLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+                graphPanel.add(imageLabel, BorderLayout.CENTER);
+                graphPanel.add(timestampLabel, BorderLayout.SOUTH);
+
+                add(graphPanel);
+            }
+
+            revalidate();
+            repaint();
+        } else{
+            JLabel cautionLabel = new JLabel("No previous graphs found");
+            add(cautionLabel);
         }
 
-        revalidate();
-        repaint();
+
+        }
+
+    /**
+     * Extracts the timestamp from the file path.
+     * Assumes the timestamp is part of the file name in the format "YYYY-MM-DD_HH-MM-SS".
+     */
+    private String extractTimestampFromPath(String path) {
+        File file = new File(path);
+        String fileName = file.getName();
+        int underscoreIndex = fileName.indexOf('_');
+        if (underscoreIndex > 0) {
+            String timestamp = fileName.substring(0, underscoreIndex).replace('_', ' ');
+            return timestamp;
+        } else {
+            return "Unknown";
+        }
+    }
+//
+//    /**
+//     * Handles property change events from the ViewModel.
+//     */
+//    @Override
+//    public void propertyChange(PropertyChangeEvent evt) {
+//        final PreviousGraphsState previousGraphsState = (PreviousGraphsState) evt.getNewValue();
+//    }
+
+    public String getViewName(){
+        return viewName;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        final PreviousGraphsState previousGraphsState = (PreviousGraphsState) evt.getNewValue();
     }
 }

@@ -37,6 +37,10 @@ public class MainController {
                 mainInteractor.executePreviousGraphs();
                 break;
 
+            case "Home":
+                mainInteractor.executeHome();
+                break;
+
             case "help":
                 mainInteractor.executeHelp();
                 break;

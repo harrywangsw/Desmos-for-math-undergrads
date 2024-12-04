@@ -2,12 +2,12 @@ package interface_adapter.phaseportrait;
 
 import java.util.List;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+//import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jfree.chart.JFreeChart;
 
 import entity.OdeSystem;
 
-@Nullable
+// @Nullable
 public class PhasePortraitState {
     private float vectorScale;
     private float leftBound;
@@ -33,6 +33,42 @@ public class PhasePortraitState {
 
     public PhasePortraitState(OdeSystem system) {
         this.system = system;
+    }
+
+    public PhasePortraitState() {
+
+    }
+
+    /**
+     * Set Plot.
+     * @param system
+     */
+    public void setSystem(OdeSystem system){
+        this.system = system;
+    }
+
+    /**
+     * Set Plot.
+     * @param plot
+     */
+    public void setPlot(JFreeChart plot){
+        this.plot = plot;
+    }
+
+    public void setLeftBound(float leftBound) {
+        this.leftBound = leftBound;
+    }
+
+    public void setRightBound(float rightBound) {
+        this.rightBound = rightBound;
+    }
+
+    public void setLowerBound(float lowerBound) {
+        this.lowerBound = lowerBound;
+    }
+
+    public void setUpperBound(float upperBound) {
+        this.upperBound = upperBound;
     }
 
     /**

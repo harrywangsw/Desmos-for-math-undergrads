@@ -130,15 +130,10 @@ public class PhasePortraitInteractor implements PhasePortraitInputBoundary {
     }
 
     @Override
-    public void makePhase(PhasePortraitViewModel viewModel, PhasePortraitOutputBoundary outputboundary, OdeSystem sys)
-            throws Exception {
-        final List<List<Float>> unitvectors = createphasevectors(sys.getEquations(), sys.getVariables());
-        final JFreeChart plot = createchart(unitvectors);
-        final PhasePortraitState state = new PhasePortraitState(sys, plot, unitvectors, -1, 1, 1, -1, 1);
-        viewModel.setState(state);
-        final PhasePortraitView view = new PhasePortraitView(viewModel, this);
-        view.setPhasePortraitController(new PhasePortraitController(this, outputboundary));
-        PhasePortraitAppBuilder.makeView(view);
+    public void makePhase(OdeSystem sys) throws Exception {
+        List<List<Float>> unitvectors = createphasevectors(sys.getEquations(), sys.getVariables());
+        JFreeChart plot = createchart(unitvectors);
+        phasePortraitOutputBoundary.makeChart(sys, plot, unitvectors);
     }
 
 }

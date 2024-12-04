@@ -1,7 +1,6 @@
 package view;
 
-import java.awt.Component;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -55,10 +54,6 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         this.equationsViewModel = equationsViewModel;
         this.equationsViewModel.addPropertyChangeListener(this);
 
-        final JLabel headingLabel = new JLabel("Differential Equations:");
-        headingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(headingLabel);
-
         // Add Top Button Panel
         createTopButtonPanel();
 
@@ -68,7 +63,12 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
         // Scrollable view
         final JScrollPane scrollPane = new JScrollPane(equationDisplay,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(0, 100));
         this.add(scrollPane);
+
+        final JLabel headingLabel = new JLabel("Differential Equations:");
+        headingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        equationDisplay.add(headingLabel);
 
         addNewEquation("x' = ");
         addNewEquation("y' = ");
@@ -232,7 +232,11 @@ public class EquationsView extends JPanel implements ActionListener, PropertyCha
      * @return array of string
      */
 
-    public String[] getequations() {
+    /**
+     * Returns the equations from the text fields as input by the user.
+     * @return the list of equations input by the user.
+     */
+    public String[] getEquations() {
         final ArrayList<String> equations = new ArrayList<>();
         for (Component equationPanel : equationDisplay.getComponents()) {
             if (equationPanel instanceof JPanel) {

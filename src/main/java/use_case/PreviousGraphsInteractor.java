@@ -8,6 +8,7 @@ import java.util.List;
 import java.io.File;
 
 public class PreviousGraphsInteractor implements PreviousGraphsInputBoundary {
+
     private final PreviousGraphsOutputBoundary previousGraphsOutputBoundary;
 
     public PreviousGraphsInteractor(PreviousGraphsOutputBoundary previousGraphsOutputBoundary) {
@@ -22,6 +23,7 @@ public class PreviousGraphsInteractor implements PreviousGraphsInputBoundary {
 
         if (graphFolder.exists() && graphFolder.isDirectory()) {
             final File[] files = graphFolder.listFiles();
+          
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile()) {

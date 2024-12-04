@@ -17,7 +17,6 @@ import org.jfree.chart.JFreeChart;
 import interface_adapter.phaseportrait.PhasePortraitController;
 import interface_adapter.phaseportrait.PhasePortraitState;
 import interface_adapter.phaseportrait.PhasePortraitViewModel;
-import use_case.PhasePortraitInteractor;
 import use_case.equations.ApiAccessException;
 
 /**
@@ -25,6 +24,7 @@ import use_case.equations.ApiAccessException;
  */
 public class PhasePortraitView extends JPanel implements ActionListener, PropertyChangeListener {
     private static ChartPanel chartPanel;
+    public static String viewName = "phase portrait";
     private final JButton decreasebutton = new JButton("decrease vector scale");
     private final JButton increasebutton = new JButton("increase vector scale");
     private final JTextField vectorscale = new JTextField("change vector scale");
@@ -38,7 +38,7 @@ public class PhasePortraitView extends JPanel implements ActionListener, Propert
     private final PhasePortraitViewModel phasePortraitViewModel;
     private PhasePortraitController phasePortraitController;
 
-    public PhasePortraitView(PhasePortraitViewModel phasePortraitViewModel, PhasePortraitInteractor interactor) {
+    public PhasePortraitView(PhasePortraitViewModel phasePortraitViewModel) {
         final JPanel scallingbuttons = new JPanel();
         final JPanel bounds = new JPanel();
         scallingbuttons.add(decreasebutton);
@@ -133,5 +133,9 @@ public class PhasePortraitView extends JPanel implements ActionListener, Propert
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 }

@@ -6,23 +6,23 @@ import interface_adapter.main.MainController;
 import use_case.note.DataAccessException;
 
 public class MainView extends JPanel {
+
     private final JButton runButton = new JButton("Run");
     private final JButton helpButton = new JButton("Help");
     private final JTextField inputFunctionArea = new JTextField(10);
-    private final String[] menuItems = {"Plot", "Draw Phase Portrait"};
+    private final String[] menuItems = {"Home", "Plot", "Draw Phase Portrait", "Show Previous Graphs"};
     private final JComboBox<String> dropDownMenu = new JComboBox<>(menuItems);
     private MainController mainController;
-    //    private final MainViewModel mainViewModel;
     private EquationsView equationsView;
 
     public MainView(EquationsView equationsView) {
         this.equationsView = equationsView;
-        //  this.mainViewModel = mainViewModel;
         final JPanel rightCornerButtons = new JPanel();
         rightCornerButtons.add(runButton);
         rightCornerButtons.add(helpButton);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         dropDownMenu.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+
         runButton.addActionListener(
                 evt -> {
                     if (evt.getSource().equals(runButton)) {
@@ -46,8 +46,8 @@ public class MainView extends JPanel {
         });
 
         this.add(dropDownMenu);
-        this.add(equationsView);
         this.add(rightCornerButtons);
+        this.add(equationsView);
     }
 
     public void setMainController(MainController controller) {

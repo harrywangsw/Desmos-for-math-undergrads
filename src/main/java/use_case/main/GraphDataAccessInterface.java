@@ -3,11 +3,8 @@ package use_case.main;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
 import use_case.note.DataAccessException;
 
-@Nullable
 public interface GraphDataAccessInterface {
 
     /**
